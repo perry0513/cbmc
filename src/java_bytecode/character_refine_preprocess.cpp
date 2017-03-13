@@ -22,7 +22,7 @@ Date:   March 2017
 /// \param target: A position in a goto program
 codet character_refine_preprocesst::convert_char_function(
   exprt (*expr_function)(const exprt &chr, const typet &type),
-  conversion_input &target)
+  conversion_inputt &target)
 {
   const code_function_callt &function_call=target;
   assert(function_call.arguments().size()==1);
@@ -78,7 +78,8 @@ exprt character_refine_preprocesst::expr_of_char_count(
 /// Converts function call to an assignment of an expression corresponding to
 /// the java method Character.charCount:(I)I
 /// \param target: a position in a goto program
-codet character_refine_preprocesst::convert_char_count(conversion_input &target)
+codet character_refine_preprocesst::convert_char_count(
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_char_count, target);
@@ -95,7 +96,8 @@ exprt character_refine_preprocesst::expr_of_char_value(
 /// Converts function call to an assignment of an expression corresponding to
 /// the java method Character.charValue:()C
 /// \param target: a position in a goto program
-codet character_refine_preprocesst::convert_char_value(conversion_input &target)
+codet character_refine_preprocesst::convert_char_value(
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_char_value, target);
@@ -104,7 +106,7 @@ codet character_refine_preprocesst::convert_char_value(conversion_input &target)
 /// Converts function call to an assignment of an expression corresponding to
 /// the java method Character.compare:(CC)I
 /// \param target: a position in a goto program
-codet character_refine_preprocesst::convert_compare(conversion_input &target)
+codet character_refine_preprocesst::convert_compare(conversion_inputt &target)
 {
   const code_function_callt &function_call=target;
   assert(function_call.arguments().size()==2);
@@ -126,7 +128,8 @@ codet character_refine_preprocesst::convert_compare(conversion_input &target)
 /// Converts function call to an assignment of an expression corresponding to
 /// the java method Character.digit:(CI)I
 /// \param target: a position in a goto program
-codet character_refine_preprocesst::convert_digit_char(conversion_input &target)
+codet character_refine_preprocesst::convert_digit_char(
+  conversion_inputt &target)
 {
   const code_function_callt &function_call=target;
   assert(function_call.arguments().size()==2);
@@ -199,17 +202,17 @@ codet character_refine_preprocesst::convert_digit_char(conversion_input &target)
 /// Converts function call to an assignment of an expression corresponding to
 /// the java method Character.digit:(II)I
 /// \param target: a position in a goto program
-codet character_refine_preprocesst::convert_digit_int(conversion_input &target)
+codet character_refine_preprocesst::convert_digit_int(conversion_inputt &target)
 {
   return convert_digit_char(target);
 }
 
 /// Converts function call to an assignment of an expression corresponding to
-/// the java method Character.forDigit:(II)I
+/// the java method Character.forDigit:(II)C
 ///
 ///    TODO: For now the radix argument is ignored
 /// \param target: a position in a goto program
-codet character_refine_preprocesst::convert_for_digit(conversion_input &target)
+codet character_refine_preprocesst::convert_for_digit(conversion_inputt &target)
 {
   const code_function_callt &function_call=target;
   assert(function_call.arguments().size()==2);
@@ -228,7 +231,7 @@ codet character_refine_preprocesst::convert_for_digit(conversion_input &target)
 /// the java method Character.getDirectionality:(C)I
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_get_directionality_char(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   // TODO: This is unimplemented for now as it requires analyzing
   // the UnicodeData file to find characters directionality.
@@ -239,7 +242,7 @@ codet character_refine_preprocesst::convert_get_directionality_char(
 /// the java method Character.getDirectionality:(I)I
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_get_directionality_int(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_get_directionality_char(target);
 }
@@ -249,7 +252,7 @@ codet character_refine_preprocesst::convert_get_directionality_int(
 ///
 ///    TODO: For now this is only for ASCII characters
 codet character_refine_preprocesst::convert_get_numeric_value_char(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_digit_char(target);
 }
@@ -260,7 +263,7 @@ codet character_refine_preprocesst::convert_get_numeric_value_char(
 ///    TODO: For now this is only for ASCII characters
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_get_numeric_value_int(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_digit_int(target);
 }
@@ -269,7 +272,7 @@ codet character_refine_preprocesst::convert_get_numeric_value_int(
 /// the java method Character.getType:(C)I
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_get_type_char(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   // TODO: This is unimplemented for now as it requires analyzing
   // the UnicodeData file to categorize characters.
@@ -280,7 +283,7 @@ codet character_refine_preprocesst::convert_get_type_char(
 /// the java method Character.getType:(I)I
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_get_type_int(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_get_type_char(target);
 }
@@ -288,7 +291,7 @@ codet character_refine_preprocesst::convert_get_type_int(
 /// Converts function call to an assignment of an expression corresponding to
 /// the java method Character.hashCode:()I
 /// \param target: a position in a goto program
-codet character_refine_preprocesst::convert_hash_code(conversion_input &target)
+codet character_refine_preprocesst::convert_hash_code(conversion_inputt &target)
 {
   return convert_char_value(target);
 }
@@ -313,7 +316,7 @@ exprt character_refine_preprocesst::expr_of_high_surrogate(
 /// Converts function call to an assignment of an expression corresponding to
 /// the java method Character.highSurrogate:(C)Z
 codet character_refine_preprocesst::convert_high_surrogate(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_high_surrogate, target);
@@ -375,7 +378,7 @@ exprt character_refine_preprocesst::expr_of_is_alphabetic(
 /// the java method Character.isAlphabetic:(I)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_alphabetic(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_is_alphabetic, target);
@@ -398,7 +401,7 @@ exprt character_refine_preprocesst::expr_of_is_bmp_code_point(
 /// the java method Character.isBmpCodePoint:(I)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_bmp_code_point(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_is_bmp_code_point, target);
@@ -443,7 +446,7 @@ exprt character_refine_preprocesst::expr_of_is_defined(
 /// the java method Character.isDefined:(C)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_defined_char(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_is_defined, target);
@@ -453,7 +456,7 @@ codet character_refine_preprocesst::convert_is_defined_char(
 /// the java method Character.isDefined:(I)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_defined_int(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_is_defined_char(target);
 }
@@ -490,7 +493,7 @@ exprt character_refine_preprocesst::expr_of_is_digit(
 /// the java method Character.isDigit:(C)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_digit_char(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_is_digit, target);
@@ -500,7 +503,7 @@ codet character_refine_preprocesst::convert_is_digit_char(
 /// the java method Character.digit:(I)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_digit_int(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_is_digit_char(target);
 }
@@ -520,7 +523,7 @@ exprt character_refine_preprocesst::expr_of_is_high_surrogate(
 /// the java method Character.isHighSurrogate:(C)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_high_surrogate(
-    conversion_input &target)
+    conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_is_high_surrogate, target);
@@ -551,7 +554,7 @@ exprt character_refine_preprocesst::expr_of_is_identifier_ignorable(
 ///    TODO: For now, we ignore the FORMAT general category value
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_identifier_ignorable_char(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_is_identifier_ignorable, target);
@@ -563,7 +566,7 @@ codet character_refine_preprocesst::convert_is_identifier_ignorable_char(
 ///    TODO: For now, we ignore the FORMAT general category value
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_identifier_ignorable_int(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_is_identifier_ignorable_char(target);
 }
@@ -572,7 +575,7 @@ codet character_refine_preprocesst::convert_is_identifier_ignorable_int(
 /// the java method Character.isIdeographic:(C)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_ideographic(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   const code_function_callt &function_call=target;
   assert(function_call.arguments().size()==1);
@@ -586,7 +589,7 @@ codet character_refine_preprocesst::convert_is_ideographic(
 /// the java method Character.isISOControl:(C)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_ISO_control_char(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   const code_function_callt &function_call=target;
   assert(function_call.arguments().size()==1);
@@ -601,7 +604,7 @@ codet character_refine_preprocesst::convert_is_ISO_control_char(
 /// the java method Character.isISOControl:(I)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_ISO_control_int(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_is_ISO_control_char(target);
 }
@@ -613,7 +616,7 @@ codet character_refine_preprocesst::convert_is_ISO_control_int(
 ///          combining mark, non-spacing mark
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_java_identifier_part_char(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_is_unicode_identifier_part, target);
@@ -623,7 +626,7 @@ codet character_refine_preprocesst::convert_is_java_identifier_part_char(
 /// the java method isJavaIdentifierPart:(I)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_java_identifier_part_int(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_is_unicode_identifier_part_char(target);
 }
@@ -636,7 +639,7 @@ codet character_refine_preprocesst::convert_is_java_identifier_part_int(
 ///          other characters.
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_java_identifier_start_char(
-    conversion_input &target)
+    conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_is_unicode_identifier_start, target);
@@ -646,7 +649,7 @@ codet character_refine_preprocesst::convert_is_java_identifier_start_char(
 /// the java method isJavaIdentifierStart:(I)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_java_identifier_start_int(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_is_java_identifier_start_char(target);
 }
@@ -655,7 +658,7 @@ codet character_refine_preprocesst::convert_is_java_identifier_start_int(
 /// the java method Character.isJavaLetter:(C)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_java_letter(
-    conversion_input &target)
+    conversion_inputt &target)
 {
   return convert_is_java_identifier_start_char(target);
 }
@@ -664,7 +667,7 @@ codet character_refine_preprocesst::convert_is_java_letter(
 /// the java method isJavaLetterOrDigit:(C)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_java_letter_or_digit(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_is_java_identifier_part_char(target);
 }
@@ -673,7 +676,7 @@ codet character_refine_preprocesst::convert_is_java_letter_or_digit(
 /// the java method Character.isLetter:(C)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_letter_char(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_is_letter, target);
@@ -683,7 +686,7 @@ codet character_refine_preprocesst::convert_is_letter_char(
 /// the java method Character.isLetter:(I)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_letter_int(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_is_letter_char(target);
 }
@@ -702,7 +705,7 @@ exprt character_refine_preprocesst::expr_of_is_letter_or_digit(
 /// the java method Character.isLetterOrDigit:(C)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_letter_or_digit_char(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_is_digit, target);
@@ -712,7 +715,7 @@ codet character_refine_preprocesst::convert_is_letter_or_digit_char(
 /// the java method Character.isLetterOrDigit:(I)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_letter_or_digit_int(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_is_letter_or_digit_char(target);
 }
@@ -723,7 +726,7 @@ codet character_refine_preprocesst::convert_is_letter_or_digit_int(
 ///    TODO: For now we only consider ASCII characters
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_lower_case_char(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_is_ascii_lower_case, target);
@@ -735,7 +738,7 @@ codet character_refine_preprocesst::convert_is_lower_case_char(
 ///    TODO: For now we only consider ASCII characters
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_lower_case_int(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_is_lower_case_char(target);
 }
@@ -744,7 +747,7 @@ codet character_refine_preprocesst::convert_is_lower_case_int(
 /// the java method Character.isLowSurrogate:(I)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_low_surrogate(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   const code_function_callt &function_call=target;
   assert(function_call.arguments().size()==1);
@@ -773,7 +776,7 @@ exprt character_refine_preprocesst::expr_of_is_mirrored(
 ///    TODO: For now only ASCII characters are considered
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_mirrored_char(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_is_mirrored, target);
@@ -785,7 +788,7 @@ codet character_refine_preprocesst::convert_is_mirrored_char(
 ///    TODO: For now only ASCII characters are considered
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_mirrored_int(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_is_mirrored_char(target);
 }
@@ -793,7 +796,7 @@ codet character_refine_preprocesst::convert_is_mirrored_int(
 /// Converts function call to an assignment of an expression corresponding to
 /// the java method Character.isSpace:(C)Z
 /// \param target: a position in a goto program
-codet character_refine_preprocesst::convert_is_space(conversion_input &target)
+codet character_refine_preprocesst::convert_is_space(conversion_inputt &target)
 {
   return convert_is_whitespace_char(target);
 }
@@ -817,7 +820,7 @@ exprt character_refine_preprocesst::expr_of_is_space_char(
 /// the java method Character.isSpaceChar:(C)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_space_char(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_is_space_char, target);
@@ -827,7 +830,7 @@ codet character_refine_preprocesst::convert_is_space_char(
 /// the java method Character.isSpaceChar:(I)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_space_char_int(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_is_space_char(target);
 }
@@ -847,7 +850,7 @@ exprt character_refine_preprocesst::expr_of_is_supplementary_code_point(
 /// the java method Character.isSupplementaryCodePoint:(I)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_supplementary_code_point(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_is_supplementary_code_point, target);
@@ -867,7 +870,7 @@ exprt character_refine_preprocesst::expr_of_is_surrogate(
 /// the java method Character.isSurrogate:(C)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_surrogate(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_is_surrogate, target);
@@ -877,7 +880,7 @@ codet character_refine_preprocesst::convert_is_surrogate(
 /// the java method Character.isSurrogatePair:(CC)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_surrogate_pair(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   const code_function_callt &function_call=target;
   assert(function_call.arguments().size()==2);
@@ -910,7 +913,7 @@ exprt character_refine_preprocesst::expr_of_is_title_case(
 /// the java method Character.isTitleCase:(C)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_title_case_char(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_is_title_case, target);
@@ -920,7 +923,7 @@ codet character_refine_preprocesst::convert_is_title_case_char(
 /// the java method Character.isTitleCase:(I)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_title_case_int(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_is_title_case_char(target);
 }
@@ -971,7 +974,7 @@ exprt character_refine_preprocesst::expr_of_is_unicode_identifier_part(
 /// the java method Character.isUnicodeIdentifierPart:(C)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_unicode_identifier_part_char(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_is_unicode_identifier_part, target);
@@ -981,7 +984,7 @@ codet character_refine_preprocesst::convert_is_unicode_identifier_part_char(
 /// the java method Character.isUnicodeIdentifierPart:(I)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_unicode_identifier_part_int(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_is_unicode_identifier_part_char(target);
 }
@@ -1002,7 +1005,7 @@ exprt character_refine_preprocesst::expr_of_is_unicode_identifier_start(
 /// the java method Character.isUnicodeIdentifierStart:(C)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_unicode_identifier_start_char(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_is_unicode_identifier_start, target);
@@ -1012,7 +1015,7 @@ codet character_refine_preprocesst::convert_is_unicode_identifier_start_char(
 /// the java method Character.isUnicodeIdentifierStart:(I)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_unicode_identifier_start_int(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_is_unicode_identifier_start_char(target);
 }
@@ -1023,7 +1026,7 @@ codet character_refine_preprocesst::convert_is_unicode_identifier_start_int(
 ///    TODO: For now we only consider ASCII characters
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_upper_case_char(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_is_ascii_upper_case, target);
@@ -1033,7 +1036,7 @@ codet character_refine_preprocesst::convert_is_upper_case_char(
 /// the java method Character.isUpperCase:(I)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_upper_case_int(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_is_upper_case_char(target);
 }
@@ -1053,7 +1056,7 @@ exprt character_refine_preprocesst::expr_of_is_valid_code_point(
 /// the java method Character.isValidCodePoint:(I)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_valid_code_point(
-    conversion_input &target)
+    conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_is_valid_code_point, target);
@@ -1085,7 +1088,7 @@ exprt character_refine_preprocesst::expr_of_is_whitespace(
 /// the java method Character.isWhitespace:(C)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_whitespace_char(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_is_whitespace, target);
@@ -1095,7 +1098,7 @@ codet character_refine_preprocesst::convert_is_whitespace_char(
 /// the java method Character.isWhitespace:(I)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_is_whitespace_int(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_is_whitespace_char(target);
 }
@@ -1118,7 +1121,7 @@ exprt character_refine_preprocesst::expr_of_low_surrogate(
 /// the java method Character.lowSurrogate:(I)Z
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_low_surrogate(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_low_surrogate, target);
@@ -1141,7 +1144,7 @@ exprt character_refine_preprocesst::expr_of_reverse_bytes(
 /// the java method Character.reverseBytes:(C)C
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_reverse_bytes(
-    conversion_input &target)
+    conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_reverse_bytes, target);
@@ -1173,7 +1176,7 @@ exprt character_refine_preprocesst::expr_of_to_chars(
 /// Converts function call to an assignment of an expression corresponding to
 /// the java method Character.toChars:(I)[C
 /// \param target: a position in a goto program
-codet character_refine_preprocesst::convert_to_chars(conversion_input &target)
+codet character_refine_preprocesst::convert_to_chars(conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_to_chars, target);
@@ -1183,7 +1186,7 @@ codet character_refine_preprocesst::convert_to_chars(conversion_input &target)
 /// the java method Character.toCodePoint:(CC)I
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_to_code_point(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   const code_function_callt &function_call=target;
   assert(function_call.arguments().size()==2);
@@ -1229,7 +1232,7 @@ exprt character_refine_preprocesst::expr_of_to_lower_case(
 /// the java method Character.toLowerCase:(C)C
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_to_lower_case_char(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_to_lower_case, target);
@@ -1239,7 +1242,7 @@ codet character_refine_preprocesst::convert_to_lower_case_char(
 /// the java method Character.toLowerCase:(I)I
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_to_lower_case_int(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_to_lower_case_char(target);
 }
@@ -1285,7 +1288,7 @@ exprt character_refine_preprocesst::expr_of_to_title_case(
 /// the java method Character.toTitleCase:(C)C
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_to_title_case_char(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_to_title_case, target);
@@ -1295,7 +1298,7 @@ codet character_refine_preprocesst::convert_to_title_case_char(
 /// the java method Character.toTitleCase:(I)I
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_to_title_case_int(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_to_title_case_char(target);
 }
@@ -1322,7 +1325,7 @@ exprt character_refine_preprocesst::expr_of_to_upper_case(
 /// the java method Character.toUpperCase:(C)C
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_to_upper_case_char(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_char_function(
     &character_refine_preprocesst::expr_of_to_upper_case, target);
@@ -1332,7 +1335,7 @@ codet character_refine_preprocesst::convert_to_upper_case_char(
 /// the java method Character.toUpperCase:(I)I
 /// \param target: a position in a goto program
 codet character_refine_preprocesst::convert_to_upper_case_int(
-  conversion_input &target)
+  conversion_inputt &target)
 {
   return convert_to_upper_case_char(target);
 }
