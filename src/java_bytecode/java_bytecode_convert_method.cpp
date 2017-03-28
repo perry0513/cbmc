@@ -35,6 +35,7 @@ Author: Daniel Kroening, kroening@kroening.com
 #include <algorithm>
 #include <functional>
 #include <unordered_set>
+#include <regex>
 
 class patternt
 {
@@ -2669,6 +2670,29 @@ void java_bytecode_convert_method(
   safe_pointer<ci_lazy_methodst> lazy_methods,
   const character_refine_preprocesst &character_refine)
 {
+  static const std::unordered_set<std::string> methods_to_ignore
+  {
+    "nondetBoolean",
+    "nondetByte",
+    "nondetChar",
+    "nondetShort",
+    "nondetInt",
+    "nondetLong",
+    "nondetFloat",
+    "nondetDouble",
+    "nondetWithNull",
+    "nondetWithoutNull",
+  };
+
+  if(std::regex_match(
+       id2string(class_symbol.name),
+       std::regex(".*org\\.cprover\\.CProver.*")) &&
+     methods_to_ignore.find(id2string(method.name))!=methods_to_ignore.end())
+  {
+    // Ignore these methods, rely on default stubbing behaviour.
+    return;
+  }
+
   java_bytecode_convert_methodt java_bytecode_convert_method(
     symbol_table,
     message_handler,
