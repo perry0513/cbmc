@@ -67,7 +67,9 @@ void goto_symext::initialize_auto_object(
       // could be NULL nondeterministically
 
       address_of_exprt address_of_expr=
-        address_of_exprt(make_auto_object(type.subtype()));
+        address_of_exprt(
+          make_auto_object(type.subtype()),
+          pointer_type);
 
       if_exprt rhs(
         side_effect_expr_nondett(bool_typet()),
