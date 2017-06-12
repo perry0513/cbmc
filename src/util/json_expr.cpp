@@ -101,7 +101,13 @@ json_objectt json(const source_locationt &location)
     result["column"]=json_stringt(id2string(location.get_column()));
 
   if(!location.get_function().empty())
-    result["function"]=json_stringt(id2string(location.get_function()));
+  {
+    std::string function_name(id2string(location.get_function()));
+    const std::string java_prefix="java::";
+    size_t prefix_loc=function_name.find(java_prefix);
+    size_t prefix_len=prefix_loc==std::string::npos?0:java_prefix.length();
+    result["function"]=json_stringt(function_name.substr(prefix_len));
+  }
 
   if(!location.get_java_bytecode_index().empty())
     result["bytecode_index"]=
