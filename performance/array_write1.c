@@ -6,5 +6,5 @@ int main()
   for(unsigned i=0; i<N; i++)
     array[i]=123;
 
-  assert(0);
+  __CPROVER_assert(0, "");
 }
