@@ -343,14 +343,14 @@ mini_bddt mini_bdd_mgrt::mk(
 }
 
 bool mini_bdd_mgrt::reverse_keyt::operator<(
-  const mini_bdd_mgrt::reverse_keyt &other) const
+  const mini_bdd_mgrt::reverse_keyt &y) const
 {
-  if(var<other.var || low<other.low)
-    return true;
-  if(var>other.var || low>other.low)
-    return false;
-
-  return high<other.high;
+  const reverse_keyt &x=*this;
+  if(x.var<y.var) return true;
+  if(x.var>y.var) return false;
+  if(x.low<y.low) return true;
+  if(x.low>y.low) return false;
+  return x.high<y.high;
 }
 
 void mini_bdd_mgrt::DumpTable(std::ostream &out) const
