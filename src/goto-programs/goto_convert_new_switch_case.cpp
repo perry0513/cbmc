@@ -1089,6 +1089,7 @@ void goto_convertt::convert_switch(
 
   goto_programt::targett previous=a;
 
+  size_t case_number=1;
   for(casest::iterator it=targets.cases.begin();
       it!=targets.cases.end();
       it++)
@@ -1101,6 +1102,8 @@ void goto_convertt::convert_switch(
     assert(!case_ops.empty());
 
     exprt guard_expr=case_guard(argument, case_ops);
+    source_location &loc=guard_expr.source_location();
+    case_number++;
 
     // adjust previous case to jump here
     previous->set_target(it->first);
