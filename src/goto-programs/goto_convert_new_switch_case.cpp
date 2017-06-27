@@ -1103,6 +1103,11 @@ void goto_convertt::convert_switch(
 
     exprt guard_expr=case_guard(argument, case_ops);
     source_location &loc=guard_expr.source_location();
+    loc.add_case_number(std::to_string(case_number));
+    status() << "INFO: set case number " << std::to_string(case_number)
+             << eom;
+    std::cout << "INFO: set case number " << std::to_string(case_number)
+              << std::endl;
     case_number++;
 
     // adjust previous case to jump here

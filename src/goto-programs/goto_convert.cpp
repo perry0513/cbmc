@@ -8,7 +8,7 @@ Author: Daniel Kroening, kroening@kroening.com
 
 /// \file
 /// Program Transformation
-
+#include <iostream>
 #include <cassert>
 
 #include <util/cprover_prefix.h>
@@ -1269,6 +1269,7 @@ void goto_convertt::convert_switch(
 
   goto_programt tmp_cases;
 
+  size_t case_number=1;
   for(auto &case_pair : targets.cases)
   {
     const caset &case_ops=case_pair.second;
@@ -1277,10 +1278,21 @@ void goto_convertt::convert_switch(
 
     exprt guard_expr=case_guard(argument, case_ops);
 
+    const source_locationt &l=code.source_location();
+    source_locationt loc;
+    loc.set_file(l.get_file());
+    loc.set_function(l.get_function());
+    loc.set_java_bytecode_index(l.get_java_bytecode_index());
+    loc.set_line(l.get_line());
+    guard_expr.add_source_location()=loc;
+
+    loc.set_case_number(std::to_string(case_number));
+    case_number++;
+
     goto_programt::targett x=tmp_cases.add_instruction();
     x->make_goto(case_pair.first);
     x->guard.swap(guard_expr);
-    x->source_location=case_ops.front().find_source_location();
+    x->source_location=loc;
   }
 
   {
