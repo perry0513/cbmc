@@ -2,6 +2,7 @@
 
 SRC = unit_tests.cpp \
       catch_example.cpp \
+      analyses/call_graph.cpp \
       # Empty last line
 
 INCLUDES= -I ../src/ -I.
