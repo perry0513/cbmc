@@ -2717,19 +2717,8 @@ const bool java_bytecode_convert_methodt::is_method_inherited(
   return false;
 }
 
-/*******************************************************************\
-
-Function: java_bytecode_convert_methodt::save_stack_entries
-
-  Inputs:
-
- Outputs:
-
- Purpose: create temporary variables if a write instruction can have undesired
-          side-effects
-
-\*******************************************************************/
-
+/// create temporary variables if a write instruction can have undesired
+/// side-effects
 void java_bytecode_convert_methodt::save_stack_entries(
   const std::string &tmp_var_prefix,
   const typet &tmp_var_type,
@@ -2770,19 +2759,8 @@ void java_bytecode_convert_methodt::save_stack_entries(
   }
 }
 
-/*******************************************************************\
-
-Function: java_bytecode_convert_methodt::create_stack_tmp_var
-
-  Inputs:
-
- Outputs:
-
- Purpose: actually create a temporary variable to hold the value of a stack
-          entry
-
-\*******************************************************************/
-
+/// actually create a temporary variable to hold the value of a stack
+/// entry
 void java_bytecode_convert_methodt::create_stack_tmp_var(
   const std::string &tmp_var_prefix,
   const typet &tmp_var_type,
