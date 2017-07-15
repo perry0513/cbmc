@@ -16,6 +16,7 @@ Author:
 #include <util/std_types.h>
 #include <util/std_expr.h>
 #include <util/simplify_expr.h>
+#include <util/invariant.h>
 
 #include <ansi-c/c_qualifiers.h>
 #include <util/c_types.h>
@@ -46,7 +47,7 @@ bool cpp_typecheckt::standard_conversion_lvalue_to_rvalue(
   const exprt &expr,
   exprt &new_expr) const
 {
-  assert(expr.get_bool(ID_C_lvalue));
+  PRECONDITION(expr.get_bool(ID_C_lvalue));
 
   if(expr.type().id()==ID_code ||
      expr.type().id()==ID_incomplete_struct ||
@@ -71,7 +72,7 @@ bool cpp_typecheckt::standard_conversion_array_to_pointer(
   const exprt &expr,
   exprt &new_expr) const
 {
-  assert(expr.type().id()==ID_array);
+  PRECONDITION(expr.type().id()==ID_array);
 
   index_exprt index(
     expr,
@@ -1060,7 +1061,9 @@ bool cpp_typecheckt::user_defined_conversion_sequence(
 
               new_expr.swap(ctor_expr);
 
-              assert(new_expr.get(ID_statement)==ID_temporary_object);
+              INVARIANT(
+                new_expr.get(ID_statement)==ID_temporary_object,
+                "statement");
 
               if(to.get_bool(ID_C_constant))
                 new_expr.type().set(ID_C_constant, true);
