@@ -15,6 +15,7 @@ Author: Daniel Kroening, kroening@kroening.com
 #include <set>
 
 #include <util/union_find.h>
+#include <util/graph.h>
 
 #include "equality.h"
 
@@ -53,6 +54,19 @@ protected:
     literalt l;
     exprt f1, f2;
   };
+  
+  // weak equivalence graph
+  class edget
+  {
+  public:
+    exprt index;
+  };
+  
+  class nodet:public graph_nodet<edget>
+  {
+  };
+  
+  grapht<nodet> weg;
 
   // the list of all equalities between arrays
   // references to objects in this container need to be stable as
