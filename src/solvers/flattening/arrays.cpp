@@ -417,20 +417,17 @@ void arrayst::add_array_constraints_equality(
 {
   // add constraints x=y => x[i]=y[i]
 
-  for(index_sett::const_iterator
-      it=index_set.begin();
-      it!=index_set.end();
-      it++)
+  for(const auto & it : index_set)
   {
     index_exprt index_expr1;
     index_expr1.type()=ns.follow(array_equality.f1.type()).subtype();
     index_expr1.array()=array_equality.f1;
-    index_expr1.index()=*it;
+    index_expr1.index()=it;
 
     index_exprt index_expr2;
     index_expr2.type()=ns.follow(array_equality.f2.type()).subtype();
     index_expr2.array()=array_equality.f2;
-    index_expr2.index()=*it;
+    index_expr2.index()=it;
 
     assert(index_expr1.type()==index_expr2.type());
 
