@@ -273,14 +273,11 @@ void arrayst::add_array_constraints()
   }
 
   // add constraints for equalities
-  for(array_equalitiest::const_iterator it=
-      array_equalities.begin();
-      it!=array_equalities.end();
-      it++)
+  for(const auto & it : array_equalities)
   {
-    add_array_constraints(
-      index_map[arrays.find_number(it->f1)],
-      *it);
+    add_array_constraints_equality(
+      index_map[arrays.find_number(it.f1)],
+      it);
 
     // update_index_map should not be necessary here
   }
@@ -414,7 +411,7 @@ void arrayst::update_index_map(bool update_all)
 #endif
 }
 
-void arrayst::add_array_constraints(
+void arrayst::add_array_constraints_equality(
   const index_sett &index_set,
   const array_equalityt &array_equality)
 {
