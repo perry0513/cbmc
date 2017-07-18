@@ -27,6 +27,7 @@ Author: Daniel Kroening, kroening@kroening.com
 
 #include <goto-symex/symex_target_equation.h>
 #include <goto-programs/safety_checker.h>
+#include <goto-symex/memory_model.h>
 
 #include "symex_bmc.h"
 
@@ -73,7 +74,7 @@ protected:
   symex_target_equationt equation;
   symex_bmct symex;
   prop_convt &prop_conv;
-
+  std::unique_ptr<memory_model_baset> memory_model;
   // use gui format
   ui_message_handlert::uit ui;
 
@@ -108,6 +109,11 @@ protected:
     resultt result,
     const goto_functionst &goto_functions);
 
+  safety_checkert::resultt get_memory_model();
+  safety_checkert::resultt setup();
+  safety_checkert::resultt execute(const goto_functionst &);
+  void slice();
+  safety_checkert::resultt show(const goto_functionst &);
   bool cover(
     const goto_functionst &goto_functions,
     const optionst::value_listt &criteria);

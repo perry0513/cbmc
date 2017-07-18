@@ -883,6 +883,7 @@ int cbmc_parse_optionst::do_bmc(bmct &bmc)
       result = CPROVER_EXIT_VERIFICATION_UNSAFE;
       break;
     case safety_checkert::resultt::ERROR:
+    case safety_checkert::resultt::UNKNOWN:
       result = CPROVER_EXIT_INTERNAL_ERROR;
       break;
   }
