@@ -53,6 +53,8 @@ public:
   }
 
   virtual resultt run(const goto_functionst &goto_functions);
+  safety_checkert::resultt setup();
+  safety_checkert::resultt execute(const goto_functionst &);
   virtual ~bmct() { }
 
   // additional stuff
@@ -110,8 +112,6 @@ protected:
     const goto_functionst &goto_functions);
 
   safety_checkert::resultt get_memory_model();
-  safety_checkert::resultt setup();
-  safety_checkert::resultt execute(const goto_functionst &);
   void slice();
   safety_checkert::resultt show(const goto_functionst &);
   bool cover(
