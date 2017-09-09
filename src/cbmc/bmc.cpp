@@ -306,7 +306,7 @@ void bmct::show_program()
 }
 
 
-safety_checkert::resultt bmct::get_memory_model()
+void bmct::get_memory_model()
 {
   const std::string mm=options.get_option("mm");
 
@@ -321,12 +321,11 @@ safety_checkert::resultt bmct::get_memory_model()
   else
   {
     error()<<"Invalid memory model "<<mm<<" -- use one of sc, tso, pso"<<eom;
-    return safety_checkert::resultt::ERROR;
+    throw 0;
   }
-  return safety_checkert::resultt::UNKNOWN;
 }
 
-safety_checkert::resultt bmct::setup()
+void bmct::setup()
 {
   get_memory_model();
   symex.set_message_handler(get_message_handler());
@@ -343,7 +342,6 @@ safety_checkert::resultt bmct::setup()
 
     setup_unwind();
 
-  return safety_checkert::resultt::UNKNOWN;
 }
 
 safety_checkert::resultt bmct::execute(const goto_functionst &goto_functions)
@@ -478,9 +476,8 @@ void bmct::slice()
 safety_checkert::resultt bmct::run(
   const goto_functionst &goto_functions)
 {
-  safety_checkert::resultt result=setup();
-  if(result!=safety_checkert::resultt::UNKNOWN)
-    return result;
+  setup();
+
   return execute(goto_functions);
 }
 
@@ -496,21 +493,18 @@ safety_checkert::resultt bmct::decide(
     return all_properties(goto_functions, prop_conv);
 }
 
-safety_checkert::resultt bmct::show(const goto_functionst &goto_functions)
+void bmct::show(const goto_functionst &goto_functions)
 {
   if(options.get_bool_option("show-vcc"))
   {
     show_vcc();
-    return safety_checkert::resultt::SAFE; // to indicate non-error
   }
 
   if(options.get_bool_option("program-only"))
   {
     show_program();
-    return safety_checkert::resultt::SAFE;
   }
 
-  return safety_checkert::resultt::UNKNOWN;
 }
 
 safety_checkert::resultt bmct::stop_on_fail(

@@ -53,7 +53,7 @@ public:
   }
 
   virtual resultt run(const goto_functionst &goto_functions);
-  safety_checkert::resultt setup();
+  void setup();
   safety_checkert::resultt execute(const goto_functionst &);
   virtual ~bmct() { }
 
@@ -111,9 +111,9 @@ protected:  symex_bmct symex;
     resultt result,
     const goto_functionst &goto_functions);
 
-  safety_checkert::resultt get_memory_model();
+  void get_memory_model();
   void slice();
-  safety_checkert::resultt show(const goto_functionst &);
+  void show(const goto_functionst &);
   bool cover(
     const goto_functionst &goto_functions,
     const optionst::value_listt &criteria);
