@@ -785,6 +785,7 @@ bool cbmc_parse_optionst::process_goto_program(
         ? std::stoul(cmdline.get_value("java-max-input-tree-depth"))
         : MAX_NONDET_TREE_DEPTH;
 
+    #if 0
     replace_java_nondet(goto_model);
 
     convert_nondet(
@@ -792,6 +793,7 @@ bool cbmc_parse_optionst::process_goto_program(
       get_message_handler(),
       max_nondet_array_length,
       max_nondet_tree_depth);
+    #endif
 
     // add generic checks
     status() << "Generic Property Instrumentation" << eom;
