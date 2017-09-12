@@ -776,6 +776,7 @@ bool cbmc_parse_optionst::process_goto_program(
     // Similar removal of java nondet statements:
     // TODO Should really get this from java_bytecode_language somehow, but we
     // don't have an instance of that here.
+    #if 0
     const size_t max_nondet_array_length=
       cmdline.isset("java-max-input-array-length")
         ? std::stoul(cmdline.get_value("java-max-input-array-length"))
@@ -785,7 +786,6 @@ bool cbmc_parse_optionst::process_goto_program(
         ? std::stoul(cmdline.get_value("java-max-input-tree-depth"))
         : MAX_NONDET_TREE_DEPTH;
 
-    #if 0
     replace_java_nondet(goto_model);
 
     convert_nondet(
