@@ -33,7 +33,6 @@ Author: Daniel Kroening, kroening@kroening.com
 #include <goto-programs/read_goto_binary.h>
 #include <goto-programs/loop_ids.h>
 #include <goto-programs/link_to_library.h>
-#include <goto-programs/goto_inline.h>
 #include <goto-programs/xml_goto_trace.h>
 #include <goto-programs/remove_complex.h>
 #include <goto-programs/remove_function_pointers.h>
@@ -294,10 +293,6 @@ bool symex_parse_optionst::process_goto_program(const optionst &options)
   {
     // we add the library
     link_to_library(goto_model, ui_message_handler);
-
-    // do partial inlining
-    status() << "Partial Inlining" << eom;
-    goto_partial_inline(goto_model, ui_message_handler);
 
     // add generic checks
     status() << "Generic Property Instrumentation" << eom;
