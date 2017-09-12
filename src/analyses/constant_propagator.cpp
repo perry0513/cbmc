@@ -65,11 +65,12 @@ void constant_propagator_domaint::assign_rec(
 
   if(lhs.id()==ID_symbol && rhs.id()==ID_if)
   {
-	exprt cond=rhs.op0();
-	assert(cond.operands().size()==2);
-	if(values.is_constant(cond.op0())
-			&& values.is_constant(cond.op1()))
-	{
+    #if 0
+    exprt cond=to_if_expr(rhs).cond();
+    assert(cond.operands().size()==2);
+    if(values.is_constant(cond.op0()) &&
+       values.is_constant(cond.op1()))
+    {
       if(cond.op0().id()==ID_index)
       {
     	exprt index=cond.op0();
@@ -82,7 +83,8 @@ void constant_propagator_domaint::assign_rec(
         UNREACHABLE;
 
       assign(values, to_symbol_expr(lhs), cond, ns);
-	}
+    }
+    #endif
   }
   else if(lhs.id()==ID_symbol && rhs_type.id()!=ID_array
                          && rhs_type.id()!=ID_struct
