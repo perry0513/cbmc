@@ -745,6 +745,13 @@ bool cbmc_parse_optionst::process_goto_program(
     // adding the library.
     remove_asm(goto_model);
 
+    // remove function pointers
+    status() << "Removal of function pointers and virtual functions" << eom;
+    remove_function_pointers(
+      get_message_handler(),
+      goto_model,
+      cmdline.isset("pointer-check"));
+
     // add the library
     link_to_library(goto_model, get_message_handler());
 
@@ -757,10 +764,13 @@ bool cbmc_parse_optionst::process_goto_program(
       get_message_handler(),
       goto_model,
       cmdline.isset("pointer-check"));
+
     // Java virtual functions -> explicit dispatch tables:
     remove_virtual_functions(goto_model);
+
     // remove catch and throw (introduces instanceof)
     remove_exceptions(goto_model);
+
     // Similar removal of RTTI inspection:
     remove_instanceof(goto_model);
 
