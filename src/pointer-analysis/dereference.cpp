@@ -196,12 +196,10 @@ exprt dereferencet::dereference_rec(
         typecast_exprt(zero, address.type()), offset, type);
     }
     else
-      throw "dereferencet: unexpected pointer constant "+address.pretty();
+      return exprt("dereference_error", type);
   }
   else
-  {
-    throw "failed to dereference `"+address.id_string()+"'";
-  }
+    return exprt("dereference_error", type);
 }
 
 exprt dereferencet::dereference_if(
@@ -262,7 +260,10 @@ exprt dereferencet::dereference_typecast(
   // pointer type cast?
   if(op_type.id()==ID_pointer)
     return dereference_rec(op, offset, type); // just pass down
-  else if(op_type.id()==ID_signedbv || op_type.id()==ID_unsignedbv)
+  else if(op_type.id()==ID_signedbv ||
+          op_type.id()==ID_unsignedbv ||
+          op_type.id()==ID_c_enum ||
+          op_type.id()==ID_c_bool)
   {
     // We got an integer-typed address A. We turn this
     // into integer_dereference(A+offset),
@@ -277,7 +278,7 @@ exprt dereferencet::dereference_typecast(
     return unary_exprt(ID_integer_dereference, integer, type);
   }
   else
-    throw "dereferencet: unexpected cast";
+    return exprt("dereference_error", type);
 }
 
 bool dereferencet::type_compatible(
