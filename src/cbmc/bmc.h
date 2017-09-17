@@ -73,8 +73,8 @@ protected:
   const optionst &options;
   symbol_tablet new_symbol_table;
   namespacet ns;
-public:  symex_target_equationt equation;
-protected:  symex_bmct symex;
+  symex_target_equationt equation;
+  symex_bmct symex;
   prop_convt &prop_conv;
   std::unique_ptr<memory_model_baset> memory_model;
   // use gui format
