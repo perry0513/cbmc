@@ -265,9 +265,9 @@ exprt dereferencet::dereference_typecast(
           op_type.id()==ID_c_enum ||
           op_type.id()==ID_c_bool)
   {
-    // We got an integer-typed address A. We turn this back (!)
-    // into *(type *)(A+offset), and then let some other layer
-    // worry about it.
+    // We got an integer-typed address A. We turn this
+    // into integer_dereference(A+offset),
+    // and then let some other layer worry about it.
 
     exprt integer=op;
 
@@ -275,10 +275,7 @@ exprt dereferencet::dereference_typecast(
       integer=
         plus_exprt(offset, typecast_exprt(op, offset.type()));
 
-    exprt new_typecast=
-      typecast_exprt(integer, pointer_type(type));
-
-    return dereference_exprt(new_typecast, type);
+    return unary_exprt("integer_dereference", integer, type);
   }
   else
     return exprt("dereference_error", type);
