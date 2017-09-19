@@ -389,7 +389,7 @@ void path_symext::assign_rec(
 
     // record new state of lhs
     {
-      // reference is not stable
+      // warning: reference var_state is not stable
       path_symex_statet::var_statet &var_state=state.get_var_state(var_info);
       var_state.ssa_symbol=new_ssa_lhs;
     }
@@ -411,6 +411,11 @@ void path_symext::assign_rec(
         #endif
         throw "assign_rec got different types";
       }
+
+      // propagate the rhs?
+      // warning: reference var_state is not stable
+      path_symex_statet::var_statet &var_state=state.get_var_state(var_info);
+      var_state.value=propagate(ssa_rhs)?ssa_rhs:nil_exprt();
     }
 
     // record the step
@@ -420,11 +425,12 @@ void path_symext::assign_rec(
     step.guard=conjunction(guard);
     step.full_lhs=full_lhs;
     step.ssa_lhs=new_ssa_lhs;
-    step.ssa_rhs=ssa_rhs;
 
-    // propagate the rhs?
-    path_symex_statet::var_statet &var_state=state.get_var_state(var_info);
-    var_state.value=propagate(ssa_rhs)?ssa_rhs:nil_exprt();
+    if(ssa_rhs.is_nil())
+      // this is a tautology, added so the solver knows about the symbol
+      step.ssa_rhs=new_ssa_lhs;
+    else
+      step.ssa_rhs=ssa_rhs;
   }
   else if(ssa_lhs.id()==ID_typecast)
   {
