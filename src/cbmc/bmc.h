@@ -114,6 +114,7 @@ protected:
   void get_memory_model();
   void slice();
   void show(const goto_functionst &);
+
   bool cover(
     const goto_functionst &goto_functions,
     const optionst::value_listt &criteria);
