@@ -32,4 +32,6 @@ void remove_functions(
   const std::list<std::string> &names,
   message_handlert &);
 
+void remove_all_except(goto_modelt &, message_handlert &);
+
 #endif // CPROVER_GOTO_INSTRUMENT_REMOVE_FUNCTION_H

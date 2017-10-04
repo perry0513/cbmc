@@ -957,6 +957,11 @@ void goto_instrument_parse_optionst::instrument_goto_program()
       get_message_handler());
   }
 
+  if(cmdline.isset("remove-all-functions"))
+  {
+    remove_all_except(goto_model, get_message_handler());
+  }
+
   // we add the library in some cases, as some analyses benefit
 
   if(cmdline.isset("add-library") ||

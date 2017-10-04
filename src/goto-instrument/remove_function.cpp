@@ -15,7 +15,34 @@ Date: April 2017
 
 #include <util/message.h>
 
+#include "function_modifies.h"
+
 #include <goto-programs/goto_model.h>
+
+// removes all except relevant functions for xsa227. This is a bodge.
+void remove_all_except(goto_modelt &goto_model, message_handlert &message_handler)
+{
+  std::vector<std::string> functions_to_keep;
+  functions_to_keep.push_back("my_init");
+  functions_to_keep.push_back("__CPROVER__start");
+  functions_to_keep.push_back("__CPROVER_initialize");
+  functions_to_keep.push_back("do_grant_table_op");
+  functions_to_keep.push_back("gnttab_map_grant_ref");
+  functions_to_keep.push_back("__gnttab_map_grant_ref");
+  functions_to_keep.push_back("create_grant_host_mapping");
+  functions_to_keep.push_back("create_grant_pte_mapping");
+
+  forall_goto_functions(f_it, goto_model.goto_functions)
+  {
+    bool keep=false;
+    for(const auto &n : functions_to_keep)
+      if(f_it->first==n)
+        keep=true;
+
+    if(!keep)
+      remove_function(goto_model, f_it->first, message_handler);
+  }
+}
 
 /// Remove the body of function "identifier" such that an analysis will treat it
 /// as a side-effect free function with non-deterministic return value.
@@ -70,3 +97,4 @@ void remove_functions(
   for(const auto &f : names)
     remove_function(goto_model, f, message_handler);
 }
+
