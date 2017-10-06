@@ -17,6 +17,10 @@ Author: Daniel Kroening, kroening@kroening.com
 #include <util/c_types.h>
 #include <util/invariant.h>
 
+#include <pointer-analysis/dereference.h>
+
+#include <analyses/dirty.h>
+
 bool goto_symext::get_unwind_recursion(
   const irep_idt &,
   const unsigned,
@@ -270,6 +274,22 @@ void goto_symext::symex_function_call_code(
         side_effect_expr_nondett(call.lhs().type(), call.source_location());
       code_assignt code(call.lhs(), rhs);
       symex_assign(state, code);
+    }
+
+    if(options.get_bool_option("havoc-undefined-functions"))
+    {
+      // assign non det to function arguments if pointers
+      // are not const
+      for(const auto &arg : call.arguments())
+      {
+        if(arg.type().id() == ID_pointer &&
+            !arg.type().subtype().get_bool(ID_C_constant))
+        {
+          exprt object = dereference_exprt(arg, arg.type().subtype());
+          clean_expr(object, state, true);
+          havoc_rec(state, guardt(), object);
+        }
+      }
     }
 
     symex_transition(state);
