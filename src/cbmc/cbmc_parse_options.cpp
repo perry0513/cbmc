@@ -178,6 +178,9 @@ void cbmc_parse_optionst::get_command_line_options(optionst &options)
       cmdline.get_value("localize-faults-method"));
   }
 
+  if(cmdline.isset("add-fake-bodiless-functions"))
+    options.set_option("add-fake-bodiless-functions", true);
+
   if(cmdline.isset("unwind"))
     options.set_option("unwind", cmdline.get_value("unwind"));
 
@@ -1061,6 +1064,9 @@ void cbmc_parse_optionst::help()
     " --partial-loops              permit paths with partial loops\n"
     " --no-pretty-names            do not simplify identifiers\n"
     " --graphml-witness filename   write the witness in GraphML format to filename\n" // NOLINT(*)
+    " --add-fake-bodiless-functions\n"
+    "                              for any function that has no body, assign non-deterministic values to\n" // NOLINT(*)
+    "                              any parameters passed as non-const pointers and the return value\n" // NOLINT(*)
     "\n"
     "Backend options:\n"
     " --object-bits n              number of bits used for object addresses\n"
