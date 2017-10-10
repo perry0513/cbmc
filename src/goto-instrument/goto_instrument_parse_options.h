@@ -79,7 +79,7 @@ Author: Daniel Kroening, kroening@kroening.com
   "(undefined-function-is-assume-false)" \
   "(remove-function-body):"\
   "(splice-call):" \
-  "(remove-function-body):" \
+  "(remove-all-xsa227)(remove-all-xsa213)" \
   "(harness-generator):" \
 
 

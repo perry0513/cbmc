@@ -19,8 +19,55 @@ Date: April 2017
 
 #include <goto-programs/goto_model.h>
 
+
+void use_only_shortest_path(goto_modelt & goto_model,
+    message_handlert & message_handler,
+    irep_idt entry,
+    irep_idt property)
+{
+  std::vector<std::string> functions_to_keep;
+  functions_to_keep.push_back("__CPROVER__start");
+  functions_to_keep.push_back("__CPROVER_initialize");
+
+
+
+
+
+
+}
+
+
 // removes all except relevant functions for xsa227. This is a bodge.
-void remove_all_except(goto_modelt &goto_model, message_handlert &message_handler)
+void remove_all_for_xsa213(goto_modelt &goto_model,
+    message_handlert &message_handler)
+{
+  std::vector<std::string> functions_to_keep;
+  functions_to_keep.push_back("my_init");
+  functions_to_keep.push_back("__CPROVER__start");
+  functions_to_keep.push_back("__CPROVER_initialize");
+  functions_to_keep.push_back("do_multicall_stub");
+  functions_to_keep.push_back("do_iret");
+  functions_to_keep.push_back("do_mmuext_op");
+  functions_to_keep.push_back("compat_mmuext_op");
+  functions_to_keep.push_back("new_guest_cr3");
+  functions_to_keep.push_back("mod_l4_entry");
+
+  forall_goto_functions(f_it, goto_model.goto_functions)
+  {
+    bool keep=false;
+    for(const auto &n : functions_to_keep)
+      if(f_it->first==n)
+        keep=true;
+
+    if(!keep)
+      remove_function(goto_model, f_it->first, message_handler);
+  }
+}
+
+
+// removes all except relevant functions for xsa227. This is a bodge.
+void remove_all_for_xsa227(goto_modelt &goto_model,
+    message_handlert &message_handler)
 {
   std::vector<std::string> functions_to_keep;
   functions_to_keep.push_back("my_init");

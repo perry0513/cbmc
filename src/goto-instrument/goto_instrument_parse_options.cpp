@@ -957,9 +957,13 @@ void goto_instrument_parse_optionst::instrument_goto_program()
       get_message_handler());
   }
 
-  if(cmdline.isset("remove-all-functions"))
+  if(cmdline.isset("remove-all-xsa227"))
   {
-    remove_all_except(goto_model, get_message_handler());
+    remove_all_for_xsa227(goto_model, get_message_handler());
+  }
+  if(cmdline.isset("remove-all-xsa213"))
+  {
+    remove_all_for_xsa213(goto_model, get_message_handler());
   }
 
   // we add the library in some cases, as some analyses benefit
