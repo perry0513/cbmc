@@ -52,7 +52,7 @@ public:
     return false;
   }
 
-  node_indext add_node_if_not_exists(std::string node_name)
+/*  node_indext add_node_if_not_exists(std::string node_name)
   {
     for(node_indext i=0; i<nodes.size(); ++i)
     {
@@ -61,7 +61,7 @@ public:
     }
 
     return grapht<xml_graph_nodet>::add_node();
-  }
+  }*/
 
   typedef std::map<std::string, std::string> key_valuest;
   key_valuest key_values;
