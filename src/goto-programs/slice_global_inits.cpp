@@ -67,7 +67,7 @@ void slice_global_inits(goto_modelt &goto_model)
 
   symbol_collectort visitor;
 
-  assert(!functions_reached.empty());
+  INVARIANT(!functions_reached.empty(), "No reachable functions founds");
 
   for(const irep_idt &id : functions_reached)
   {
@@ -88,7 +88,8 @@ void slice_global_inits(goto_modelt &goto_model)
 
   goto_functionst::function_mapt::iterator f_it;
   f_it=goto_functions.function_map.find(initialize);
-  assert(f_it!=goto_functions.function_map.end());
+  INVARIANT(f_it!=goto_functions.function_map.end(),
+      "No initialize function found");
 
   goto_programt &goto_program=f_it->second.body;
 
