@@ -81,8 +81,11 @@ Author: Daniel Kroening, kroening@kroening.com
   "(remove-function-body):"\
   "(splice-call):" \
   "(remove-all-xsa227)(remove-all-xsa213)" \
+  "(aggressive-slice)" \
+  "(call-depth):" \
   "(harness-generator):" \
-
+  "(preserve-function):" \
+  "(preserve-functions-containing):" \
 
 class goto_instrument_parse_optionst:
   public parse_options_baset,
