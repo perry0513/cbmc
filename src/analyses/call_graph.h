@@ -45,8 +45,10 @@ public:
   void output_xml(std::ostream &out) const;
   call_grapht get_inverted() const;
   std::unordered_set<irep_idt, irep_id_hash>
-      reachable_functions(irep_idt start);
-  std::list<irep_idt>shortest_function_path(irep_idt src, irep_idt dest);
+  reachable_functions(irep_idt start);
+  void reachable_within_n_steps(std::size_t steps,
+      std::unordered_set<irep_idt, irep_id_hash> &function_list);
+  std::list<irep_idt> shortest_function_path(irep_idt src, irep_idt dest);
 
   bool get_node_index(const irep_idt& function_name, node_indext &n) const
   {
