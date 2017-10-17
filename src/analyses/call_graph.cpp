@@ -174,6 +174,7 @@ void call_grapht::reachable_within_n_steps(
   }
 }
 
+
 std::unordered_set<irep_idt, irep_id_hash>
 call_grapht::reachable_functions(irep_idt start_function)
 {

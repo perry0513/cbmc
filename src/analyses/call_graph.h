@@ -76,7 +76,6 @@ public:
     return result;
   }
 
-
 protected:
 
   void output_dot_node(std::ostream &out, node_indext n) const override;
