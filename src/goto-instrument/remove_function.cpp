@@ -20,14 +20,6 @@ Date: April 2017
 #include <goto-programs/goto_model.h>
 
 
-void use_only_shortest_path(goto_modelt & goto_model,
-    message_handlert & message_handler,
-    irep_idt entry,
-    irep_idt property)
-{
-  std::vector<std::string> functions_to_keep;
-  functions_to_keep.push_back("__CPROVER__start");
-  functions_to_keep.push_back("__CPROVER_initialize");
 
 
 
