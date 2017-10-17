@@ -455,6 +455,18 @@ int goto_instrument_parse_optionst::doit()
 
       return 0;
     }
+    if(cmdline.isset("function-arguments"))
+    {
+      std::list<std::string> function_names = cmdline.get_values(
+          "function-arguments");
+      if(function_names.size() != 1)
+        status() << "One, and only one, function name must be given \n";
+
+      get_function_argument_types(goto_model, function_names.front(),
+          get_message_handler());
+
+      return 0;
+    }
 
     if(cmdline.isset("show-rw-set"))
     {

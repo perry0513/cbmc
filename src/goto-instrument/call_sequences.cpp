@@ -17,6 +17,7 @@ Date: April 2013
 #include <iostream>
 #include <unordered_set>
 
+#include <util/message.h>
 #include <util/std_expr.h>
 #include <util/simplify_expr.h>
 
@@ -356,4 +357,28 @@ void list_calls_and_arguments(const goto_modelt &goto_model)
 
   forall_goto_functions(f_it, goto_model.goto_functions)
     list_calls_and_arguments(ns, f_it->first, f_it->second.body);
+}
+
+void get_function_argument_types(const goto_modelt &goto_model,
+    irep_idt function, message_handlert & message_handler)
+{
+  messaget message(message_handler);
+  auto function_location=
+    goto_model.goto_functions.function_map.find(function);
+
+  if(function_location==goto_model.goto_functions.function_map.end())
+    {
+      message.error() << "No function " << function
+                      << " in goto program" << messaget::eom;
+      return;
+    }
+
+  for(const auto p : function_location->second.type.parameters())
+  {
+ //   message.status() << "parameter "<< p.get_identifier()
+   //     << " type " << p.type().id_string() << messaget::eom;
+
+  }
+
+
 }
