@@ -56,6 +56,8 @@ class optionst;
   "(show-claims)(claim):(show-properties)" \
   "(drop-unused-functions)" \
   "(property):(stop-on-fail)(trace)" \
+  "(hex)" \
+  "(trace-verbosity):" \
   "(error-label):(verbosity):(no-library)" \
   "(nondet-static)" \
   "(version)" \
