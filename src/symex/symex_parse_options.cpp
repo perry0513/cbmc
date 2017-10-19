@@ -57,6 +57,7 @@ Author: Daniel Kroening, kroening@kroening.com
 #include <path-symex/locs.h>
 
 #include "path_search.h"
+#include "shortest_path_graph.h"
 
 symex_parse_optionst::symex_parse_optionst(int argc, const char **argv):
   parse_options_baset(SYMEX_OPTIONS, argc, argv),
@@ -161,6 +162,18 @@ int symex_parse_optionst::doit()
     locst locs(ns);
     locs.build(goto_model.goto_functions);
     locs.output(std::cout);
+    return 0;
+  }
+
+  if(cmdline.isset("show-distances-to-property"))
+  {
+    const namespacet ns(goto_model.symbol_table);
+    locst locs(ns);
+    locs.build(goto_model.goto_functions);
+
+    shortest_path_grapht path_search_graph(goto_model.goto_functions, locs);
+
+    locs.output_reachable(std::cout);
     return 0;
   }
 
@@ -610,6 +623,8 @@ void symex_parse_optionst::help()
     " --max-search-time s          limit search to approximately s seconds\n"
     "\n"
     "Other options:\n"
+    " --show-distances-to-property\n"
+    "                              shows the (context free) shortest path from every reachable program location to a single property" // NOLINT(*)
     " --version                    show version and exit\n"
     " --xml-ui                     use XML-formatted output\n"
     " --verbosity #                verbosity level\n"
