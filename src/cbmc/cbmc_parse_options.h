@@ -55,7 +55,7 @@ class optionst;
   "(show-symbol-table)(show-parse-tree)(show-vcc)" \
   "(show-claims)(claim):(show-properties)" \
   "(drop-unused-functions)" \
-  "(add-fake-bodiless-functions)" \
+  "(havoc-undefined-functions)" \
   "(property):(stop-on-fail)(trace)" \
   "(hex)" \
   "(trace-verbosity):" \

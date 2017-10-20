@@ -278,7 +278,7 @@ void goto_symext::symex_function_call_code(
       symex_assign_rec(state, code);
     }
 
-    if(options.get_bool_option("add-fake-bodiless-functions"))
+    if(options.get_bool_option("havoc-undefined-functions"))
     {
       // assign non det to function arguments if pointers
       // are not const
