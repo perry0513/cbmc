@@ -354,69 +354,55 @@ void grapht<N>::remove_out_edges(node_indext n)
 }
 
 template<class N>
-void grapht<N>::shortest_path(
-  node_indext src,
-  node_indext dest,
-  patht &path,
-  bool non_trivial) const
+void grapht<N>::shortest_path(node_indext src, node_indext dest, patht &path,
+    bool non_trivial) const
 {
   std::vector<bool> visited;
-  std::vector<unsigned> distance;
-  std::vector<unsigned> previous;
+  std::vector<std::size_t> distance;
+  std::vector<std::size_t> previous;
 
   // initialization
   visited.resize(nodes.size(), false);
-  distance.resize(nodes.size(), (unsigned)(-1));
+  distance.resize(nodes.size(), std::numeric_limits<std::size_t>::max());
   previous.resize(nodes.size(), 0);
 
   if(!non_trivial)
   {
-    distance[src]=0;
-    visited[src]=true;
+    distance[src] = 0;
+    visited[src] = true;
   }
 
   // does BFS, not Dijkstra
   // we hope the graph is sparse
-  std::vector<node_indext> frontier_set, new_frontier_set;
+  std::vector<node_indext> frontier_set;
 
   frontier_set.reserve(nodes.size());
 
   frontier_set.push_back(src);
 
-  unsigned d=0;
-  bool found=false;
+  bool found = false;
 
-  while(!frontier_set.empty() && !found)
+  for(std::size_t d = 1; !frontier_set.empty(); ++d)
   {
-    d++;
+    std::vector<node_indext> new_frontier_set;
 
-    new_frontier_set.clear();
-    new_frontier_set.reserve(nodes.size());
-
-    for(typename std::vector<node_indext>::const_iterator
-        f_it=frontier_set.begin();
-        f_it!=frontier_set.end() && !found;
-        f_it++)
+    for(const auto &i : frontier_set)
     {
-      node_indext i=*f_it;
-      const nodet &n=nodes[i];
+      const nodet &n = nodes[i];
 
       // do all neighbors
-      for(typename edgest::const_iterator
-          o_it=n.out.begin();
-          o_it!=n.out.end() && !found;
-          o_it++)
+      for(const auto &edge_out : n.out)
       {
-        node_indext o=o_it->first;
+        node_indext o = edge_out.first;
 
         if(!visited[o])
         {
-          distance[o]=d;
-          previous[o]=i;
-          visited[o]=true;
+          distance[o] = d;
+          previous[o] = i;
+          visited[o] = true;
 
-          if(o==dest)
-            found=true;
+          if(o == dest)
+            found = true;
           else
             new_frontier_set.push_back(o);
         }
@@ -431,16 +417,16 @@ void grapht<N>::shortest_path(
   path.clear();
 
   // reachable at all?
-  if(distance[dest]==(unsigned)(-1))
+  if(distance[dest] == std::numeric_limits<std::size_t>::max())
     return; // nah
 
   while(true)
   {
     path.push_front(dest);
-    if(distance[dest]==0 ||
-       previous[dest]==src) break; // we are there
-    assert(dest!=previous[dest]);
-    dest=previous[dest];
+    if(distance[dest] == 0 || previous[dest] == src)
+      break; // we are there
+    assert(dest != previous[dest]);
+    dest = previous[dest];
   }
 }
 
