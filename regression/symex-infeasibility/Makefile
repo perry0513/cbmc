@@ -1,10 +1,14 @@
 default: tests.log
 
 test:
-	@../test.pl -c ../../../src/symex/symex
+	@../test.pl -c "../../../src/symex/symex --bfs"
+	@../test.pl -c "../../../src/symex/symex --dfs"
+	@../test.pl -c "../../../src/symex/symex --dfs --randomize"		
 
 tests.log: ../test.pl
-	@../test.pl -c ../../../src/symex/symex
+	@../test.pl -c "../../../src/symex/symex --bfs"
+	@../test.pl -c "../../../src/symex/symex --dfs"
+	@../test.pl -c "../../../src/symex/symex --dfs --randomize"		
 
 show:
 	@for dir in *; do \
