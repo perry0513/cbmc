@@ -14,9 +14,13 @@ Author:
 #include "reachable_call_graph.h"
 #include <util/message.h>
 
-
 reachable_call_grapht::reachable_call_grapht
 (const goto_modelt & _goto_model)
+{
+  build(_goto_model.goto_functions);
+}
+
+void reachable_call_grapht::initialize(const goto_modelt & _goto_model)
 {
   build(_goto_model.goto_functions);
 }
