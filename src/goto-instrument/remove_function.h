@@ -36,6 +36,14 @@ void remove_functions(
   const std::list<std::string> &names,
   message_handlert &);
 
+/// \brief Replace function bodies with assume(false).
+/// This effectively blocks any paths through the function
+/// or depending on return values from the function.
+/// \param goto model, list of function names, message handler
+void block_functions(
+  goto_modelt &,
+  const std::list<std::string> &names,
+  message_handlert &);
 
 /// \brief The aggressive slicer removes the body of all the functions except
 /// those on the shortest path, those within the call-depth of the

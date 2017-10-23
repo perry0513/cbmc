@@ -989,6 +989,14 @@ void goto_instrument_parse_optionst::instrument_goto_program()
       get_message_handler());
   }
 
+  if(cmdline.isset("block-function"))
+  {
+    block_functions(
+      goto_model,
+      cmdline.get_values("block-function"),
+      get_message_handler());
+  }
+
   if(cmdline.isset("remove-all-xsa227"))
   {
     remove_all_for_xsa227(goto_model, get_message_handler());
@@ -1639,6 +1647,7 @@ void goto_instrument_parse_optionst::help()
     " --model-argc-argv <n>        model up to <n> command line arguments\n"
     // NOLINTNEXTLINE(whitespace/line_length)
     " --remove-function-body <f>   remove the implementation of function <f> (may be repeated)\n"
+    " --block-function <f>         replace body of function <f> with assume(false), effectively block all paths through function\n" // NOLINT(*)
     "\n"
     "Other options:\n"
     " --no-system-headers          with --dump-c/--dump-cpp: generate C source expanding libc includes\n" // NOLINT(*)

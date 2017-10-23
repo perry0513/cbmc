@@ -216,3 +216,48 @@ void remove_functions(
     remove_function(goto_model, f, message_handler);
 }
 
+void block_function(
+    goto_modelt &goto_model,
+    const irep_idt &identifier,
+    message_handlert &message_handler)
+{
+  messaget message(message_handler);
+
+  goto_functionst::function_mapt::iterator entry=
+    goto_model.goto_functions.function_map.find(identifier);
+
+  if(entry==goto_model.goto_functions.function_map.end())
+    {
+      message.error() << "No function " << identifier
+                      << " in goto program" << messaget::eom;
+      return;
+    }
+    else if(entry->second.is_inlined())
+    {
+      message.warning() << "Function " << identifier << " is inlined, "
+                        << "instantiations will not be removed"
+                        << messaget::eom;
+    }
+
+    if(entry->second.body_available())
+    {
+      message.status() << "Removing body of " << identifier
+                       << messaget::eom;
+      entry->second.clear();
+      goto_model.symbol_table.get_writeable_ref(identifier).value.make_nil();
+    }
+
+    entry->second.body.add_instruction()->make_assumption(false_exprt());
+}
+
+void block_functions(
+    goto_modelt &goto_model,
+    const std::list<std::string> &functions,
+    message_handlert &message_handler)
+{
+  for(const auto &func : functions)
+  {
+    block_function(goto_model, func, message_handler);
+  }
+}
+

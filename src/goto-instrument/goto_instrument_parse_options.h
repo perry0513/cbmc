@@ -79,6 +79,7 @@ Author: Daniel Kroening, kroening@kroening.com
   "(show-threaded)(list-calls-args)(print-path-lengths)" \
   "(undefined-function-is-assume-false)" \
   "(remove-function-body):"\
+  "(block-function):"\
   "(splice-call):" \
   "(remove-all-xsa227)(remove-all-xsa213)" \
   "(aggressive-slice)" \
