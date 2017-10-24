@@ -58,9 +58,10 @@ void path_searcht::sort_queue()
   else
   {
     error() << "all states have shortest path length = MAX_UNSIGNED_INT, "
-             << "either they are unreachable or "
-             << "something went wrong in the shortest path computation" << eom;
-    throw "search heuristic failed to pick the next state";
+             << "try removing function pointers with goto-instrument next time."
+             << "randomly picking state instead"
+             << eom;
+    shuffle_queue(queue);
   }
 }
 

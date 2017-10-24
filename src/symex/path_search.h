@@ -132,7 +132,8 @@ protected:
   /// Pick random element of queue and move to front
   /// \param queue  queue to be shuffled
   void shuffle_queue(queuet &queue);
-  // needed for shortest path heuristic
+  /// Move element with shortest distance to property
+  /// to the front of the queue
   void sort_queue();
   void sort_queue_per_function();
   // search heuristic
