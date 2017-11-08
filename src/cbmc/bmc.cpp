@@ -310,8 +310,6 @@ void bmct::get_memory_model()
 {
   const std::string mm=options.get_option("mm");
 
-  std::unique_ptr<memory_model_baset> memory_model;
-
   if(mm.empty() || mm=="sc")
     memory_model=util_make_unique<memory_model_sct>(ns);
   else if(mm=="tso")
@@ -320,7 +318,8 @@ void bmct::get_memory_model()
     memory_model=util_make_unique<memory_model_psot>(ns);
   else
   {
-    error()<<"Invalid memory model "<<mm<<" -- use one of sc, tso, pso"<<eom;
+    error() << "Invalid memory model " << mm
+    	    << " -- use one of sc, tso, pso" << eom;
     throw 0;
   }
 }
@@ -337,7 +336,7 @@ void bmct::setup()
       symex.language_mode=init_symbol->mode;
   }
 
-  status()<<"Starting Bounded Model Checking"<<eom;
+  status() << "Starting Bounded Model Checking" << eom;
   symex.last_source_location.make_nil();
 
     setup_unwind();
@@ -358,8 +357,9 @@ safety_checkert::resultt bmct::execute(const goto_functionst &goto_functions)
       (*memory_model)(equation);
     }
 
-    statistics()<<"size of program expression: "<<equation.SSA_steps.size()
-        <<" steps"<<eom;
+    statistics() << "size of program expression: "
+    		     << equation.SSA_steps.size()
+                 << " steps" << eom;
 
     slice();
 
@@ -367,7 +367,7 @@ safety_checkert::resultt bmct::execute(const goto_functionst &goto_functions)
     std::string cov_out=options.get_option("symex-coverage-report");
     if(!cov_out.empty()&&symex.output_coverage_report(goto_functions, cov_out))
     {
-      error()<<"Failed to write symex coverage report"<<eom;
+      error() << "Failed to write symex coverage report" << eom;
       return safety_checkert::resultt::ERROR;
     }
 
@@ -379,20 +379,21 @@ safety_checkert::resultt bmct::execute(const goto_functionst &goto_functions)
 
     if(!options.get_list_option("cover").empty())
     {
-      const optionst::value_listt criteria=options.get_list_option("cover");
-      return
-          cover(goto_functions, criteria) ?
-              safety_checkert::resultt::ERROR : safety_checkert::resultt::SAFE;
+      const optionst::value_listt criteria = options.get_list_option("cover");
+      return cover(goto_functions, criteria) ?
+    		  safety_checkert::resultt::ERROR : safety_checkert::resultt::SAFE;
     }
 
     if(options.get_option("localize-faults")!="")
     {
-      fault_localizationt fault_localization(goto_functions, *this, options);
+      fault_localizationt fault_localization(
+    		  goto_functions, *this, options);
       return fault_localization();
     }
 
     // any properties to check at all?
-    if(!options.get_bool_option("program-only")&&symex.remaining_vccs==0)
+    if(!options.get_bool_option("program-only") &&
+    		symex.remaining_vccs==0)
     {
       report_success();
       output_graphml(resultt::SAFE, goto_functions);
@@ -407,28 +408,23 @@ safety_checkert::resultt bmct::execute(const goto_functionst &goto_functions)
 
     return decide(goto_functions, prop_conv);
 
-  } catch(const std::string &error_str)
+  }
+  catch(const std::string &error_str)
 
   {
-    messaget message(get_message_handler());
-    message.error().source_location=symex.last_source_location;
-    message.error()<<error_str<<messaget::eom;
-
+    error() << error_str << messaget::eom;
     return safety_checkert::resultt::ERROR;
   }
 
   catch(const char *error_str)
   {
-    messaget message(get_message_handler());
-    message.error().source_location=symex.last_source_location;
-    message.error()<<error_str<<messaget::eom;
-
+    error() << error_str << messaget::eom;
     return safety_checkert::resultt::ERROR;
   }
 
   catch(const std::bad_alloc &)
   {
-    error()<<"Out of memory"<<eom;
+    error() << "Out of memory" << eom;
     return safety_checkert::resultt::ERROR;
   }
 }
