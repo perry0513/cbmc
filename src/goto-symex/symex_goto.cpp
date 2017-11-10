@@ -15,6 +15,7 @@ Author: Daniel Kroening, kroening@kroening.com
 #include <algorithm>
 
 #include <util/std_expr.h>
+#include <util/simplify_expr.h>
 
 #include <analyses/dirty.h>
 
@@ -28,7 +29,7 @@ void goto_symext::symex_goto(statet &state)
 
   exprt new_guard=old_guard;
   state.rename(new_guard, ns);
-  do_simplify(new_guard);
+  simplify(new_guard, ns);
 
   if(new_guard.is_false() ||
      state.guard.is_false())
