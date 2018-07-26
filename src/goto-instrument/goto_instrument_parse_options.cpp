@@ -46,6 +46,7 @@ Author: Daniel Kroening, kroening@kroening.com
 #include <goto-programs/show_symbol_table.h>
 
 #include <pointer-analysis/value_set_analysis.h>
+#include <pointer-analysis/value_set_analysis_fi.h>
 #include <pointer-analysis/goto_program_dereference.h>
 #include <pointer-analysis/add_failed_symbols.h>
 #include <pointer-analysis/show_value_sets.h>
@@ -245,6 +246,18 @@ int goto_instrument_parse_optionst::doit()
       value_set_analysist value_set_analysis(ns);
       value_set_analysis(goto_model.goto_functions);
       show_value_sets(get_ui(), goto_model, value_set_analysis);
+      return CPROVER_EXIT_SUCCESS;
+    }
+
+    if(cmdline.isset("show-value-set-fi"))
+    {
+
+      namespacet ns(goto_model.symbol_table);
+      value_set_analysis_fit value_set(
+        ns, value_set_analysis_fit::track_optionst::TRACK_FUNCTION_POINTERS);
+
+      value_set(goto_model.goto_functions);
+      value_set.output(goto_model.goto_functions, std::cout);
       return CPROVER_EXIT_SUCCESS;
     }
 
