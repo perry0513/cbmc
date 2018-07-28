@@ -83,7 +83,7 @@ void smt2_convt::write_header()
 
   out << "(set-option :produce-models true)" << "\n";
   out << "(set-option :auto-config false)" << "\n";
-  out << " (set-option :phase-selection 5)" << "\n";
+  out << " (set-option :smt.phase-selection 5)" << "\n";
 
   // We use a broad mixture of logics, so on some solvers
   // its better not to declare here.
