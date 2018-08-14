@@ -271,7 +271,8 @@ protected:
       if(
         parameter.type().id() == ID_pointer &&
         std::regex_match(
-          id2string(parameter.get_base_name()), parameters_to_havoc))
+          id2string(parameter.get_base_name()), parameters_to_havoc) &&
+        parameter.type().subtype().id() != ID_empty)
       {
         // if (param != nullptr) { *param = nondet(); }
         auto goto_instruction = add_instruction();
