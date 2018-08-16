@@ -74,9 +74,13 @@ void reachability_slicert::fixedpoint_to_assertions(
     const auto caller_is_known = stack.back().caller_is_known;
     stack.pop_back();
 
-    if(node.reaches_assertion)
+    if(
+      node.reaches_assertion.is_true() ||
+      (caller_is_known && node.reaches_assertion.is_unknown()))
+    {
       continue;
-    node.reaches_assertion = true;
+    }
+    node.reaches_assertion = caller_is_known ? tvt::unknown() : tvt(true);
 
     for(const auto &edge : node.in)
     {
@@ -195,7 +199,7 @@ void reachability_slicert::slice(goto_functionst &goto_functions)
       {
         const cfgt::nodet &e=cfg[cfg.entry_map[i_it]];
         if(
-          !e.reaches_assertion && !e.reachable_from_assertion &&
+          e.reaches_assertion.is_false() && !e.reachable_from_assertion &&
           !i_it->is_end_function())
           i_it->make_assumption(false_exprt());
       }

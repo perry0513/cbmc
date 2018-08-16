@@ -38,11 +38,12 @@ public:
 protected:
   struct slicer_entryt
   {
-    slicer_entryt() : reaches_assertion(false), reachable_from_assertion(false)
+    slicer_entryt()
+      : reaches_assertion(tvt(false)), reachable_from_assertion(false)
     {
     }
 
-    bool reaches_assertion;
+    tvt reaches_assertion;
     bool reachable_from_assertion;
   };
 
