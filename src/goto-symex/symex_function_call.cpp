@@ -10,7 +10,6 @@ Author: Daniel Kroening, kroening@kroening.com
 /// Symbolic Execution of ANSI-C
 
 #include "goto_symex.h"
-
 #include <util/arith_tools.h>
 #include <util/base_type.h>
 #include <util/byte_operators.h>
@@ -283,7 +282,8 @@ void goto_symext::symex_function_call_code(
       for(const auto &arg : call.arguments())
       {
         if(arg.type().id() == ID_pointer &&
-            !arg.type().subtype().get_bool(ID_C_constant))
+            !arg.type().subtype().get_bool(ID_C_constant) &&
+            arg.type().subtype().id()!=ID_code)
         {
           exprt object = dereference_exprt(arg, arg.type().subtype());
           clean_expr(object, state, true);
