@@ -1511,11 +1511,11 @@ void goto_instrument_parse_optionst::instrument_goto_program()
 
     aggressive_slicer.doit();
 
-    status() << "Performing a reachability slice" << eom;
+/*    status() << "Performing a reachability slice" << eom;
     if(cmdline.isset("property"))
       reachability_slicer(goto_model, cmdline.get_values("property"));
     else
-      reachability_slicer(goto_model);
+      reachability_slicer(goto_model);*/
   }
 
   // recalculate numbers, etc.
