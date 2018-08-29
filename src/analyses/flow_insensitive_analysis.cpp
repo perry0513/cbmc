@@ -68,12 +68,7 @@ void flow_insensitive_analysis_baset::output(
   const goto_functionst &goto_functions,
   std::ostream &out)
 {
-  forall_goto_functions(f_it, goto_functions)
-  {
-    out << "////\n" << "//// Function: " << f_it->first << "\n////\n\n";
-
-    output(f_it->second.body, f_it->first, out);
-  }
+  get_state().output(ns, out);
 }
 
 void flow_insensitive_analysis_baset::output(
