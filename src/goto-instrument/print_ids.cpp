@@ -643,11 +643,11 @@ void print_ids(goto_modelt &goto_model)
         const auto &call=to_code_function_call(target->code);
         if(call.function().id()==ID_dereference)
         {
-          std::cout << "CALL at " << target->source_location << ":\n";
 
           const auto &pointer=to_dereference_expr(call.function()).pointer();
           auto addresses=aliases.get_addresses(pointer);
           std::set<symbol_exprt> functions;
+
 
           for(const auto &address : addresses)
           {
@@ -658,12 +658,13 @@ void print_ids(goto_modelt &goto_model)
                deref.id()==ID_symbol)
               functions.insert(to_symbol_expr(deref));
           }
+          std::cout << "CALL at " << target->source_location << " replaced by "<<functions.size()<<" candidates:\n";
 
           for(const auto &f : functions)
             std::cout << "  function: " << f.get_identifier() << '\n';
-
-          remove_function_pointer(
-            f.second.body, target, functions, goto_model);
+          if(functions.size()>0)
+           remove_function_pointer(
+             f.second.body, target, functions, goto_model);
         }
       }
     }
