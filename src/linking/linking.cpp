@@ -1328,10 +1328,10 @@ void linkingt::rename_symbols(
 
     new_symbol.name=new_identifier;
 
-    #ifdef DEBUG
+   // #ifdef DEBUG
     debug() << "LINKING: renaming " << id << " to "
             << new_identifier << eom;
-    #endif
+   // #endif
 
     if(new_symbol.is_type)
       rename_symbol.insert_type(id, new_identifier);
