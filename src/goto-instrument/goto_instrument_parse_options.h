@@ -109,6 +109,8 @@ Author: Daniel Kroening, kroening@kroening.com
   "(show-threaded)(list-calls-args)" \
   "(undefined-function-is-assume-false)" \
   "(remove-function-body):"\
+  "(moderate-function-pointer-removal)"\
+  "(extreme-function-pointer-removal)"\
   OPT_AGGRESSIVE_SLICER \
   OPT_FLUSH \
   "(splice-call):" \
