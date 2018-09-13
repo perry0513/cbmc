@@ -236,6 +236,8 @@ int goto_instrument_parse_optionst::doit()
       return CPROVER_EXIT_SUCCESS;
     }
 
+
+
     if(cmdline.isset("print-ids"))
     {
       print_ids(goto_model);
@@ -1118,6 +1120,17 @@ void goto_instrument_parse_optionst::instrument_goto_program()
   {
     do_remove_const_function_pointers_only();
   }
+  else if(cmdline.isset("extreme-function-pointer-removal"))
+  {
+    print_ids(goto_model);
+    do_indirect_call_and_rtti_removal();
+  }
+  else if(cmdline.isset("moderate-function-pointer-removal"))
+  {
+    print_ids(goto_model, true);
+    do_indirect_call_and_rtti_removal();
+  }
+
 
   if(cmdline.isset("replace-calls"))
   {
