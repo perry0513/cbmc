@@ -1,0 +1,77 @@
+{
+    "jobs": [
+        {
+            "status": "SUCCEEDED", 
+            "container": {
+                "mountPoints": [], 
+                "taskArn": "arn:aws:ecs:ap-southeast-2:742113291861:task/00927731-d232-4682-8c6d-a03383460b36", 
+                "logStreamName": "xen_job_110/default/00927731-d232-4682-8c6d-a03383460b36", 
+                "image": "742113291861.dkr.ecr.us-east-1.amazonaws.com/xen-paper", 
+                "containerInstanceArn": "arn:aws:ecs:ap-southeast-2:742113291861:container-instance/4cf415b0-6be8-488d-9262-5f57a61313ac", 
+                "environment": [
+                    {
+                        "name": "BATCH_FILE_S3_URL", 
+                        "value": "s3://xen-paper-bucket/myjob.sh"
+                    }, 
+                    {
+                        "name": "BATCH_FILE_TYPE", 
+                        "value": "script"
+                    }
+                ], 
+                "vcpus": 1, 
+                "jobRoleArn": "arn:aws:iam::742113291861:role/xen-paper-batch-runner", 
+                "volumes": [], 
+                "memory": 110000, 
+                "command": [
+                    "myjob.sh", 
+                    "213", 
+                    "2", 
+                    "2", 
+                    "1", 
+                    "1", 
+                    "2", 
+                    "fixFP"
+                ], 
+                "ulimits": [], 
+                "exitCode": 0
+            }, 
+            "parameters": {
+                "unwind": "2", 
+                "fullslice": "1", 
+                "direct_paths": "1", 
+                "functionpointers": "2", 
+                "depth": "2", 
+                "XSA_num": "213", 
+                "tracename": "fixFP"
+            }, 
+            "jobDefinition": "arn:aws:batch:ap-southeast-2:742113291861:job-definition/xen_job_110:1", 
+            "statusReason": "Essential container in task exited", 
+            "jobId": "9e54ac9c-572e-4f36-8715-93367b6efc18", 
+            "attempts": [
+                {
+                    "startedAt": 1537266627341, 
+                    "container": {
+                        "taskArn": "arn:aws:ecs:ap-southeast-2:742113291861:task/00927731-d232-4682-8c6d-a03383460b36", 
+                        "containerInstanceArn": "arn:aws:ecs:ap-southeast-2:742113291861:container-instance/4cf415b0-6be8-488d-9262-5f57a61313ac", 
+                        "logStreamName": "xen_job_110/default/00927731-d232-4682-8c6d-a03383460b36", 
+                        "exitCode": 0
+                    }, 
+                    "stoppedAt": 1537285759054, 
+                    "statusReason": "Essential container in task exited"
+                }
+            ], 
+            "retryStrategy": {
+                "attempts": 1
+            }, 
+            "jobQueue": "arn:aws:batch:ap-southeast-2:742113291861:job-queue/xen-paper-queue-110", 
+            "timeout": {
+                "attemptDurationSeconds": 28800
+            }, 
+            "dependsOn": [], 
+            "startedAt": 1537266627341, 
+            "jobName": "110_run-213-22-dp1-fs1-fp2", 
+            "createdAt": 1537258351178, 
+            "stoppedAt": 1537285759054
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+{
+  "computeEnvironmentName": "xen_compute_110",
+  "type": "MANAGED",
+  "state": "ENABLED",
+  "computeResources": {
+    "type": "EC2",
+    "minvCpus": 0,
+    "maxvCpus": 256,
+    "desiredvCpus": 0,
+    "instanceTypes": [
+      "r4"
+    ],
+    "subnets": [
+	"subnet-3c113e77", 
+	"subnet-7fe98f50", 
+	"subnet-513dcd5e",
+	"subnet-cbed8be4", 
+	"subnet-5921d156", 
+	"subnet-1743d94a", 
+	"subnet-7142d82c", 
+	"subnet-9b1f46ff", 
+	"subnet-0e057131", 
+	"subnet-7f1e6a40", 
+        "subnet-bf1738f4", 
+        "subnet-f31d4497"
+    ],
+    "securityGroupIds": [
+      "sg-b23268c6"
+    ],
+    "instanceRole": "ecsInstanceRole",    "tags": {
+      "Name": "Batch Instance - xen-paper"
+    }
+
+  },
+  "serviceRole": "arn:aws:iam::742113291861:role/AWSBatchServiceRole"
+}
