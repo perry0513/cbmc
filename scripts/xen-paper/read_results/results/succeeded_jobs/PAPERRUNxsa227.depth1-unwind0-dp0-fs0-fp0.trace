@@ -1,0 +1,194 @@
+1537443460
+1537443508
+103.946892 CBMC version 5.10 (cbmc-5.10-163-g755b00c) 64-bit x86_64 linux
+103.947524 Reading GOTO program from file
+103.947533 Reading: xsa227.sliced.binary
+104.917588 Generating GOTO Program
+104.940784 Adding CPROVER library (x86_64)
+104.958220 sh: gcc: command not found
+104.958235 GCC preprocessing failed
+104.969660 Removal of function pointers and virtual functions
+105.156191 Generic Property Instrumentation
+105.264725 Running with 16 object bits, 48 offset bits (user-specified)
+105.271719 Starting Bounded Model Checking
+106.624581 **** WARNING: no body for function get_cpu_info$link3$link3; assigning non-deterministic values to any pointer arguments
+106.644383 **** WARNING: no body for function __builtin_memcpy; assigning non-deterministic values to any pointer arguments
+106.660427 **** WARNING: no body for function hvm_copy_from_guest_virt_nofault; assigning non-deterministic values to any pointer arguments
+106.685879 **** WARNING: no body for function __copy_from_user_ll; assigning non-deterministic values to any pointer arguments
+106.839303 **** WARNING: no body for function get_cpu_info$link3; assigning non-deterministic values to any pointer arguments
+107.090253 **** WARNING: no body for function rcu_lock_domain; assigning non-deterministic values to any pointer arguments
+107.136215 Not unwinding loop rcu_lock_domain_by_id.1 iteration 1 file domain.c line 562 function rcu_lock_domain_by_id thread 0
+107.247022 **** WARNING: no body for function xsm_default_action$link3; assigning non-deterministic values to any pointer arguments
+107.372411 **** WARNING: no body for function __get_maptrack_handle; assigning non-deterministic values to any pointer arguments
+107.417419 **** WARNING: no body for function _spin_lock; assigning non-deterministic values to any pointer arguments
+107.417797 **** WARNING: no body for function nr_maptrack_frames; assigning non-deterministic values to any pointer arguments
+107.418664 **** WARNING: no body for function _spin_unlock; assigning non-deterministic values to any pointer arguments
+107.428730 **** WARNING: no body for function steal_maptrack_handle; assigning non-deterministic values to any pointer arguments
+107.731005 **** WARNING: no body for function _percpu_read_lock; assigning non-deterministic values to any pointer arguments
+107.747385 **** WARNING: no body for function nr_grant_frames; assigning non-deterministic values to any pointer arguments
+108.009544 **** WARNING: no body for function _set_status_v1; assigning non-deterministic values to any pointer arguments
+108.022695 **** WARNING: no body for function _set_status_v2; assigning non-deterministic values to any pointer arguments
+108.084195 **** WARNING: no body for function get_page_from_gfn$link2; assigning non-deterministic values to any pointer arguments
+108.104797 **** WARNING: no body for function _mfn$link3; assigning non-deterministic values to any pointer arguments
+108.104907 **** WARNING: no body for function mfn_x$link1; assigning non-deterministic values to any pointer arguments
+108.122757 **** WARNING: no body for function p2m_mem_paging_populate; assigning non-deterministic values to any pointer arguments
+108.174109 **** WARNING: no body for function pdx_to_pfn$link2; assigning non-deterministic values to any pointer arguments
+108.296925 **** WARNING: no body for function _percpu_read_unlock; assigning non-deterministic values to any pointer arguments
+108.382147 **** WARNING: no body for function __cmpxchg$link3$link3; assigning non-deterministic values to any pointer arguments
+108.382539 Not unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+108.384449 **** WARNING: no body for function cleanup_page_cacheattr; assigning non-deterministic values to any pointer arguments
+108.387038 **** WARNING: no body for function free_domheap_pages; assigning non-deterministic values to any pointer arguments
+108.462964 **** WARNING: no body for function _read_lock$link2; assigning non-deterministic values to any pointer arguments
+108.463419 **** WARNING: no body for function find_range; assigning non-deterministic values to any pointer arguments
+108.489661 **** WARNING: no body for function _read_unlock$link2; assigning non-deterministic values to any pointer arguments
+108.571090 **** WARNING: no body for function _gfn$link2$link4; assigning non-deterministic values to any pointer arguments
+108.581896 **** WARNING: no body for function guest_physmap_add_entry; assigning non-deterministic values to any pointer arguments
+108.871459 **** WARNING: no body for function get_page_from_gfn_p2m; assigning non-deterministic values to any pointer arguments
+108.917548 **** WARNING: no body for function pfn_to_pdx$link8$link2; assigning non-deterministic values to any pointer arguments
+109.041016 **** WARNING: no body for function mfn_x$link3$link4; assigning non-deterministic values to any pointer arguments
+109.041277 **** WARNING: no body for function __virt_to_maddr$link3$link2; assigning non-deterministic values to any pointer arguments
+109.044409 **** WARNING: no body for function __maddr_to_virt$link2$link1; assigning non-deterministic values to any pointer arguments
+109.067863 **** WARNING: no body for function mapcache_current_vcpu; assigning non-deterministic values to any pointer arguments
+109.217486 **** WARNING: no body for function get_cpu_info$link6$link5; assigning non-deterministic values to any pointer arguments
+109.218842 **** WARNING: no body for function NEED_FLUSH$link3; assigning non-deterministic values to any pointer arguments
+109.221227 **** WARNING: no body for function flush_area_local; assigning non-deterministic values to any pointer arguments
+109.249007 **** WARNING: no body for function __find_next_zero_bit; assigning non-deterministic values to any pointer arguments
+109.254510 **** WARNING: no body for function __xchg$link1$link4; assigning non-deterministic values to any pointer arguments
+109.255413 Not unwinding loop map_domain_page.3 iteration 1 file domain_page.c line 126 function map_domain_page thread 0
+109.301620 **** WARNING: no body for function __find_first_zero_bit; assigning non-deterministic values to any pointer arguments
+109.354504 **** WARNING: no body for function write_u64_atomic$link2$link2; assigning non-deterministic values to any pointer arguments
+109.415104 Not unwinding loop map_domain_page.5 iteration 1 file domain_page.c line 152 function map_domain_page thread 0
+109.471695 **** WARNING: no body for function set_bit$link2$link3; assigning non-deterministic values to any pointer arguments
+109.473646 **** WARNING: no body for function constant_test_bit$link4$link5; assigning non-deterministic values to any pointer arguments
+109.636257 **** WARNING: no body for function rep_nop$link3$link2; assigning non-deterministic values to any pointer arguments
+109.636358 Not unwinding loop page_lock.0 iteration 1 file mm.c line 1784 function page_lock thread 0
+109.667879 Not unwinding loop page_lock.1 iteration 1 file mm.c line 1791 function page_lock thread 0
+109.702781 Not unwinding loop page_unlock.0 iteration 1 file mm.c line 1803 function page_unlock thread 0
+109.729646 **** WARNING: no body for function paging_write_guest_entry; assigning non-deterministic values to any pointer arguments
+109.778014 Not unwinding loop page_unlock.0 iteration 1 file mm.c line 1803 function page_unlock thread 0
+109.796436 Not unwinding loop page_unlock.0 iteration 1 file mm.c line 1803 function page_unlock thread 0
+109.847455 **** WARNING: no body for function is_iomem_page; assigning non-deterministic values to any pointer arguments
+109.947386 **** WARNING: no body for function printk; assigning non-deterministic values to any pointer arguments
+109.949028 **** WARNING: no body for function __domain_crash; assigning non-deterministic values to any pointer arguments
+110.108380 **** WARNING: no body for function put_page_and_type$link2$link1; assigning non-deterministic values to any pointer arguments
+110.235153 **** WARNING: no body for function invalidate_shadow_ldt; assigning non-deterministic values to any pointer arguments
+110.262437 Not unwinding loop put_page_from_l1e.1 iteration 1 file mm.c line 1254 function put_page_from_l1e thread 0
+110.385269 Not unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+110.873100 Not unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+111.126064 **** WARNING: no body for function guest_map_l1e; assigning non-deterministic values to any pointer arguments
+111.162665 **** WARNING: no body for function get_page_from_pagenr; assigning non-deterministic values to any pointer arguments
+111.189396 **** WARNING: no body for function guest_unmap_l1e; assigning non-deterministic values to any pointer arguments
+111.216904 Not unwinding loop page_lock.0 iteration 1 file mm.c line 1784 function page_lock thread 0
+111.249890 Not unwinding loop page_lock.1 iteration 1 file mm.c line 1791 function page_lock thread 0
+111.268349 Not unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+111.345271 Not unwinding loop page_unlock.0 iteration 1 file mm.c line 1803 function page_unlock thread 0
+111.347626 Not unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+111.474663 Not unwinding loop page_unlock.0 iteration 1 file mm.c line 1803 function page_unlock thread 0
+111.477035 Not unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+112.011776 Not unwinding loop put_page_from_l1e.1 iteration 1 file mm.c line 1254 function put_page_from_l1e thread 0
+112.148854 Not unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+112.821105 **** WARNING: no body for function __get_page_type; assigning non-deterministic values to any pointer arguments
+113.640511 Not unwinding loop map_domain_page.3 iteration 1 file domain_page.c line 126 function map_domain_page thread 0
+113.810561 Not unwinding loop map_domain_page.5 iteration 1 file domain_page.c line 152 function map_domain_page thread 0
+114.032437 Not unwinding loop page_lock.0 iteration 1 file mm.c line 1784 function page_lock thread 0
+114.066939 Not unwinding loop page_lock.1 iteration 1 file mm.c line 1791 function page_lock thread 0
+114.105030 Not unwinding loop page_unlock.0 iteration 1 file mm.c line 1803 function page_unlock thread 0
+114.182384 Not unwinding loop page_unlock.0 iteration 1 file mm.c line 1803 function page_unlock thread 0
+114.202694 Not unwinding loop page_unlock.0 iteration 1 file mm.c line 1803 function page_unlock thread 0
+114.700942 Not unwinding loop put_page_from_l1e.1 iteration 1 file mm.c line 1254 function put_page_from_l1e thread 0
+114.842472 Not unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+115.390286 Not unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+115.763955 Not unwinding loop page_lock.0 iteration 1 file mm.c line 1784 function page_lock thread 0
+115.799618 Not unwinding loop page_lock.1 iteration 1 file mm.c line 1791 function page_lock thread 0
+115.819413 Not unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+115.903213 Not unwinding loop page_unlock.0 iteration 1 file mm.c line 1803 function page_unlock thread 0
+115.905756 Not unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+116.041633 Not unwinding loop page_unlock.0 iteration 1 file mm.c line 1803 function page_unlock thread 0
+116.044107 Not unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+116.597516 Not unwinding loop put_page_from_l1e.1 iteration 1 file mm.c line 1254 function put_page_from_l1e thread 0
+116.737443 Not unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+117.372458 Not unwinding loop page_get_owner_and_reference.0 iteration 1 file mm.c line 2197 function page_get_owner_and_reference thread 0
+117.666266 Not unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+118.119726 Not unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+118.436544 **** WARNING: no body for function grant_write_lock; assigning non-deterministic values to any pointer arguments
+118.622535 Not unwinding loop mapkind.2 iteration 1 file grant_table.c line 727 function mapkind thread 0
+118.977111 **** WARNING: no body for function grant_write_unlock; assigning non-deterministic values to any pointer arguments
+119.675340 **** WARNING: no body for function __put_page_type; assigning non-deterministic values to any pointer arguments
+119.699350 Not unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+119.892980 Not unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+120.619953 **** WARNING: no body for function read_u32_atomic$link4; assigning non-deterministic values to any pointer arguments
+120.651188 **** WARNING: no body for function __cmpxchg$link4; assigning non-deterministic values to any pointer arguments
+120.653481 Not unwinding loop put_maptrack_handle.0 iteration 1 file grant_table.c line 387 function put_maptrack_handle thread 0
+121.725919 **** WARNING: no body for function hvm_copy_to_guest_virt_nofault; assigning non-deterministic values to any pointer arguments
+121.788247 **** WARNING: no body for function __copy_to_user_ll; assigning non-deterministic values to any pointer arguments
+121.831249 Not unwinding loop gnttab_map_grant_ref.0 iteration 1 file grant_table.c line 1059 function gnttab_map_grant_ref thread 0
+122.926553 **** WARNING: no body for function __gnttab_unmap_grant_ref; assigning non-deterministic values to any pointer arguments
+123.046062 Not unwinding loop gnttab_unmap_grant_ref.0 iteration 1 file grant_table.c line 1344 function gnttab_unmap_grant_ref thread 0
+123.067409 **** WARNING: no body for function gnttab_flush_tlb; assigning non-deterministic values to any pointer arguments
+123.087970 **** WARNING: no body for function __gnttab_unmap_common_complete; assigning non-deterministic values to any pointer arguments
+123.088448 Not unwinding loop gnttab_unmap_grant_ref.1 iteration 1 file grant_table.c line 1357 function gnttab_unmap_grant_ref thread 0
+123.129113 **** WARNING: no body for function hvm_local_events_need_delivery; assigning non-deterministic values to any pointer arguments
+123.366979 Not unwinding loop gnttab_unmap_grant_ref.2 iteration 1 file grant_table.c line 1339 function gnttab_unmap_grant_ref thread 0
+123.478312 Not unwinding loop gnttab_unmap_grant_ref.3 iteration 1 file grant_table.c line 1372 function gnttab_unmap_grant_ref thread 0
+123.957200 **** WARNING: no body for function __gnttab_unmap_and_replace; assigning non-deterministic values to any pointer arguments
+124.080366 Not unwinding loop gnttab_unmap_and_replace.0 iteration 1 file grant_table.c line 1407 function gnttab_unmap_and_replace thread 0
+124.123215 Not unwinding loop gnttab_unmap_and_replace.1 iteration 1 file grant_table.c line 1420 function gnttab_unmap_and_replace thread 0
+124.414256 Not unwinding loop gnttab_unmap_and_replace.2 iteration 1 file grant_table.c line 1402 function gnttab_unmap_and_replace thread 0
+124.536943 Not unwinding loop gnttab_unmap_and_replace.3 iteration 1 file grant_table.c line 1435 function gnttab_unmap_and_replace thread 0
+124.932671 **** WARNING: no body for function copy_from_user; assigning non-deterministic values to any pointer arguments
+125.094964 **** WARNING: no body for function rcu_lock_domain_by_any_id; assigning non-deterministic values to any pointer arguments
+125.131216 **** WARNING: no body for function xsm_grant_setup; assigning non-deterministic values to any pointer arguments
+125.227421 **** WARNING: no body for function grant_to_status_frames; assigning non-deterministic values to any pointer arguments
+125.227636 **** WARNING: no body for function nr_status_frames; assigning non-deterministic values to any pointer arguments
+125.279144 **** WARNING: no body for function gnttab_grow_table; assigning non-deterministic values to any pointer arguments
+125.351123 **** WARNING: no body for function __virt_to_maddr$link1; assigning non-deterministic values to any pointer arguments
+125.555131 Not unwinding loop gnttab_setup_table.3 iteration 1 file grant_table.c line 1620 function gnttab_setup_table thread 0
+126.479445 **** WARNING: no body for function get_gfn_type; assigning non-deterministic values to any pointer arguments
+126.536627 **** WARNING: no body for function __put_gfn; assigning non-deterministic values to any pointer arguments
+126.753284 Not unwinding loop gnttab_transfer.2 iteration 1 file grant_table.c line 1768 function gnttab_transfer thread 0
+127.334006 **** WARNING: no body for function gnttab_copy_one; assigning non-deterministic values to any pointer arguments
+127.336078 **** WARNING: no body for function gnttab_copy_release_buf; assigning non-deterministic values to any pointer arguments
+127.502749 Not unwinding loop gnttab_copy.0 iteration 1 file grant_table.c line 2550 function gnttab_copy thread 0
+127.557694 **** WARNING: no body for function gnttab_copy_unlock_domains; assigning non-deterministic values to any pointer arguments
+127.954923 **** WARNING: no body for function xsm_grant_query_size; assigning non-deterministic values to any pointer arguments
+128.896215 Not unwinding loop gnttab_set_version.0 iteration 1 file grant_table.c line 2614 function gnttab_set_version thread 0
+128.953037 **** WARNING: no body for function gnttab_populate_status_frames; assigning non-deterministic values to any pointer arguments
+129.076531 Not unwinding loop gnttab_set_version.1 iteration 1 file grant_table.c line 2639 function gnttab_set_version thread 0
+129.223404 **** WARNING: no body for function __builtin_memset; assigning non-deterministic values to any pointer arguments
+129.240691 Not unwinding loop gnttab_set_version.2 iteration 1 file grant_table.c line 2662 function gnttab_set_version thread 0
+129.277765 **** WARNING: no body for function gnttab_unpopulate_status_frames; assigning non-deterministic values to any pointer arguments
+129.351669 **** WARNING: no body for function clear_page_sse2; assigning non-deterministic values to any pointer arguments
+129.351963 Not unwinding loop gnttab_set_version.3 iteration 1 file grant_table.c line 2690 function gnttab_set_version thread 0
+129.412182 Not unwinding loop gnttab_set_version.4 iteration 1 file grant_table.c line 2702 function gnttab_set_version thread 0
+130.443327 **** WARNING: no body for function copy_to_user; assigning non-deterministic values to any pointer arguments
+130.480545 Not unwinding loop gnttab_get_status_frames.0 iteration 1 file grant_table.c line 2778 function gnttab_get_status_frames thread 0
+132.281077 **** WARNING: no body for function __gnttab_swap_grant_ref; assigning non-deterministic values to any pointer arguments
+132.450673 Not unwinding loop gnttab_swap_grant_ref.0 iteration 1 file grant_table.c line 2897 function gnttab_swap_grant_ref thread 0
+133.037108 **** WARNING: no body for function __gnttab_cache_flush; assigning non-deterministic values to any pointer arguments
+133.355470 Not unwinding loop gnttab_cache_flush.0 iteration 1 file grant_table.c line 3000 function gnttab_cache_flush thread 0
+133.383243 Not unwinding loop gnttab_cache_flush.1 iteration 1 file grant_table.c line 2994 function gnttab_cache_flush thread 0
+140.399313 **** WARNING: no body for function get_cpu_info$link5$link6; assigning non-deterministic values to any pointer arguments
+140.431989 **** WARNING: no body for function __set_bit$link2$link3; assigning non-deterministic values to any pointer arguments
+140.495603 Not unwinding loop hypercall_create_continuation.2 iteration 1 file domain.c line 2242 function hypercall_create_continuation thread 0
+140.991196 Not unwinding loop hypercall_create_continuation.5 iteration 1 file domain.c line 2262 function hypercall_create_continuation thread 0
+141.147167 Not unwinding loop hypercall_create_continuation.8 iteration 1 file domain.c line 2278 function hypercall_create_continuation thread 0
+142.115737 size of program expression: 29997 steps
+142.119401 simple slicing removed 23898 assignments
+142.119405 Generated 2 VCC(s), 2 remaining after simplification
+142.119412 Passing problem to propositional reduction
+142.119424 converting SSA
+149.391208 Running propositional reduction
+149.391225 Post-processing
+3729.103191 SAT checker ran out of memory
+3729.103266 Out of memory
+
+real	61m14.270s
+user	60m30.768s
+sys	0m43.648s
+goto-instrument options: --aggressive-slice --aggressive-slice-call-depth 1 
+cbmc options:  --stop-on-fail --object-bits 16 --trace --trace-show-function-calls --trace-show-code --trace-hex --no-sat-preprocessor --unwind 0 --havoc-undefined-functions 
+Reading GOTO program from `xsa227.sliced.binary'
+Effective lines of code: 2270
+Reading GOTO program from `xsa227.binary'
+Effective lines of code: 101708
+1537447191

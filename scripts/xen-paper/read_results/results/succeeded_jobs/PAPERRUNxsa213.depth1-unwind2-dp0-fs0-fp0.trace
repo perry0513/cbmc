@@ -1,0 +1,927 @@
+1537443463
+1537443522
+124.833455 CBMC version 5.10 (cbmc-5.10-163-g755b00c) 64-bit x86_64 linux
+124.834089 Reading GOTO program from file
+124.834098 Reading: xsa213.sliced.binary
+125.806394 Generating GOTO Program
+125.829183 Adding CPROVER library (x86_64)
+125.847363 sh: gcc: command not found
+125.847380 GCC preprocessing failed
+125.860474 Removal of function pointers and virtual functions
+126.043803 Generic Property Instrumentation
+126.144767 Running with 16 object bits, 48 offset bits (user-specified)
+126.151734 Starting Bounded Model Checking
+127.383974 **** WARNING: no body for function get_cpu_info$link45$link1; assigning non-deterministic values to any pointer arguments
+127.407273 **** WARNING: no body for function get_cpu_info$link34$link1; assigning non-deterministic values to any pointer arguments
+127.422718 **** WARNING: no body for function __copy_from_user$link4$link1; assigning non-deterministic values to any pointer arguments
+127.431033 **** WARNING: no body for function __builtin_memset; assigning non-deterministic values to any pointer arguments
+127.441854 **** WARNING: no body for function printk; assigning non-deterministic values to any pointer arguments
+127.514065 **** WARNING: no body for function toggle_guest_mode; assigning non-deterministic values to any pointer arguments
+127.559633 **** WARNING: no body for function constant_test_bit$link36; assigning non-deterministic values to any pointer arguments
+127.682025 **** WARNING: no body for function async_exception_cleanup; assigning non-deterministic values to any pointer arguments
+127.772443 **** WARNING: no body for function __domain_crash; assigning non-deterministic values to any pointer arguments
+127.947468 **** WARNING: no body for function put_page_type_preemptible; assigning non-deterministic values to any pointer arguments
+127.950411 **** WARNING: no body for function __cmpxchg$link3$link3; assigning non-deterministic values to any pointer arguments
+127.950672 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+127.952191 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+127.962865 **** WARNING: no body for function cleanup_page_cacheattr; assigning non-deterministic values to any pointer arguments
+127.964407 **** WARNING: no body for function free_domheap_pages; assigning non-deterministic values to any pointer arguments
+128.078468 **** WARNING: no body for function get_cpu_info$link5$link6; assigning non-deterministic values to any pointer arguments
+128.085010 **** WARNING: no body for function __set_bit$link2$link3; assigning non-deterministic values to any pointer arguments
+128.108269 Unwinding loop hypercall_create_continuation.2 iteration 1 file domain.c line 2242 function hypercall_create_continuation thread 0
+128.120203 Not unwinding loop hypercall_create_continuation.2 iteration 2 file domain.c line 2242 function hypercall_create_continuation thread 0
+128.313462 Unwinding loop hypercall_create_continuation.5 iteration 1 file domain.c line 2262 function hypercall_create_continuation thread 0
+128.349852 Not unwinding loop hypercall_create_continuation.5 iteration 2 file domain.c line 2262 function hypercall_create_continuation thread 0
+128.398559 Unwinding loop hypercall_create_continuation.8 iteration 1 file domain.c line 2278 function hypercall_create_continuation thread 0
+128.434918 Not unwinding loop hypercall_create_continuation.8 iteration 2 file domain.c line 2278 function hypercall_create_continuation thread 0
+128.566799 **** WARNING: no body for function get_cpu_info$link3$link3; assigning non-deterministic values to any pointer arguments
+128.589736 **** WARNING: no body for function __builtin_memcpy; assigning non-deterministic values to any pointer arguments
+128.612222 **** WARNING: no body for function hvm_copy_from_guest_virt_nofault; assigning non-deterministic values to any pointer arguments
+128.848336 **** WARNING: no body for function rcu_lock_current_domain$link2; assigning non-deterministic values to any pointer arguments
+128.942580 **** WARNING: no body for function rcu_lock_domain$link2; assigning non-deterministic values to any pointer arguments
+129.037620 **** WARNING: no body for function rcu_lock_domain_by_id; assigning non-deterministic values to any pointer arguments
+129.271572 **** WARNING: no body for function rcu_unlock_domain$link11; assigning non-deterministic values to any pointer arguments
+129.341657 **** WARNING: no body for function xsm_default_action$link3$link2; assigning non-deterministic values to any pointer arguments
+129.602534 **** WARNING: no body for function __copy_from_user_ll; assigning non-deterministic values to any pointer arguments
+129.888678 **** WARNING: no body for function get_page_from_gfn_p2m; assigning non-deterministic values to any pointer arguments
+129.994314 **** WARNING: no body for function __get_page_type; assigning non-deterministic values to any pointer arguments
+130.054217 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+130.057133 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+130.245636 **** WARNING: no body for function _mfn$link14; assigning non-deterministic values to any pointer arguments
+130.272381 **** WARNING: no body for function mfn_x$link11; assigning non-deterministic values to any pointer arguments
+130.348198 **** WARNING: no body for function __xadd$link5; assigning non-deterministic values to any pointer arguments
+130.348758 **** WARNING: no body for function observe_head; assigning non-deterministic values to any pointer arguments
+130.351467 **** WARNING: no body for function rep_nop$link5; assigning non-deterministic values to any pointer arguments
+130.351545 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+130.355115 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+130.381643 **** WARNING: no body for function get_cpu_info$link28; assigning non-deterministic values to any pointer arguments
+130.442290 **** WARNING: no body for function add_u16_sized; assigning non-deterministic values to any pointer arguments
+130.476178 **** WARNING: no body for function put_page_type; assigning non-deterministic values to any pointer arguments
+130.479111 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+130.482861 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+130.850183 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+130.852930 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+130.938329 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+130.941688 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+131.105767 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+131.108645 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+131.422671 **** WARNING: no body for function mfn_x$link3$link4; assigning non-deterministic values to any pointer arguments
+131.422879 **** WARNING: no body for function __virt_to_maddr$link3$link2; assigning non-deterministic values to any pointer arguments
+131.425669 **** WARNING: no body for function __maddr_to_virt$link2$link1; assigning non-deterministic values to any pointer arguments
+131.448850 **** WARNING: no body for function mapcache_current_vcpu; assigning non-deterministic values to any pointer arguments
+131.590376 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+131.593498 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+131.627402 **** WARNING: no body for function get_cpu_info$link6$link5; assigning non-deterministic values to any pointer arguments
+131.628806 **** WARNING: no body for function NEED_FLUSH$link3; assigning non-deterministic values to any pointer arguments
+131.631783 **** WARNING: no body for function pre_flush; assigning non-deterministic values to any pointer arguments
+131.631986 **** WARNING: no body for function read_cr4$link1; assigning non-deterministic values to any pointer arguments
+131.632143 **** WARNING: no body for function hvm_flush_guest_tlbs; assigning non-deterministic values to any pointer arguments
+131.632245 **** WARNING: no body for function write_cr4$link1; assigning non-deterministic values to any pointer arguments
+131.632420 **** WARNING: no body for function post_flush; assigning non-deterministic values to any pointer arguments
+131.679395 **** WARNING: no body for function __find_next_zero_bit; assigning non-deterministic values to any pointer arguments
+131.684341 **** WARNING: no body for function __xchg$link1$link4; assigning non-deterministic values to any pointer arguments
+131.685241 Unwinding loop map_domain_page.3 iteration 1 file domain_page.c line 126 function map_domain_page thread 0
+131.688326 Not unwinding loop map_domain_page.3 iteration 2 file domain_page.c line 126 function map_domain_page thread 0
+131.751239 **** WARNING: no body for function __find_first_zero_bit; assigning non-deterministic values to any pointer arguments
+131.805485 **** WARNING: no body for function write_u64_atomic$link2$link2; assigning non-deterministic values to any pointer arguments
+131.867895 Unwinding loop map_domain_page.5 iteration 1 file domain_page.c line 152 function map_domain_page thread 0
+131.954209 Not unwinding loop map_domain_page.5 iteration 2 file domain_page.c line 152 function map_domain_page thread 0
+132.063547 **** WARNING: no body for function set_bit$link2$link3; assigning non-deterministic values to any pointer arguments
+132.100259 **** WARNING: no body for function constant_test_bit$link4$link5; assigning non-deterministic values to any pointer arguments
+132.477191 **** WARNING: no body for function paging_write_guest_entry; assigning non-deterministic values to any pointer arguments
+132.800530 **** WARNING: no body for function get_l4_linear_pagetable; assigning non-deterministic values to any pointer arguments
+134.131217 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+134.134836 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+134.268719 **** WARNING: no body for function write_u64_atomic$link4$link1; assigning non-deterministic values to any pointer arguments
+134.320637 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+134.325300 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+134.427031 Unwinding loop invalidate_shadow_ldt.7 iteration 1 file mm.c line 611 function invalidate_shadow_ldt thread 0
+134.504096 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+134.508519 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+134.608153 Not unwinding loop invalidate_shadow_ldt.7 iteration 2 file mm.c line 611 function invalidate_shadow_ldt thread 0
+134.704191 **** WARNING: no body for function write_cr3; assigning non-deterministic values to any pointer arguments
+134.817013 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+134.820675 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+136.302691 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+136.306744 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+136.403078 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+136.406325 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+137.093372 **** WARNING: no body for function hvm_portio_accept; assigning non-deterministic values to any pointer arguments
+137.115015 **** WARNING: no body for function vmx_get_guest_bndcfgs; assigning non-deterministic values to any pointer arguments
+137.163311 **** WARNING: no body for function hvm_mmio_accept; assigning non-deterministic values to any pointer arguments
+137.193729 **** WARNING: no body for function .init$$cpufreq_dbs_handle_option; assigning non-deterministic values to any pointer arguments
+137.221554 **** WARNING: no body for function dpci_portio_accept; assigning non-deterministic values to any pointer arguments
+137.253214 **** WARNING: no body for function evtchn_fifo_is_pending; assigning non-deterministic values to any pointer arguments
+137.309241 **** WARNING: no body for function .init$$cpufreq_userspace_handle_option; assigning non-deterministic values to any pointer arguments
+137.343422 **** WARNING: no body for function sh_invlpg__guest_4; assigning non-deterministic values to any pointer arguments
+137.395679 **** WARNING: no body for function hap_invlpg; assigning non-deterministic values to any pointer arguments
+137.449242 **** WARNING: no body for function sh_invlpg__guest_3; assigning non-deterministic values to any pointer arguments
+137.502026 **** WARNING: no body for function stdvga_mem_accept; assigning non-deterministic values to any pointer arguments
+137.538386 **** WARNING: no body for function evtchn_2l_is_pending; assigning non-deterministic values to any pointer arguments
+137.599622 **** WARNING: no body for function sh_invlpg__guest_2; assigning non-deterministic values to any pointer arguments
+137.658548 **** WARNING: no body for function vmx_set_guest_bndcfgs; assigning non-deterministic values to any pointer arguments
+137.720499 **** WARNING: no body for function evtchn_2l_is_masked; assigning non-deterministic values to any pointer arguments
+137.787486 **** WARNING: no body for function msixtbl_range; assigning non-deterministic values to any pointer arguments
+137.836149 **** WARNING: no body for function evtchn_fifo_is_masked; assigning non-deterministic values to any pointer arguments
+139.772773 **** WARNING: no body for function .init$$acpi_parse_processor_affinity; assigning non-deterministic values to any pointer arguments
+139.800248 **** WARNING: no body for function .init$$_scan_pci_devices; assigning non-deterministic values to any pointer arguments
+139.828877 **** WARNING: no body for function .init$$acpi_parse_lapic_nmi; assigning non-deterministic values to any pointer arguments
+139.855741 **** WARNING: no body for function sh_pagetable_dying$link2; assigning non-deterministic values to any pointer arguments
+139.906261 **** WARNING: no body for function ehci_dbgp_getc; assigning non-deterministic values to any pointer arguments
+139.939889 **** WARNING: no body for function .init$$acpi_parse_memory_affinity; assigning non-deterministic values to any pointer arguments
+139.974819 **** WARNING: no body for function intel_iommu_unmap_page; assigning non-deterministic values to any pointer arguments
+140.028541 **** WARNING: no body for function sh_pagetable_dying$link1; assigning non-deterministic values to any pointer arguments
+140.086232 **** WARNING: no body for function pmtimer_save; assigning non-deterministic values to any pointer arguments
+140.149193 **** WARNING: no body for function evtchn_fifo_print_state; assigning non-deterministic values to any pointer arguments
+140.216578 **** WARNING: no body for function .init$$acpi_parse_x2apic_affinity; assigning non-deterministic values to any pointer arguments
+140.267195 **** WARNING: no body for function amd_iommu_read_msi_from_ire; assigning non-deterministic values to any pointer arguments
+140.318016 **** WARNING: no body for function erst_exec_add_value; assigning non-deterministic values to any pointer arguments
+140.368246 **** WARNING: no body for function guest_iommu_mmio_range; assigning non-deterministic values to any pointer arguments
+140.433094 **** WARNING: no body for function erst_exec_goto; assigning non-deterministic values to any pointer arguments
+140.485044 **** WARNING: no body for function csched2_free_vdata; assigning non-deterministic values to any pointer arguments
+140.605492 **** WARNING: no body for function csched2_dom_destroy; assigning non-deterministic values to any pointer arguments
+140.714390 **** WARNING: no body for function viridian_save_domain_ctxt; assigning non-deterministic values to any pointer arguments
+140.787866 **** WARNING: no body for function parse_event_log_entry; assigning non-deterministic values to any pointer arguments
+140.845405 **** WARNING: no body for function erst_exec_subtract_value; assigning non-deterministic values to any pointer arguments
+140.900941 **** WARNING: no body for function set_ioapic_affinity_irq; assigning non-deterministic values to any pointer arguments
+140.958947 **** WARNING: no body for function aer_hest_parse; assigning non-deterministic values to any pointer arguments
+141.018715 **** WARNING: no body for function amd_iommu_unmap_page; assigning non-deterministic values to any pointer arguments
+141.098558 **** WARNING: no body for function hvm_load_tsc_adjust; assigning non-deterministic values to any pointer arguments
+141.185821 **** WARNING: no body for function _dump_pci_devices; assigning non-deterministic values to any pointer arguments
+141.256190 **** WARNING: no body for function evtchn_2l_set_pending; assigning non-deterministic values to any pointer arguments
+141.344694 **** WARNING: no body for function vpic_save; assigning non-deterministic values to any pointer arguments
+141.437567 **** WARNING: no body for function rtc_pf_callback; assigning non-deterministic values to any pointer arguments
+141.530942 **** WARNING: no body for function erst_exec_stall_while_true; assigning non-deterministic values to any pointer arguments
+141.608164 **** WARNING: no body for function .init$$cmp_ex; assigning non-deterministic values to any pointer arguments
+141.684253 **** WARNING: no body for function csched_vcpu_wake; assigning non-deterministic values to any pointer arguments
+141.765565 **** WARNING: no body for function hpet_load; assigning non-deterministic values to any pointer arguments
+141.865286 **** WARNING: no body for function intel_iommu_get_reserved_device_memory; assigning non-deterministic values to any pointer arguments
+141.948266 **** WARNING: no body for function csched2_context_saved; assigning non-deterministic values to any pointer arguments
+142.036471 **** WARNING: no body for function irq_save_isa; assigning non-deterministic values to any pointer arguments
+142.145720 **** WARNING: no body for function csched2_cpu_pick; assigning non-deterministic values to any pointer arguments
+142.451677 **** WARNING: no body for function serial_rx; assigning non-deterministic values to any pointer arguments
+142.640208 **** WARNING: no body for function irq_save_link; assigning non-deterministic values to any pointer arguments
+142.758909 **** WARNING: no body for function vmx_handle_cd; assigning non-deterministic values to any pointer arguments
+142.874928 **** WARNING: no body for function rt_free_vdata; assigning non-deterministic values to any pointer arguments
+142.973702 **** WARNING: no body for function csched2_dom_init; assigning non-deterministic values to any pointer arguments
+143.076077 **** WARNING: no body for function compat_sched_op; assigning non-deterministic values to any pointer arguments
+143.172022 **** WARNING: no body for function compat_xen_version; assigning non-deterministic values to any pointer arguments
+143.268505 **** WARNING: no body for function rt_alloc_domdata; assigning non-deterministic values to any pointer arguments
+143.370586 **** WARNING: no body for function vmx_save_vmcs_ctxt; assigning non-deterministic values to any pointer arguments
+143.488121 **** WARNING: no body for function csched_vcpu_insert; assigning non-deterministic values to any pointer arguments
+143.591584 **** WARNING: no body for function hvm_load_cpu_msrs; assigning non-deterministic values to any pointer arguments
+143.715635 **** WARNING: no body for function hvm_physdev_op; assigning non-deterministic values to any pointer arguments
+143.820222 **** WARNING: no body for function vlapic_pt_cb; assigning non-deterministic values to any pointer arguments
+143.951965 **** WARNING: no body for function irq_load_pci; assigning non-deterministic values to any pointer arguments
+144.092043 **** WARNING: no body for function csched2_vcpu_yield; assigning non-deterministic values to any pointer arguments
+144.216121 **** WARNING: no body for function do_physdev_op; assigning non-deterministic values to any pointer arguments
+144.327955 **** WARNING: no body for function csched2_vcpu_wake; assigning non-deterministic values to any pointer arguments
+144.445714 **** WARNING: no body for function evtchn_2l_print_state; assigning non-deterministic values to any pointer arguments
+144.581481 **** WARNING: no body for function csched_alloc_domdata; assigning non-deterministic values to any pointer arguments
+144.844903 **** WARNING: no body for function apei_exec_noop; assigning non-deterministic values to any pointer arguments
+145.098312 **** WARNING: no body for function csched2_vcpu_sleep; assigning non-deterministic values to any pointer arguments
+145.227267 **** WARNING: no body for function hvm_load_mtrr_msr; assigning non-deterministic values to any pointer arguments
+145.532911 **** WARNING: no body for function do_sched_op_compat; assigning non-deterministic values to any pointer arguments
+145.668572 **** WARNING: no body for function .init$$acpi_madt_oem_check$link2; assigning non-deterministic values to any pointer arguments
+145.805216 **** WARNING: no body for function sh_pagetable_dying; assigning non-deterministic values to any pointer arguments
+145.960420 **** WARNING: no body for function .init$$acpi_madt_oem_check; assigning non-deterministic values to any pointer arguments
+146.098333 **** WARNING: no body for function .init$$acpi_parse_nmi_src; assigning non-deterministic values to any pointer arguments
+146.237296 **** WARNING: no body for function vmce_save_vcpu_ctxt; assigning non-deterministic values to any pointer arguments
+146.402353 **** WARNING: no body for function hvm_save_cpu_ctxt; assigning non-deterministic values to any pointer arguments
+146.573000 **** WARNING: no body for function evtchn_fifo_init; assigning non-deterministic values to any pointer arguments
+146.749146 **** WARNING: no body for function erst_exec_stall; assigning non-deterministic values to any pointer arguments
+146.908378 **** WARNING: no body for function do_event_channel_op; assigning non-deterministic values to any pointer arguments
+147.065515 **** WARNING: no body for function viridian_load_vcpu_ctxt; assigning non-deterministic values to any pointer arguments
+147.252597 **** WARNING: no body for function rtc_load; assigning non-deterministic values to any pointer arguments
+147.444124 **** WARNING: no body for function amd_iommu_msi_msg_update_ire; assigning non-deterministic values to any pointer arguments
+147.618871 **** WARNING: no body for function pmtimer_load; assigning non-deterministic values to any pointer arguments
+147.817376 **** WARNING: no body for function hvm_save_tsc_adjust; assigning non-deterministic values to any pointer arguments
+148.021926 **** WARNING: no body for function vioapic_range; assigning non-deterministic values to any pointer arguments
+148.228498 **** WARNING: no body for function csched2_vcpu_remove; assigning non-deterministic values to any pointer arguments
+148.420478 **** WARNING: no body for function hvm_save_cpu_msrs; assigning non-deterministic values to any pointer arguments
+148.631881 **** WARNING: no body for function erst_exec_load_var1; assigning non-deterministic values to any pointer arguments
+148.822904 **** WARNING: no body for function .init$$acpi_madt_oem_check$link1; assigning non-deterministic values to any pointer arguments
+149.211341 **** WARNING: no body for function vmx_load_vmcs_ctxt; assigning non-deterministic values to any pointer arguments
+149.424138 **** WARNING: no body for function msi_msg_write_remap_rte; assigning non-deterministic values to any pointer arguments
+149.618385 **** WARNING: no body for function parse_ppr_log_entry; assigning non-deterministic values to any pointer arguments
+149.814412 **** WARNING: no body for function msi_msg_read_remap_rte; assigning non-deterministic values to any pointer arguments
+150.011654 **** WARNING: no body for function hpet_save; assigning non-deterministic values to any pointer arguments
+150.432184 **** WARNING: no body for function lapic_save_regs; assigning non-deterministic values to any pointer arguments
+150.659143 **** WARNING: no body for function ns16550_getc; assigning non-deterministic values to any pointer arguments
+150.868631 **** WARNING: no body for function set_msi_affinity; assigning non-deterministic values to any pointer arguments
+151.076653 **** WARNING: no body for function do_sched_op; assigning non-deterministic values to any pointer arguments
+151.283231 **** WARNING: no body for function rt_context_saved; assigning non-deterministic values to any pointer arguments
+151.497042 **** WARNING: no body for function rt_dom_init; assigning non-deterministic values to any pointer arguments
+151.711970 **** WARNING: no body for function rt_vcpu_insert; assigning non-deterministic values to any pointer arguments
+151.926169 **** WARNING: no body for function sh_destroy_monitor_table__sh_3; assigning non-deterministic values to any pointer arguments
+152.154262 **** WARNING: no body for function hvm_physdev_op_compat32; assigning non-deterministic values to any pointer arguments
+152.361498 **** WARNING: no body for function .init$$acpi_parse_ioapic; assigning non-deterministic values to any pointer arguments
+152.572728 **** WARNING: no body for function irq_load_isa; assigning non-deterministic values to any pointer arguments
+153.036962 **** WARNING: no body for function hvm_load_cpu_xsave_states; assigning non-deterministic values to any pointer arguments
+153.293258 **** WARNING: no body for function evtchn_2l_unmask; assigning non-deterministic values to any pointer arguments
+153.545552 **** WARNING: no body for function ioapic_load; assigning non-deterministic values to any pointer arguments
+153.802368 **** WARNING: no body for function do_xen_version; assigning non-deterministic values to any pointer arguments
+154.038054 **** WARNING: no body for function evtchn_fifo_clear_pending; assigning non-deterministic values to any pointer arguments
+154.301082 **** WARNING: no body for function fpu_handle_exception; assigning non-deterministic values to any pointer arguments
+154.544979 **** WARNING: no body for function powernow_cpufreq_update; assigning non-deterministic values to any pointer arguments
+154.788335 **** WARNING: no body for function hvm_save_cpu_xsave_states; assigning non-deterministic values to any pointer arguments
+155.059739 **** WARNING: no body for function viridian_load_domain_ctxt; assigning non-deterministic values to any pointer arguments
+155.335493 **** WARNING: no body for function dma_msi_set_affinity; assigning non-deterministic values to any pointer arguments
+155.595666 **** WARNING: no body for function rtc_save; assigning non-deterministic values to any pointer arguments
+155.878451 **** WARNING: no body for function a653sched_adjust_global; assigning non-deterministic values to any pointer arguments
+156.144997 **** WARNING: no body for function rt_cpu_pick; assigning non-deterministic values to any pointer arguments
+156.414449 **** WARNING: no body for function elf_core_save_regs; assigning non-deterministic values to any pointer arguments
+156.679164 **** WARNING: no body for function compat_physdev_op; assigning non-deterministic values to any pointer arguments
+157.225819 **** WARNING: no body for function nvmx_vmexit_trap; assigning non-deterministic values to any pointer arguments
+157.511398 **** WARNING: no body for function amd_need_clearbank_scan; assigning non-deterministic values to any pointer arguments
+157.778450 **** WARNING: no body for function rcu_node_free; assigning non-deterministic values to any pointer arguments
+158.045920 **** WARNING: no body for function hvm_load_cpu_ctxt; assigning non-deterministic values to any pointer arguments
+158.338277 **** WARNING: no body for function rtn_free; assigning non-deterministic values to any pointer arguments
+158.611744 **** WARNING: no body for function csched_dom_destroy; assigning non-deterministic values to any pointer arguments
+158.887120 **** WARNING: no body for function a653sched_free_domdata; assigning non-deterministic values to any pointer arguments
+159.161279 **** WARNING: no body for function csched2_free_domdata; assigning non-deterministic values to any pointer arguments
+159.434554 **** WARNING: no body for function csched2_sys_cntl; assigning non-deterministic values to any pointer arguments
+160.309207 **** WARNING: no body for function .init$$acpi_parse_lapic_addr_ovr; assigning non-deterministic values to any pointer arguments
+160.589190 **** WARNING: no body for function .init$$acpi_parse_x2apic; assigning non-deterministic values to any pointer arguments
+161.169563 **** WARNING: no body for function vmx_load_msr; assigning non-deterministic values to any pointer arguments
+161.469706 **** WARNING: no body for function apei_exec_read_register; assigning non-deterministic values to any pointer arguments
+161.752099 **** WARNING: no body for function csched_vcpu_sleep; assigning non-deterministic values to any pointer arguments
+162.037162 **** WARNING: no body for function vmx_set_guest_pat; assigning non-deterministic values to any pointer arguments
+162.337405 **** WARNING: no body for function hpet_range; assigning non-deterministic values to any pointer arguments
+162.639113 **** WARNING: no body for function apei_exec_read_register_value; assigning non-deterministic values to any pointer arguments
+162.921281 **** WARNING: no body for function apei_exec_write_register; assigning non-deterministic values to any pointer arguments
+163.203167 **** WARNING: no body for function apei_exec_write_register_value; assigning non-deterministic values to any pointer arguments
+163.487105 **** WARNING: no body for function erst_exec_load_var2; assigning non-deterministic values to any pointer arguments
+163.770897 **** WARNING: no body for function rt_vcpu_sleep; assigning non-deterministic values to any pointer arguments
+164.059074 **** WARNING: no body for function vmce_load_vcpu_ctxt; assigning non-deterministic values to any pointer arguments
+164.369377 **** WARNING: no body for function irq_save_pci; assigning non-deterministic values to any pointer arguments
+164.686682 **** WARNING: no body for function pit_save; assigning non-deterministic values to any pointer arguments
+165.009034 **** WARNING: no body for function vlapic_tdt_pt_cb; assigning non-deterministic values to any pointer arguments
+165.331803 **** WARNING: no body for function hvm_memory_op_compat32; assigning non-deterministic values to any pointer arguments
+165.634401 **** WARNING: no body for function shadow_free_p2m_page; assigning non-deterministic values to any pointer arguments
+165.963911 **** WARNING: no body for function erst_exec_store_var1; assigning non-deterministic values to any pointer arguments
+166.274850 **** WARNING: no body for function erst_exec_add; assigning non-deterministic values to any pointer arguments
+166.587580 **** WARNING: no body for function vmx_init_hypercall_page; assigning non-deterministic values to any pointer arguments
+166.925104 **** WARNING: no body for function a653sched_free_vdata; assigning non-deterministic values to any pointer arguments
+167.243422 **** WARNING: no body for function erst_exec_subtract; assigning non-deterministic values to any pointer arguments
+167.562393 **** WARNING: no body for function erst_exec_skip_next_instruction_if_true; assigning non-deterministic values to any pointer arguments
+167.881905 **** WARNING: no body for function viridian_save_vcpu_ctxt; assigning non-deterministic values to any pointer arguments
+168.226040 **** WARNING: no body for function erst_exec_set_src_address_base; assigning non-deterministic values to any pointer arguments
+168.553395 **** WARNING: no body for function erst_exec_set_dst_address_base; assigning non-deterministic values to any pointer arguments
+168.882385 **** WARNING: no body for function erst_exec_move_data; assigning non-deterministic values to any pointer arguments
+169.208519 **** WARNING: no body for function rt_vcpu_wake; assigning non-deterministic values to any pointer arguments
+169.540321 **** WARNING: no body for function csched2_alloc_domdata; assigning non-deterministic values to any pointer arguments
+169.870910 **** WARNING: no body for function .init$$acpi_parse_lapic; assigning non-deterministic values to any pointer arguments
+170.198995 **** WARNING: no body for function hvm_save_mtrr_msr; assigning non-deterministic values to any pointer arguments
+170.553412 **** WARNING: no body for function a653sched_alloc_domdata; assigning non-deterministic values to any pointer arguments
+170.890396 **** WARNING: no body for function .init$$acpi_parse_x2apic_nmi; assigning non-deterministic values to any pointer arguments
+171.223902 **** WARNING: no body for function .init$$acpi_parse_int_src_ovr; assigning non-deterministic values to any pointer arguments
+171.892584 **** WARNING: no body for function compat_xenoprof_op; assigning non-deterministic values to any pointer arguments
+172.225581 **** WARNING: no body for function sh_destroy_monitor_table__sh_4; assigning non-deterministic values to any pointer arguments
+172.581771 **** WARNING: no body for function vmx_save_msr; assigning non-deterministic values to any pointer arguments
+172.937217 **** WARNING: no body for function do_callback_op; assigning non-deterministic values to any pointer arguments
+173.268666 **** WARNING: no body for function compat_callback_op; assigning non-deterministic values to any pointer arguments
+173.602866 **** WARNING: no body for function irq_load_link; assigning non-deterministic values to any pointer arguments
+173.966670 **** WARNING: no body for function evtchn_2l_clear_pending; assigning non-deterministic values to any pointer arguments
+174.709427 **** WARNING: no body for function do_set_debugreg; assigning non-deterministic values to any pointer arguments
+175.064028 **** WARNING: no body for function evtchn_fifo_unmask; assigning non-deterministic values to any pointer arguments
+175.447102 **** WARNING: no body for function vlapic_range; assigning non-deterministic values to any pointer arguments
+175.832186 **** WARNING: no body for function hap_free_p2m_page; assigning non-deterministic values to any pointer arguments
+176.223486 **** WARNING: no body for function rt_free_domdata; assigning non-deterministic values to any pointer arguments
+176.596906 **** WARNING: no body for function rt_dom_destroy; assigning non-deterministic values to any pointer arguments
+176.974048 **** WARNING: no body for function rt_vcpu_remove; assigning non-deterministic values to any pointer arguments
+177.352408 **** WARNING: no body for function lapic_load_hidden; assigning non-deterministic values to any pointer arguments
+177.752970 **** WARNING: no body for function csched_sys_cntl; assigning non-deterministic values to any pointer arguments
+178.135340 **** WARNING: no body for function a653sched_pick_cpu; assigning non-deterministic values to any pointer arguments
+178.523683 **** WARNING: no body for function hvm_memory_op; assigning non-deterministic values to any pointer arguments
+178.903364 **** WARNING: no body for function pit_load; assigning non-deterministic values to any pointer arguments
+179.310505 **** WARNING: no body for function do_xenoprof_op; assigning non-deterministic values to any pointer arguments
+179.694958 **** WARNING: no body for function pit_time_fired; assigning non-deterministic values to any pointer arguments
+180.104861 **** WARNING: no body for function a653sched_vcpu_sleep; assigning non-deterministic values to any pointer arguments
+180.499392 **** WARNING: no body for function ioapic_save; assigning non-deterministic values to any pointer arguments
+180.916407 **** WARNING: no body for function a653sched_vcpu_wake; assigning non-deterministic values to any pointer arguments
+181.318102 **** WARNING: no body for function csched_cpu_pick; assigning non-deterministic values to any pointer arguments
+181.719140 **** WARNING: no body for function intel_need_clearbank_scan; assigning non-deterministic values to any pointer arguments
+182.114952 **** WARNING: no body for function csched_vcpu_yield; assigning non-deterministic values to any pointer arguments
+182.518175 **** WARNING: no body for function csched_vcpu_remove; assigning non-deterministic values to any pointer arguments
+182.921838 **** WARNING: no body for function csched_free_domdata; assigning non-deterministic values to any pointer arguments
+183.325118 **** WARNING: no body for function csched_free_vdata; assigning non-deterministic values to any pointer arguments
+183.728419 **** WARNING: no body for function csched_dom_init; assigning non-deterministic values to any pointer arguments
+184.135185 **** WARNING: no body for function vpic_load; assigning non-deterministic values to any pointer arguments
+184.609318 **** WARNING: no body for function vmx_process_isr; assigning non-deterministic values to any pointer arguments
+185.022195 **** WARNING: no body for function hpet_msi_set_affinity; assigning non-deterministic values to any pointer arguments
+185.432934 **** WARNING: no body for function vmx_get_guest_pat; assigning non-deterministic values to any pointer arguments
+185.863294 **** WARNING: no body for function evtchn_fifo_set_pending; assigning non-deterministic values to any pointer arguments
+186.293782 **** WARNING: no body for function vmx_invlpg; assigning non-deterministic values to any pointer arguments
+186.725264 **** WARNING: no body for function lapic_save_hidden; assigning non-deterministic values to any pointer arguments
+187.163949 **** WARNING: no body for function .init$$srat_parse_region; assigning non-deterministic values to any pointer arguments
+187.579584 **** WARNING: no body for function .init$$_setup_hwdom_pci_devices; assigning non-deterministic values to any pointer arguments
+187.998919 **** WARNING: no body for function lapic_load_regs; assigning non-deterministic values to any pointer arguments
+188.444723 **** WARNING: no body for function csched2_vcpu_insert; assigning non-deterministic values to any pointer arguments
+188.873349 **** WARNING: no body for function .init$$hest_parse_cmc; assigning non-deterministic values to any pointer arguments
+286.747461 **** WARNING: no body for function bitmap_zero$link2$link2; assigning non-deterministic values to any pointer arguments
+288.167995 **** WARNING: no body for function find_first_set_bit$link4; assigning non-deterministic values to any pointer arguments
+288.286582 **** WARNING: no body for function cpumask_or$link4; assigning non-deterministic values to any pointer arguments
+288.345059 Unwinding loop vcpumask_to_pcpumask.0 iteration 1 file mm.c line 3085 function vcpumask_to_pcpumask thread 0
+288.522040 Not unwinding loop vcpumask_to_pcpumask.0 iteration 2 file mm.c line 3085 function vcpumask_to_pcpumask thread 0
+288.647458 Unwinding loop vcpumask_to_pcpumask.1 iteration 1 file mm.c line 3070 function vcpumask_to_pcpumask thread 0
+290.247500 Unwinding loop vcpumask_to_pcpumask.0 iteration 1 file mm.c line 3085 function vcpumask_to_pcpumask thread 0
+290.427124 Not unwinding loop vcpumask_to_pcpumask.0 iteration 2 file mm.c line 3085 function vcpumask_to_pcpumask thread 0
+290.554893 Not unwinding loop vcpumask_to_pcpumask.1 iteration 2 file mm.c line 3070 function vcpumask_to_pcpumask thread 0
+291.201137 **** WARNING: no body for function get_cpu_info$link28$link1; assigning non-deterministic values to any pointer arguments
+291.204875 **** WARNING: no body for function cpumask_check$link12$link1; assigning non-deterministic values to any pointer arguments
+291.205567 **** WARNING: no body for function variable_test_bit$link20$link1; assigning non-deterministic values to any pointer arguments
+291.322303 **** WARNING: no body for function cpumask_of$link9$link1; assigning non-deterministic values to any pointer arguments
+291.322958 **** WARNING: no body for function cpumask_subset$link1$link1; assigning non-deterministic values to any pointer arguments
+291.334607 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+291.339668 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+291.445752 **** WARNING: no body for function cpumask_and$link3$link1; assigning non-deterministic values to any pointer arguments
+291.446946 **** WARNING: no body for function cpumask_clear_cpu$link5$link1; assigning non-deterministic values to any pointer arguments
+291.447977 **** WARNING: no body for function send_IPI_mask; assigning non-deterministic values to any pointer arguments
+291.448710 **** WARNING: no body for function cpumask_empty$link6$link1; assigning non-deterministic values to any pointer arguments
+291.452175 **** WARNING: no body for function rep_nop$link5$link2; assigning non-deterministic values to any pointer arguments
+291.452381 Unwinding loop flush_area_mask.1 iteration 1 file smp.c line 235 function flush_area_mask thread 0
+291.456791 Not unwinding loop flush_area_mask.1 iteration 2 file smp.c line 235 function flush_area_mask thread 0
+291.964931 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+291.969684 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+292.078864 Unwinding loop flush_area_mask.1 iteration 1 file smp.c line 235 function flush_area_mask thread 0
+292.083168 Not unwinding loop flush_area_mask.1 iteration 2 file smp.c line 235 function flush_area_mask thread 0
+293.138426 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+293.142187 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+293.253079 Unwinding loop flush_area_mask.1 iteration 1 file smp.c line 235 function flush_area_mask thread 0
+293.256191 Not unwinding loop flush_area_mask.1 iteration 2 file smp.c line 235 function flush_area_mask thread 0
+294.426520 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+294.430222 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+294.536321 Unwinding loop flush_area_mask.1 iteration 1 file smp.c line 235 function flush_area_mask thread 0
+294.539620 Not unwinding loop flush_area_mask.1 iteration 2 file smp.c line 235 function flush_area_mask thread 0
+295.582656 **** WARNING: no body for function list_empty; assigning non-deterministic values to any pointer arguments
+296.946657 **** WARNING: no body for function __find_first_bit; assigning non-deterministic values to any pointer arguments
+297.008982 **** WARNING: no body for function bitmap_intersects$link3$link1; assigning non-deterministic values to any pointer arguments
+297.013904 **** WARNING: no body for function cpumask_check$link4$link2; assigning non-deterministic values to any pointer arguments
+297.014235 **** WARNING: no body for function __set_bit$link3$link3; assigning non-deterministic values to any pointer arguments
+297.120805 **** WARNING: no body for function __find_next_bit; assigning non-deterministic values to any pointer arguments
+297.121947 Unwinding loop do_mmuext_op.6 iteration 1 file mm.c line 3464 function do_mmuext_op thread 0
+297.240167 Not unwinding loop do_mmuext_op.6 iteration 2 file mm.c line 3464 function do_mmuext_op thread 0
+297.401817 **** WARNING: no body for function get_cpu_info$link7$link4; assigning non-deterministic values to any pointer arguments
+297.733206 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+297.736972 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+297.844364 Unwinding loop flush_area_mask.1 iteration 1 file smp.c line 235 function flush_area_mask thread 0
+297.847430 Not unwinding loop flush_area_mask.1 iteration 2 file smp.c line 235 function flush_area_mask thread 0
+299.249980 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+299.253349 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+299.642174 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+299.646569 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+299.920618 Unwinding loop invalidate_shadow_ldt.7 iteration 1 file mm.c line 611 function invalidate_shadow_ldt thread 0
+300.107936 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+300.112519 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+300.383806 Not unwinding loop invalidate_shadow_ldt.7 iteration 2 file mm.c line 611 function invalidate_shadow_ldt thread 0
+302.376218 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+302.380948 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+303.498263 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+303.502315 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+303.795238 Unwinding loop map_domain_page.3 iteration 1 file domain_page.c line 126 function map_domain_page thread 0
+303.800927 Not unwinding loop map_domain_page.3 iteration 2 file domain_page.c line 126 function map_domain_page thread 0
+304.408994 Unwinding loop map_domain_page.5 iteration 1 file domain_page.c line 152 function map_domain_page thread 0
+304.687909 Not unwinding loop map_domain_page.5 iteration 2 file domain_page.c line 152 function map_domain_page thread 0
+305.691018 **** WARNING: no body for function clear_page_sse2; assigning non-deterministic values to any pointer arguments
+306.387950 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+306.392785 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+307.968554 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+307.973207 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+308.201543 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+308.206096 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+309.301870 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+309.306052 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+309.599832 Unwinding loop map_domain_page.3 iteration 1 file domain_page.c line 126 function map_domain_page thread 0
+309.605250 Not unwinding loop map_domain_page.3 iteration 2 file domain_page.c line 126 function map_domain_page thread 0
+310.214152 Unwinding loop map_domain_page.5 iteration 1 file domain_page.c line 152 function map_domain_page thread 0
+310.496599 Not unwinding loop map_domain_page.5 iteration 2 file domain_page.c line 152 function map_domain_page thread 0
+311.946134 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+311.950744 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+312.245667 Unwinding loop map_domain_page.3 iteration 1 file domain_page.c line 126 function map_domain_page thread 0
+312.251471 Not unwinding loop map_domain_page.3 iteration 2 file domain_page.c line 126 function map_domain_page thread 0
+312.864514 Unwinding loop map_domain_page.5 iteration 1 file domain_page.c line 152 function map_domain_page thread 0
+313.147280 Not unwinding loop map_domain_page.5 iteration 2 file domain_page.c line 152 function map_domain_page thread 0
+314.189754 **** WARNING: no body for function copy_page_sse2; assigning non-deterministic values to any pointer arguments
+315.666453 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+315.671851 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+315.914248 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+315.919951 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+345.433039 Unwinding loop do_mmuext_op.7 iteration 1 file mm.c line 3157 function do_mmuext_op thread 0
+345.882367 **** WARNING: no body for function hvm_local_events_need_delivery; assigning non-deterministic values to any pointer arguments
+353.705938 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+353.783372 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+356.072257 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+356.140447 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+357.193601 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+357.263474 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+359.606767 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+359.680556 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+360.436972 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+360.509730 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+361.582813 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+361.655267 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+365.113544 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+365.186237 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+366.100514 Unwinding loop map_domain_page.3 iteration 1 file domain_page.c line 126 function map_domain_page thread 0
+366.167686 Not unwinding loop map_domain_page.3 iteration 2 file domain_page.c line 126 function map_domain_page thread 0
+367.823205 Unwinding loop map_domain_page.5 iteration 1 file domain_page.c line 152 function map_domain_page thread 0
+368.688889 Not unwinding loop map_domain_page.5 iteration 2 file domain_page.c line 152 function map_domain_page thread 0
+380.422365 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+380.589286 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+381.569056 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+381.642921 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+382.238093 Unwinding loop invalidate_shadow_ldt.7 iteration 1 file mm.c line 611 function invalidate_shadow_ldt thread 0
+382.907159 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+382.980936 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+383.588977 Not unwinding loop invalidate_shadow_ldt.7 iteration 2 file mm.c line 611 function invalidate_shadow_ldt thread 0
+384.730562 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+384.806045 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+391.598588 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+391.670694 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+392.399902 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+392.472696 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+612.413333 Unwinding loop vcpumask_to_pcpumask.0 iteration 1 file mm.c line 3085 function vcpumask_to_pcpumask thread 0
+613.036586 Not unwinding loop vcpumask_to_pcpumask.0 iteration 2 file mm.c line 3085 function vcpumask_to_pcpumask thread 0
+613.310087 Unwinding loop vcpumask_to_pcpumask.1 iteration 1 file mm.c line 3070 function vcpumask_to_pcpumask thread 0
+618.797557 Unwinding loop vcpumask_to_pcpumask.0 iteration 1 file mm.c line 3085 function vcpumask_to_pcpumask thread 0
+619.405428 Not unwinding loop vcpumask_to_pcpumask.0 iteration 2 file mm.c line 3085 function vcpumask_to_pcpumask thread 0
+619.676129 Not unwinding loop vcpumask_to_pcpumask.1 iteration 2 file mm.c line 3070 function vcpumask_to_pcpumask thread 0
+622.144891 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+622.229818 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+622.606543 Unwinding loop flush_area_mask.1 iteration 1 file smp.c line 235 function flush_area_mask thread 0
+622.691664 Not unwinding loop flush_area_mask.1 iteration 2 file smp.c line 235 function flush_area_mask thread 0
+624.758147 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+624.845178 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+625.215292 Unwinding loop flush_area_mask.1 iteration 1 file smp.c line 235 function flush_area_mask thread 0
+625.299985 Not unwinding loop flush_area_mask.1 iteration 2 file smp.c line 235 function flush_area_mask thread 0
+627.980216 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+628.064366 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+628.428438 Unwinding loop flush_area_mask.1 iteration 1 file smp.c line 235 function flush_area_mask thread 0
+628.511760 Not unwinding loop flush_area_mask.1 iteration 2 file smp.c line 235 function flush_area_mask thread 0
+631.647059 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+631.730241 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+632.090263 Unwinding loop flush_area_mask.1 iteration 1 file smp.c line 235 function flush_area_mask thread 0
+632.172709 Not unwinding loop flush_area_mask.1 iteration 2 file smp.c line 235 function flush_area_mask thread 0
+639.044039 Unwinding loop do_mmuext_op.6 iteration 1 file mm.c line 3464 function do_mmuext_op thread 0
+639.710057 Not unwinding loop do_mmuext_op.6 iteration 2 file mm.c line 3464 function do_mmuext_op thread 0
+641.567328 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+641.649384 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+642.004692 Unwinding loop flush_area_mask.1 iteration 1 file smp.c line 235 function flush_area_mask thread 0
+642.086194 Not unwinding loop flush_area_mask.1 iteration 2 file smp.c line 235 function flush_area_mask thread 0
+645.677229 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+645.757945 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+646.975450 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+647.052220 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+647.879774 Unwinding loop invalidate_shadow_ldt.7 iteration 1 file mm.c line 611 function invalidate_shadow_ldt thread 0
+648.695737 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+648.772297 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+649.599681 Not unwinding loop invalidate_shadow_ldt.7 iteration 2 file mm.c line 611 function invalidate_shadow_ldt thread 0
+654.481724 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+654.565347 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+658.497181 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+658.577059 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+659.774691 Unwinding loop map_domain_page.3 iteration 1 file domain_page.c line 126 function map_domain_page thread 0
+659.857206 Not unwinding loop map_domain_page.3 iteration 2 file domain_page.c line 126 function map_domain_page thread 0
+662.103928 Unwinding loop map_domain_page.5 iteration 1 file domain_page.c line 152 function map_domain_page thread 0
+663.248397 Not unwinding loop map_domain_page.5 iteration 2 file domain_page.c line 152 function map_domain_page thread 0
+668.778597 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+668.864014 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+673.002905 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+673.084303 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+673.880708 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+673.961763 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+677.873674 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+677.953325 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+679.146399 Unwinding loop map_domain_page.3 iteration 1 file domain_page.c line 126 function map_domain_page thread 0
+679.229060 Not unwinding loop map_domain_page.3 iteration 2 file domain_page.c line 126 function map_domain_page thread 0
+681.473465 Unwinding loop map_domain_page.5 iteration 1 file domain_page.c line 152 function map_domain_page thread 0
+682.615750 Not unwinding loop map_domain_page.5 iteration 2 file domain_page.c line 152 function map_domain_page thread 0
+687.476919 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+687.557440 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+688.759684 Unwinding loop map_domain_page.3 iteration 1 file domain_page.c line 126 function map_domain_page thread 0
+688.842606 Not unwinding loop map_domain_page.3 iteration 2 file domain_page.c line 126 function map_domain_page thread 0
+691.087961 Unwinding loop map_domain_page.5 iteration 1 file domain_page.c line 152 function map_domain_page thread 0
+692.234205 Not unwinding loop map_domain_page.5 iteration 2 file domain_page.c line 152 function map_domain_page thread 0
+700.270104 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+700.354729 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+701.103277 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+701.185838 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+735.495733 Not unwinding loop do_mmuext_op.7 iteration 2 file mm.c line 3157 function do_mmuext_op thread 0
+742.242725 Unwinding loop hypercall_create_continuation.2 iteration 1 file domain.c line 2242 function hypercall_create_continuation thread 0
+742.693779 Not unwinding loop hypercall_create_continuation.2 iteration 2 file domain.c line 2242 function hypercall_create_continuation thread 0
+745.913105 Unwinding loop hypercall_create_continuation.5 iteration 1 file domain.c line 2262 function hypercall_create_continuation thread 0
+747.005859 Not unwinding loop hypercall_create_continuation.5 iteration 2 file domain.c line 2262 function hypercall_create_continuation thread 0
+748.470170 Unwinding loop hypercall_create_continuation.8 iteration 1 file domain.c line 2278 function hypercall_create_continuation thread 0
+749.601760 Not unwinding loop hypercall_create_continuation.8 iteration 2 file domain.c line 2278 function hypercall_create_continuation thread 0
+751.499657 Unwinding loop hypercall_create_continuation.2 iteration 1 file domain.c line 2242 function hypercall_create_continuation thread 0
+751.934179 Not unwinding loop hypercall_create_continuation.2 iteration 2 file domain.c line 2242 function hypercall_create_continuation thread 0
+755.085508 Unwinding loop hypercall_create_continuation.5 iteration 1 file domain.c line 2262 function hypercall_create_continuation thread 0
+756.172657 Not unwinding loop hypercall_create_continuation.5 iteration 2 file domain.c line 2262 function hypercall_create_continuation thread 0
+757.636131 Unwinding loop hypercall_create_continuation.8 iteration 1 file domain.c line 2278 function hypercall_create_continuation thread 0
+758.762037 Not unwinding loop hypercall_create_continuation.8 iteration 2 file domain.c line 2278 function hypercall_create_continuation thread 0
+760.847808 **** WARNING: no body for function hvm_copy_to_guest_virt_nofault; assigning non-deterministic values to any pointer arguments
+762.272299 **** WARNING: no body for function __copy_to_user$link11$link1; assigning non-deterministic values to any pointer arguments
+770.211934 Unwinding loop do_multicall_stub.0 iteration 1 file multicallstub.c line 9 function do_multicall_stub thread 0
+772.932807 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+772.937325 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+774.120638 Unwinding loop hypercall_create_continuation.2 iteration 1 file domain.c line 2242 function hypercall_create_continuation thread 0
+774.232147 Not unwinding loop hypercall_create_continuation.2 iteration 2 file domain.c line 2242 function hypercall_create_continuation thread 0
+775.302899 Unwinding loop hypercall_create_continuation.5 iteration 1 file domain.c line 2262 function hypercall_create_continuation thread 0
+775.636907 Not unwinding loop hypercall_create_continuation.5 iteration 2 file domain.c line 2262 function hypercall_create_continuation thread 0
+776.081432 Unwinding loop hypercall_create_continuation.8 iteration 1 file domain.c line 2278 function hypercall_create_continuation thread 0
+776.414967 Not unwinding loop hypercall_create_continuation.8 iteration 2 file domain.c line 2278 function hypercall_create_continuation thread 0
+784.809031 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+784.814404 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+786.369348 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+786.374857 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+787.158392 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+787.164573 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+788.885797 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+788.891584 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+789.442956 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+789.448579 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+790.359741 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+790.365939 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+792.577052 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+792.582048 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+793.145422 Unwinding loop map_domain_page.3 iteration 1 file domain_page.c line 126 function map_domain_page thread 0
+793.152387 Not unwinding loop map_domain_page.3 iteration 2 file domain_page.c line 126 function map_domain_page thread 0
+794.361695 Unwinding loop map_domain_page.5 iteration 1 file domain_page.c line 152 function map_domain_page thread 0
+794.916006 Not unwinding loop map_domain_page.5 iteration 2 file domain_page.c line 152 function map_domain_page thread 0
+803.663551 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+803.669320 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+804.352896 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+804.360185 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+804.927809 Unwinding loop invalidate_shadow_ldt.7 iteration 1 file mm.c line 611 function invalidate_shadow_ldt thread 0
+805.293710 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+805.300453 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+805.860765 Not unwinding loop invalidate_shadow_ldt.7 iteration 2 file mm.c line 611 function invalidate_shadow_ldt thread 0
+806.555069 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+806.559990 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+812.021616 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+812.026396 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+812.579059 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+812.583741 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1008.995138 Unwinding loop vcpumask_to_pcpumask.0 iteration 1 file mm.c line 3085 function vcpumask_to_pcpumask thread 0
+1009.357933 Not unwinding loop vcpumask_to_pcpumask.0 iteration 2 file mm.c line 3085 function vcpumask_to_pcpumask thread 0
+1009.664156 Unwinding loop vcpumask_to_pcpumask.1 iteration 1 file mm.c line 3070 function vcpumask_to_pcpumask thread 0
+1013.443535 Unwinding loop vcpumask_to_pcpumask.0 iteration 1 file mm.c line 3085 function vcpumask_to_pcpumask thread 0
+1013.805518 Not unwinding loop vcpumask_to_pcpumask.0 iteration 2 file mm.c line 3085 function vcpumask_to_pcpumask thread 0
+1014.113118 Not unwinding loop vcpumask_to_pcpumask.1 iteration 2 file mm.c line 3070 function vcpumask_to_pcpumask thread 0
+1015.987028 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+1015.994370 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+1016.287440 Unwinding loop flush_area_mask.1 iteration 1 file smp.c line 235 function flush_area_mask thread 0
+1016.293382 Not unwinding loop flush_area_mask.1 iteration 2 file smp.c line 235 function flush_area_mask thread 0
+1017.621877 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+1017.628367 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+1017.919522 Unwinding loop flush_area_mask.1 iteration 1 file smp.c line 235 function flush_area_mask thread 0
+1017.925136 Not unwinding loop flush_area_mask.1 iteration 2 file smp.c line 235 function flush_area_mask thread 0
+1019.887982 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+1019.893243 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+1020.181654 Unwinding loop flush_area_mask.1 iteration 1 file smp.c line 235 function flush_area_mask thread 0
+1020.186632 Not unwinding loop flush_area_mask.1 iteration 2 file smp.c line 235 function flush_area_mask thread 0
+1022.453757 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+1022.459793 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+1022.747427 Unwinding loop flush_area_mask.1 iteration 1 file smp.c line 235 function flush_area_mask thread 0
+1022.752711 Not unwinding loop flush_area_mask.1 iteration 2 file smp.c line 235 function flush_area_mask thread 0
+1027.894507 Unwinding loop do_mmuext_op.6 iteration 1 file mm.c line 3464 function do_mmuext_op thread 0
+1028.198799 Not unwinding loop do_mmuext_op.6 iteration 2 file mm.c line 3464 function do_mmuext_op thread 0
+1029.423056 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+1029.428534 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+1029.715906 Unwinding loop flush_area_mask.1 iteration 1 file smp.c line 235 function flush_area_mask thread 0
+1029.720875 Not unwinding loop flush_area_mask.1 iteration 2 file smp.c line 235 function flush_area_mask thread 0
+1032.497000 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+1032.502270 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+1033.345454 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1033.351697 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1034.075531 Unwinding loop invalidate_shadow_ldt.7 iteration 1 file mm.c line 611 function invalidate_shadow_ldt thread 0
+1034.539580 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1034.545948 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1035.270786 Not unwinding loop invalidate_shadow_ldt.7 iteration 2 file mm.c line 611 function invalidate_shadow_ldt thread 0
+1039.078437 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1039.085503 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1041.734086 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+1041.740201 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+1042.485789 Unwinding loop map_domain_page.3 iteration 1 file domain_page.c line 126 function map_domain_page thread 0
+1042.494521 Not unwinding loop map_domain_page.3 iteration 2 file domain_page.c line 126 function map_domain_page thread 0
+1044.106917 Unwinding loop map_domain_page.5 iteration 1 file domain_page.c line 152 function map_domain_page thread 0
+1044.842978 Not unwinding loop map_domain_page.5 iteration 2 file domain_page.c line 152 function map_domain_page thread 0
+1049.050224 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1049.057284 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1052.088006 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1052.094806 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1052.684801 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1052.691665 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1055.336469 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+1055.342586 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+1056.084481 Unwinding loop map_domain_page.3 iteration 1 file domain_page.c line 126 function map_domain_page thread 0
+1056.093188 Not unwinding loop map_domain_page.3 iteration 2 file domain_page.c line 126 function map_domain_page thread 0
+1057.696495 Unwinding loop map_domain_page.5 iteration 1 file domain_page.c line 152 function map_domain_page thread 0
+1058.430675 Not unwinding loop map_domain_page.5 iteration 2 file domain_page.c line 152 function map_domain_page thread 0
+1061.957648 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+1061.964205 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+1062.711854 Unwinding loop map_domain_page.3 iteration 1 file domain_page.c line 126 function map_domain_page thread 0
+1062.720751 Not unwinding loop map_domain_page.3 iteration 2 file domain_page.c line 126 function map_domain_page thread 0
+1064.329704 Unwinding loop map_domain_page.5 iteration 1 file domain_page.c line 152 function map_domain_page thread 0
+1065.072081 Not unwinding loop map_domain_page.5 iteration 2 file domain_page.c line 152 function map_domain_page thread 0
+1070.996774 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1071.004137 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1071.596243 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1071.603880 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1104.594329 Unwinding loop do_mmuext_op.7 iteration 1 file mm.c line 3157 function do_mmuext_op thread 0
+1116.653681 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1116.738880 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1120.201022 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+1120.283901 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+1121.985811 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1122.070664 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1125.702483 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1125.786750 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1127.020330 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1127.104288 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1128.927524 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1129.012103 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1134.355970 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+1134.438558 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+1135.848875 Unwinding loop map_domain_page.3 iteration 1 file domain_page.c line 126 function map_domain_page thread 0
+1135.934869 Not unwinding loop map_domain_page.3 iteration 2 file domain_page.c line 126 function map_domain_page thread 0
+1138.666878 Unwinding loop map_domain_page.5 iteration 1 file domain_page.c line 152 function map_domain_page thread 0
+1140.010159 Not unwinding loop map_domain_page.5 iteration 2 file domain_page.c line 152 function map_domain_page thread 0
+1158.216743 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+1158.401216 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+1159.860342 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1159.939205 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1160.985729 Unwinding loop invalidate_shadow_ldt.7 iteration 1 file mm.c line 611 function invalidate_shadow_ldt thread 0
+1161.939590 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1162.018199 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1163.063654 Not unwinding loop invalidate_shadow_ldt.7 iteration 2 file mm.c line 611 function invalidate_shadow_ldt thread 0
+1164.732349 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1164.817387 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1175.649594 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1175.730508 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1176.927285 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1177.006259 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1437.772210 Unwinding loop vcpumask_to_pcpumask.0 iteration 1 file mm.c line 3085 function vcpumask_to_pcpumask thread 0
+1438.573781 Not unwinding loop vcpumask_to_pcpumask.0 iteration 2 file mm.c line 3085 function vcpumask_to_pcpumask thread 0
+1439.002564 Unwinding loop vcpumask_to_pcpumask.1 iteration 1 file mm.c line 3070 function vcpumask_to_pcpumask thread 0
+1446.492419 Unwinding loop vcpumask_to_pcpumask.0 iteration 1 file mm.c line 3085 function vcpumask_to_pcpumask thread 0
+1447.266232 Not unwinding loop vcpumask_to_pcpumask.0 iteration 2 file mm.c line 3085 function vcpumask_to_pcpumask thread 0
+1447.692439 Not unwinding loop vcpumask_to_pcpumask.1 iteration 2 file mm.c line 3070 function vcpumask_to_pcpumask thread 0
+1451.161271 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+1451.249397 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+1451.788356 Unwinding loop flush_area_mask.1 iteration 1 file smp.c line 235 function flush_area_mask thread 0
+1451.876508 Not unwinding loop flush_area_mask.1 iteration 2 file smp.c line 235 function flush_area_mask thread 0
+1454.677098 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+1454.765448 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+1455.301362 Unwinding loop flush_area_mask.1 iteration 1 file smp.c line 235 function flush_area_mask thread 0
+1455.389998 Not unwinding loop flush_area_mask.1 iteration 2 file smp.c line 235 function flush_area_mask thread 0
+1458.929377 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+1459.017220 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+1459.549765 Unwinding loop flush_area_mask.1 iteration 1 file smp.c line 235 function flush_area_mask thread 0
+1459.637284 Not unwinding loop flush_area_mask.1 iteration 2 file smp.c line 235 function flush_area_mask thread 0
+1463.803279 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+1463.901909 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+1464.438184 Unwinding loop flush_area_mask.1 iteration 1 file smp.c line 235 function flush_area_mask thread 0
+1464.530035 Not unwinding loop flush_area_mask.1 iteration 2 file smp.c line 235 function flush_area_mask thread 0
+1473.797045 Unwinding loop do_mmuext_op.6 iteration 1 file mm.c line 3464 function do_mmuext_op thread 0
+1474.631261 Not unwinding loop do_mmuext_op.6 iteration 2 file mm.c line 3464 function do_mmuext_op thread 0
+1477.153488 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+1477.238944 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+1477.758833 Unwinding loop flush_area_mask.1 iteration 1 file smp.c line 235 function flush_area_mask thread 0
+1477.844367 Not unwinding loop flush_area_mask.1 iteration 2 file smp.c line 235 function flush_area_mask thread 0
+1482.696553 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+1482.782965 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+1484.435295 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1484.515305 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1485.752900 Unwinding loop invalidate_shadow_ldt.7 iteration 1 file mm.c line 611 function invalidate_shadow_ldt thread 0
+1486.826287 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1486.906273 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1488.143458 Not unwinding loop invalidate_shadow_ldt.7 iteration 2 file mm.c line 611 function invalidate_shadow_ldt thread 0
+1494.710077 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1494.797323 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1500.194023 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+1500.278528 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+1501.895200 Unwinding loop map_domain_page.3 iteration 1 file domain_page.c line 126 function map_domain_page thread 0
+1501.983432 Not unwinding loop map_domain_page.3 iteration 2 file domain_page.c line 126 function map_domain_page thread 0
+1505.141087 Unwinding loop map_domain_page.5 iteration 1 file domain_page.c line 152 function map_domain_page thread 0
+1506.699963 Not unwinding loop map_domain_page.5 iteration 2 file domain_page.c line 152 function map_domain_page thread 0
+1514.534771 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1514.623199 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1520.118570 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1520.205003 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1521.334383 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1521.419986 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1526.808513 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+1526.892909 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+1528.501983 Unwinding loop map_domain_page.3 iteration 1 file domain_page.c line 126 function map_domain_page thread 0
+1528.598879 Not unwinding loop map_domain_page.3 iteration 2 file domain_page.c line 126 function map_domain_page thread 0
+1531.733032 Unwinding loop map_domain_page.5 iteration 1 file domain_page.c line 152 function map_domain_page thread 0
+1533.281026 Not unwinding loop map_domain_page.5 iteration 2 file domain_page.c line 152 function map_domain_page thread 0
+1539.947504 Unwinding loop _spin_lock.0 iteration 1 file spinlock.c line 141 function _spin_lock thread 0
+1540.031821 Not unwinding loop _spin_lock.0 iteration 2 file spinlock.c line 141 function _spin_lock thread 0
+1541.641387 Unwinding loop map_domain_page.3 iteration 1 file domain_page.c line 126 function map_domain_page thread 0
+1541.730179 Not unwinding loop map_domain_page.3 iteration 2 file domain_page.c line 126 function map_domain_page thread 0
+1544.879726 Unwinding loop map_domain_page.5 iteration 1 file domain_page.c line 152 function map_domain_page thread 0
+1546.426778 Not unwinding loop map_domain_page.5 iteration 2 file domain_page.c line 152 function map_domain_page thread 0
+1557.653370 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1557.743631 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1558.820131 Unwinding loop put_page.1 iteration 1 file mm.c line 2170 function put_page thread 0
+1558.906174 Not unwinding loop put_page.1 iteration 2 file mm.c line 2170 function put_page thread 0
+1596.502432 Not unwinding loop do_mmuext_op.7 iteration 2 file mm.c line 3157 function do_mmuext_op thread 0
+1604.279611 Unwinding loop hypercall_create_continuation.2 iteration 1 file domain.c line 2242 function hypercall_create_continuation thread 0
+1604.824671 Not unwinding loop hypercall_create_continuation.2 iteration 2 file domain.c line 2242 function hypercall_create_continuation thread 0
+1608.777763 Unwinding loop hypercall_create_continuation.5 iteration 1 file domain.c line 2262 function hypercall_create_continuation thread 0
+1610.168530 Not unwinding loop hypercall_create_continuation.5 iteration 2 file domain.c line 2262 function hypercall_create_continuation thread 0
+1611.986129 Unwinding loop hypercall_create_continuation.8 iteration 1 file domain.c line 2278 function hypercall_create_continuation thread 0
+1613.399850 Not unwinding loop hypercall_create_continuation.8 iteration 2 file domain.c line 2278 function hypercall_create_continuation thread 0
+1615.826417 Unwinding loop hypercall_create_continuation.2 iteration 1 file domain.c line 2242 function hypercall_create_continuation thread 0
+1616.369637 Not unwinding loop hypercall_create_continuation.2 iteration 2 file domain.c line 2242 function hypercall_create_continuation thread 0
+1620.370108 Unwinding loop hypercall_create_continuation.5 iteration 1 file domain.c line 2262 function hypercall_create_continuation thread 0
+1621.735926 Not unwinding loop hypercall_create_continuation.5 iteration 2 file domain.c line 2262 function hypercall_create_continuation thread 0
+1623.572858 Unwinding loop hypercall_create_continuation.8 iteration 1 file domain.c line 2278 function hypercall_create_continuation thread 0
+1624.979368 Not unwinding loop hypercall_create_continuation.8 iteration 2 file domain.c line 2278 function hypercall_create_continuation thread 0
+1638.489706 Not unwinding loop do_multicall_stub.0 iteration 2 file multicallstub.c line 9 function do_multicall_stub thread 0
+1807.290213 size of program expression: 359269 steps
+1807.351456 simple slicing removed 93220 assignments
+1807.351463 Generated 4 VCC(s), 4 remaining after simplification
+1807.351472 Passing problem to propositional reduction
+1807.351483 converting SSA
+1901.841971 warning: ignoring typecast
+  * type: struct
+      * components: 
+        0: 
+          * type: pointer
+              * width: 64
+              * #source_location: 
+                * file: version.c
+                * line: 73
+                * function: 
+                * working_directory: /tmp/xen/xen/common
+              0: empty
+                  * #source_location: 
+                    * file: version.c
+                    * line: 73
+                    * function: 
+                    * working_directory: /tmp/xen/xen/common
+                  * #constant: 1
+          * name: p
+          * pretty_name: p
+          * #source_location: 
+            * file: /tmp/xen/xen/include/public/xen.h
+            * line: 50
+            * function: 
+            * working_directory: /tmp/xen/xen/common
+      * #source_location: 
+        * file: /tmp/xen/xen/include/public/xen.h
+        * line: 50
+        * function: 
+        * working_directory: /tmp/xen/xen/common
+  0: symbol
+      * type: unsignedbv
+          * width: 64
+          * #alignment: constant
+              * type: signedbv
+                  * width: 64
+                  * #c_type: signed_long_int
+              * value: 0000000000000000000000000000000000000000000000000001000000000000
+          * #c_type: unsigned_long_int
+      * identifier: paging_invlpg::va!0@1#1
+      * expression: symbol
+          * type: unsignedbv
+              * width: 64
+              * #alignment: constant
+                  * type: signedbv
+                      * width: 64
+                      * #c_type: signed_long_int
+                  * value: 0000000000000000000000000000000000000000000000000001000000000000
+              * #c_type: unsigned_long_int
+          * identifier: paging_invlpg::va
+      * L0: 0
+      * L1: 1
+      * L2: 1
+      * L1_object_identifier: paging_invlpg::va!0@1
+      * #SSA_symbol: 1
+1911.089307 warning: ignoring typecast
+  * type: struct
+      * components: 
+        0: 
+          * type: pointer
+              * width: 64
+              * #source_location: 
+                * file: version.c
+                * line: 73
+                * function: 
+                * working_directory: /tmp/xen/xen/common
+              0: empty
+                  * #source_location: 
+                    * file: version.c
+                    * line: 73
+                    * function: 
+                    * working_directory: /tmp/xen/xen/common
+                  * #constant: 1
+          * name: p
+          * pretty_name: p
+          * #source_location: 
+            * file: /tmp/xen/xen/include/public/xen.h
+            * line: 50
+            * function: 
+            * working_directory: /tmp/xen/xen/common
+      * #source_location: 
+        * file: /tmp/xen/xen/include/public/xen.h
+        * line: 50
+        * function: 
+        * working_directory: /tmp/xen/xen/common
+  0: symbol
+      * type: unsignedbv
+          * width: 64
+          * #alignment: constant
+              * type: signedbv
+                  * width: 64
+                  * #c_type: signed_long_int
+              * value: 0000000000000000000000000000000000000000000000000001000000000000
+          * #c_type: unsigned_long_int
+      * identifier: paging_invlpg::va!0@2#1
+      * expression: symbol
+          * type: unsignedbv
+              * width: 64
+              * #alignment: constant
+                  * type: signedbv
+                      * width: 64
+                      * #c_type: signed_long_int
+                  * value: 0000000000000000000000000000000000000000000000000001000000000000
+              * #c_type: unsigned_long_int
+          * identifier: paging_invlpg::va
+      * L0: 0
+      * L1: 2
+      * L2: 1
+      * L1_object_identifier: paging_invlpg::va!0@2
+      * #SSA_symbol: 1
+1911.584638 warning: ignoring typecast
+  * type: struct
+      * components: 
+        0: 
+          * type: pointer
+              * width: 64
+              * #source_location: 
+                * file: version.c
+                * line: 73
+                * function: 
+                * working_directory: /tmp/xen/xen/common
+              0: empty
+                  * #source_location: 
+                    * file: version.c
+                    * line: 73
+                    * function: 
+                    * working_directory: /tmp/xen/xen/common
+                  * #constant: 1
+          * name: p
+          * pretty_name: p
+          * #source_location: 
+            * file: /tmp/xen/xen/include/public/xen.h
+            * line: 50
+            * function: 
+            * working_directory: /tmp/xen/xen/common
+      * #source_location: 
+        * file: /tmp/xen/xen/include/public/xen.h
+        * line: 50
+        * function: 
+        * working_directory: /tmp/xen/xen/common
+  0: symbol
+      * type: unsignedbv
+          * width: 64
+          * #alignment: constant
+              * type: signedbv
+                  * width: 64
+                  * #c_type: signed_long_int
+              * value: 0000000000000000000000000000000000000000000000000001000000000000
+          * #c_type: unsigned_long_int
+      * identifier: paging_invlpg::va!0@3#1
+      * expression: symbol
+          * type: unsignedbv
+              * width: 64
+              * #alignment: constant
+                  * type: signedbv
+                      * width: 64
+                      * #c_type: signed_long_int
+                  * value: 0000000000000000000000000000000000000000000000000001000000000000
+              * #c_type: unsigned_long_int
+          * identifier: paging_invlpg::va
+      * L0: 0
+      * L1: 3
+      * L2: 1
+      * L1_object_identifier: paging_invlpg::va!0@3
+      * #SSA_symbol: 1
+1912.009360 Running propositional reduction
+./batch_script.sh: line 144:    61 Killed                  cbmc --timestamp monotonic $CBMC_options --property $PROPERTY $BASE.sliced.binary
+
+real	479m7.406s
+user	434m13.020s
+sys	10m48.172s
+goto-instrument options: --aggressive-slice --aggressive-slice-call-depth 1 
+cbmc options:  --stop-on-fail --object-bits 16 --trace --trace-show-function-calls --trace-show-code --trace-hex --no-sat-preprocessor --unwind 2 --havoc-undefined-functions 
+Reading GOTO program from `xsa213.sliced.binary'
+Effective lines of code: 1856
+Reading GOTO program from `xsa213.binary'
+Effective lines of code: 101725
+1537472278

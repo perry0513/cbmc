@@ -1,0 +1,6 @@
+Start analysis: 1537525821
+Done slicing 1537525888
+Reading GOTO program from `xsa200.sliced.binary'
+Effective lines of code: 57892
+Reading GOTO program from `xsa200.binary'
+Effective lines of code: 101729
