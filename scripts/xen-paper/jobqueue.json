@@ -1,0 +1,11 @@
+{
+  "jobQueueName": "xen-paper-queue-110",
+  "state": "ENABLED",
+  "priority": 20,
+  "computeEnvironmentOrder": [
+    {
+      "order": 1,
+      "computeEnvironment": "xen_compute_110"
+    }
+  ]
+}
