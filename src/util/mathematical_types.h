@@ -124,6 +124,13 @@ public:
   {
     return subtypes()[1];
   }
+
+  mathematical_function_typet()
+  {
+    subtypes().resize(2);
+  }
+
+  mathematical_function_typet(const mathematical_function_typet &) = default;
 };
 
 /// Check whether a reference to a typet is a \ref mathematical_function_typet.
