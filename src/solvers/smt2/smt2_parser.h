@@ -25,6 +25,7 @@ public:
   {
     setup_commands();
     setup_sorts();
+    setup_expressions();
   }
 
   virtual ~smt2_parsert() = default;
@@ -115,6 +116,9 @@ protected:
     }
   };
 
+  // expressions
+  std::unordered_map<std::string, std::function<exprt()>> expressions;
+  virtual void setup_expressions();
   exprt expression();
   exprt function_application();
   exprt function_application_ieee_float_op(
