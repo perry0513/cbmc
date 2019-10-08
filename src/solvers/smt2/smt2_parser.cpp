@@ -149,6 +149,7 @@ irep_idt smt2_parsert::add_fresh_id(const irep_idt &id, const exprt &expr)
   return new_id;
 }
 
+
 void smt2_parsert::add_unique_id(const irep_idt &id, const exprt &expr)
 {
   if(!id_map
@@ -162,6 +163,39 @@ void smt2_parsert::add_unique_id(const irep_idt &id, const exprt &expr)
     throw error() << "identifier '" << id << "' defined twice";
   }
 }
+
+
+irep_idt smt2_parsert::add_fresh_local_id(const irep_idt &id, const exprt &expr)
+{
+  if(local_id_map
+       .emplace(
+         std::piecewise_construct,
+         std::forward_as_tuple(id),
+         std::forward_as_tuple(expr))
+       .second)
+  {
+    return id; // id not yet used
+  }
+
+  auto &count=renaming_counters[id];
+  irep_idt new_id;
+  do
+  {
+    new_id=id2string(id)+'#'+std::to_string(count);
+    count++;
+  } while(!local_id_map
+             .emplace(
+               std::piecewise_construct,
+               std::forward_as_tuple(new_id),
+               std::forward_as_tuple(expr))
+             .second);
+
+  // record renaming
+  renaming_map[id] = new_id;
+
+  return new_id;
+}
+
 
 irep_idt smt2_parsert::rename_id(const irep_idt &id) const
 {
@@ -746,9 +780,20 @@ exprt smt2_parsert::expression()
       if(e_it != expressions.end())
         return e_it->second();
 
+      // rummage through local_id_map
+      const irep_idt final_local_id = local_rename_id(identifier);
+      auto id_it = local_id_map.find(final_local_id);
+      if(id_it != local_id_map.end())
+      {
+        symbol_exprt symbol_expr(final_local_id, id_it->second.type);
+        if(smt2_tokenizer.token_is_quoted_symbol())
+          symbol_expr.set(ID_C_quoted, true);
+        return std::move(symbol_expr);
+      }
+
       // rummage through id_map
       const irep_idt final_id = rename_id(identifier);
-      auto id_it = id_map.find(final_id);
+      id_it = id_map.find(final_id);
       if(id_it != id_map.end())
       {
         symbol_exprt symbol_expr(final_id, id_it->second.type);
@@ -1184,7 +1229,7 @@ smt2_parsert::function_signature_definition()
     irep_idt id = smt2_tokenizer.get_buffer();
     domain.push_back(sort());
 
-    parameters.push_back(add_fresh_id(id, exprt(ID_nil, domain.back())));
+    parameters.push_back(add_fresh_local_id(id, exprt(ID_nil, domain.back())));
 
     if(next_token() != smt2_tokenizert::CLOSE)
       throw error("expected ')' at end of parameter");
@@ -1299,6 +1344,10 @@ void smt2_parsert::setup_commands()
 
     // save the renaming map
     renaming_mapt old_renaming_map = renaming_map;
+
+    local_id_map.clear();
+    local_renaming_map.clear();
+    local_renaming_counters.clear();
 
     const irep_idt id = smt2_tokenizer.get_buffer();
 

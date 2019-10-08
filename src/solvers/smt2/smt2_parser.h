@@ -46,6 +46,7 @@ public:
 
   using id_mapt=std::map<irep_idt, idt>;
   id_mapt id_map;
+  id_mapt local_id_map;
 
   struct named_termt
   {
@@ -87,11 +88,16 @@ protected:
   // for let/quantifier bindings, function parameters
   using renaming_mapt=std::map<irep_idt, irep_idt>;
   renaming_mapt renaming_map;
+  renaming_mapt local_renaming_map;
   using renaming_counterst=std::map<irep_idt, unsigned>;
   renaming_counterst renaming_counters;
+  renaming_counterst local_renaming_counters;
   irep_idt add_fresh_id(const irep_idt &, const exprt &);
+
   void add_unique_id(const irep_idt &, const exprt &);
+  irep_idt add_fresh_local_id(const irep_idt &id, const exprt &expr);
   irep_idt rename_id(const irep_idt &) const;
+  irep_idt local_rename_id(const irep_idt &) const;
 
   struct signature_with_parameter_idst
   {
