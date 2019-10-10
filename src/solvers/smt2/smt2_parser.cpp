@@ -781,7 +781,7 @@ exprt smt2_parsert::expression()
         return e_it->second();
 
       // rummage through local_id_map
-      const irep_idt final_local_id = local_rename_id(identifier);
+      const irep_idt final_local_id = rename_id(identifier);
       auto id_it = local_id_map.find(final_local_id);
       if(id_it != local_id_map.end())
       {
@@ -1346,8 +1346,6 @@ void smt2_parsert::setup_commands()
     renaming_mapt old_renaming_map = renaming_map;
 
     local_id_map.clear();
-    local_renaming_map.clear();
-    local_renaming_counters.clear();
 
     const irep_idt id = smt2_tokenizer.get_buffer();
 
@@ -1380,6 +1378,8 @@ void smt2_parsert::setup_commands()
 
     id_map.at(id).type = signature.type;
     id_map.at(id).parameters = signature.parameters;
+    local_id_map.clear();
+
   };
 
   commands["exit"] = [this]() { exit = true; };

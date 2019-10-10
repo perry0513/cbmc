@@ -88,10 +88,10 @@ protected:
   // for let/quantifier bindings, function parameters
   using renaming_mapt=std::map<irep_idt, irep_idt>;
   renaming_mapt renaming_map;
-  renaming_mapt local_renaming_map;
+
   using renaming_counterst=std::map<irep_idt, unsigned>;
   renaming_counterst renaming_counters;
-  renaming_counterst local_renaming_counters;
+
   irep_idt add_fresh_id(const irep_idt &, const exprt &);
 
   void add_unique_id(const irep_idt &, const exprt &);
