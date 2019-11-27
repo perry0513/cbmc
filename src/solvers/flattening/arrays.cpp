@@ -200,6 +200,9 @@ void arrayst::collect_arrays(const exprt &a)
   else if(a.id()==ID_array_of)
   {
   }
+  else if(a.id()==ID_array_list)
+  {
+  }
   else if(a.id()==ID_byte_update_little_endian ||
           a.id()==ID_byte_update_big_endian)
   {
