@@ -18,6 +18,7 @@ Author: Daniel Kroening, kroening@kroening.com
 #include <util/range.h>
 
 #include <numeric>
+#include <iostream>
 
 smt2_tokenizert::tokent smt2_parsert::next_token()
 {
@@ -40,7 +41,7 @@ void smt2_parsert::skip_to_end_of_list()
 
 void smt2_parsert::command_sequence()
 {
-  exit=false;
+  exit = false;
 
   while(!exit)
   {
@@ -85,7 +86,7 @@ void smt2_parsert::command_sequence()
 
 void smt2_parsert::ignore_command()
 {
-  std::size_t parentheses=0;
+  std::size_t parentheses = 0;
   while(true)
   {
     switch(smt2_tokenizer.peek())
@@ -96,7 +97,7 @@ void smt2_parsert::ignore_command()
       break;
 
     case smt2_tokenizert::CLOSE:
-      if(parentheses==0)
+      if(parentheses == 0)
         return; // done
 
       next_token();
@@ -133,11 +134,11 @@ irep_idt smt2_parsert::add_fresh_id(
   idt::kindt kind,
   const exprt &expr)
 {
-  auto &count=renaming_counters[id];
+  auto &count = renaming_counters[id];
   irep_idt new_id;
   do
   {
-    new_id=id2string(id)+'#'+std::to_string(count);
+    new_id = id2string(id) + '#' + std::to_string(count);
     count++;
   } while(!id_map
              .emplace(
@@ -168,9 +169,9 @@ void smt2_parsert::add_unique_id(const irep_idt &id, const exprt &expr)
 
 irep_idt smt2_parsert::rename_id(const irep_idt &id) const
 {
-  auto it=renaming_map.find(id);
+  auto it = renaming_map.find(id);
 
-  if(it==renaming_map.end())
+  if(it == renaming_map.end())
     return id;
   else
     return it->second;
@@ -193,20 +194,19 @@ exprt smt2_parsert::let_expression()
     irep_idt identifier = smt2_tokenizer.get_buffer();
 
     // note that the previous bindings are _not_ visible yet
-    exprt value=expression();
+    exprt value = expression();
 
     if(next_token() != smt2_tokenizert::CLOSE)
       throw error("expected ')' after value in binding");
 
-    bindings.push_back(
-      std::pair<irep_idt, exprt>(identifier, value));
+    bindings.push_back(std::pair<irep_idt, exprt>(identifier, value));
   }
 
   if(next_token() != smt2_tokenizert::CLOSE)
     throw error("expected ')' at end of bindings");
 
   // save the renaming map
-  renaming_mapt old_renaming_map=renaming_map;
+  renaming_mapt old_renaming_map = renaming_map;
 
   // go forwards, add to id_map, renaming if need be
   for(auto &b : bindings)
@@ -233,7 +233,7 @@ exprt smt2_parsert::let_expression()
   // unique identifiers
 
   // restore renamings
-  renaming_map=old_renaming_map;
+  renaming_map = old_renaming_map;
 
   return let_exprt(variables, values, where);
 }
@@ -254,7 +254,7 @@ exprt smt2_parsert::quantifier_expression(irep_idt id)
 
     irep_idt identifier = smt2_tokenizer.get_buffer();
 
-    typet type=sort();
+    typet type = sort();
 
     if(next_token() != smt2_tokenizert::CLOSE)
       throw error("expected ')' after sort in binding");
@@ -277,12 +277,12 @@ exprt smt2_parsert::quantifier_expression(irep_idt id)
     b.set_identifier(id);
   }
 
-  exprt expr=expression();
+  exprt expr = expression();
 
   if(next_token() != smt2_tokenizert::CLOSE)
     throw error() << "expected ')' after " << id;
 
-  exprt result=expr;
+  exprt result = expr;
 
   // remove bindings from id_map
   for(const auto &b : bindings)
@@ -292,10 +292,10 @@ exprt smt2_parsert::quantifier_expression(irep_idt id)
   renaming_map = old_renaming_map;
 
   // go backwards, build quantified expression
-  for(auto r_it=bindings.rbegin(); r_it!=bindings.rend(); r_it++)
+  for(auto r_it = bindings.rbegin(); r_it != bindings.rend(); r_it++)
   {
     quantifier_exprt quantifier(id, *r_it, result);
-    result=quantifier;
+    result = quantifier;
   }
 
   return result;
@@ -311,7 +311,7 @@ exprt smt2_parsert::function_application(
   if(op.size() != function_type.domain().size())
     throw error("wrong number of arguments for function");
 
-  for(std::size_t i=0; i<op.size(); i++)
+  for(std::size_t i = 0; i < op.size(); i++)
   {
     if(op[i].type() != function_type.domain()[i])
       throw error("wrong type for arguments for function");
@@ -345,13 +345,13 @@ exprt::operandst smt2_parsert::cast_bv_to_signed(const exprt::operandst &op)
 
 exprt smt2_parsert::cast_bv_to_unsigned(const exprt &expr)
 {
-  if(expr.type().id()==ID_unsignedbv) // no need to cast
+  if(expr.type().id() == ID_unsignedbv) // no need to cast
     return expr;
 
-  if(expr.type().id()!=ID_signedbv)
+  if(expr.type().id() != ID_signedbv)
     throw error("expected signed bitvector");
 
-  const auto width=to_signedbv_type(expr.type()).get_width();
+  const auto width = to_signedbv_type(expr.type()).get_width();
   return typecast_exprt(expr, unsignedbv_typet(width));
 }
 
@@ -367,7 +367,9 @@ exprt smt2_parsert::multi_ary(irep_idt id, const exprt::operandst &op)
       throw error() << "expression must have operands with matching types,"
                        " but got '"
                     << smt2_format(op[0].type()) << "' and '"
-                    << smt2_format(op[i].type()) << '\'';
+                    << smt2_format(op[i].type()) << '\'' << op[0].pretty()
+                    << "\n"
+                    << op[i].pretty() << "\n";
     }
   }
 
@@ -378,8 +380,11 @@ exprt smt2_parsert::multi_ary(irep_idt id, const exprt::operandst &op)
 
 exprt smt2_parsert::binary_predicate(irep_idt id, const exprt::operandst &op)
 {
-  if(op.size()!=2)
-    throw error("expression must have two operands");
+  if(op.size() != 2)
+  {
+    throw error() << "expression must have two operands but got " << op.size()
+                  << " and the first was " << smt2_format(op[0].type()) << "\n";
+  }
 
   if(op[0].type() != op[1].type())
   {
@@ -394,7 +399,7 @@ exprt smt2_parsert::binary_predicate(irep_idt id, const exprt::operandst &op)
 
 exprt smt2_parsert::unary(irep_idt id, const exprt::operandst &op)
 {
-  if(op.size()!=1)
+  if(op.size() != 1)
     throw error("expression must have one operand");
 
   return unary_exprt(id, op[0], op[0].type());
@@ -402,8 +407,12 @@ exprt smt2_parsert::unary(irep_idt id, const exprt::operandst &op)
 
 exprt smt2_parsert::binary(irep_idt id, const exprt::operandst &op)
 {
-  if(op.size()!=2)
-    throw error("expression must have two operands");
+  if(op.size() != 2)
+  {
+    throw error() << id2string(id)
+                  << " expression must have two operands but got " << op.size()
+                  << "\n";
+  }
 
   if(op[0].type() != op[1].type())
     throw error("expression must have operands with matching types");
@@ -592,7 +601,7 @@ exprt smt2_parsert::function_application()
 
         irep_idt id = smt2_tokenizer.get_buffer(); // hash it
 
-        if(id=="extract")
+        if(id == "extract")
         {
           if(next_token() != smt2_tokenizert::NUMERAL)
             throw error("expected numeral after extract");
@@ -607,26 +616,24 @@ exprt smt2_parsert::function_application()
           if(next_token() != smt2_tokenizert::CLOSE)
             throw error("expected ')' after extract");
 
-          auto op=operands();
+          auto op = operands();
 
-          if(op.size()!=1)
+          if(op.size() != 1)
             throw error("extract takes one operand");
 
-          auto upper_e=from_integer(upper, integer_typet());
-          auto lower_e=from_integer(lower, integer_typet());
+          auto upper_e = from_integer(upper, integer_typet());
+          auto lower_e = from_integer(lower, integer_typet());
 
-          if(upper<lower)
+          if(upper < lower)
             throw error("extract got bad indices");
 
-          unsignedbv_typet t(upper-lower+1);
+          unsignedbv_typet t(upper - lower + 1);
 
           return extractbits_exprt(op[0], upper_e, lower_e, t);
         }
-        else if(id=="rotate_left" ||
-                id=="rotate_right" ||
-                id == ID_repeat ||
-                id=="sign_extend" ||
-                id=="zero_extend")
+        else if(
+          id == "rotate_left" || id == "rotate_right" || id == ID_repeat ||
+          id == "sign_extend" || id == "zero_extend")
         {
           if(next_token() != smt2_tokenizert::NUMERAL)
             throw error() << "expected numeral after " << id;
@@ -636,22 +643,22 @@ exprt smt2_parsert::function_application()
           if(next_token() != smt2_tokenizert::CLOSE)
             throw error() << "expected ')' after " << id << " index";
 
-          auto op=operands();
+          auto op = operands();
 
-          if(op.size()!=1)
+          if(op.size() != 1)
             throw error() << id << " takes one operand";
 
-          if(id=="rotate_left")
+          if(id == "rotate_left")
           {
-            auto dist=from_integer(index, integer_typet());
+            auto dist = from_integer(index, integer_typet());
             return binary_exprt(op[0], ID_rol, dist, op[0].type());
           }
-          else if(id=="rotate_right")
+          else if(id == "rotate_right")
           {
-            auto dist=from_integer(index, integer_typet());
+            auto dist = from_integer(index, integer_typet());
             return binary_exprt(op[0], ID_ror, dist, op[0].type());
           }
-          else if(id=="sign_extend")
+          else if(id == "sign_extend")
           {
             // we first convert to a signed type of the original width,
             // then extend to the new width, and then go to unsigned
@@ -665,10 +672,10 @@ exprt smt2_parsert::function_application()
                 typecast_exprt(op[0], small_signed_type), large_signed_type),
               unsigned_type);
           }
-          else if(id=="zero_extend")
+          else if(id == "zero_extend")
           {
-            auto width=to_unsignedbv_type(op[0].type()).get_width();
-            unsignedbv_typet unsigned_type(width+index);
+            auto width = to_unsignedbv_type(op[0].type()).get_width();
+            unsignedbv_typet unsigned_type(width + index);
 
             return typecast_exprt(op[0], unsigned_type);
           }
@@ -688,7 +695,7 @@ exprt smt2_parsert::function_application()
       else
       {
         // just double parentheses
-        exprt tmp=expression();
+        exprt tmp = expression();
 
         if(
           next_token() != smt2_tokenizert::CLOSE &&
@@ -703,7 +710,7 @@ exprt smt2_parsert::function_application()
     else
     {
       // just double parentheses
-      exprt tmp=expression();
+      exprt tmp = expression();
 
       if(
         next_token() != smt2_tokenizert::CLOSE &&
@@ -723,7 +730,7 @@ exprt smt2_parsert::function_application()
   case smt2_tokenizert::NONE:
   case smt2_tokenizert::KEYWORD:
     // just parentheses
-    exprt tmp=expression();
+    exprt tmp = expression();
     if(next_token() != smt2_tokenizert::CLOSE)
       throw error("mismatched parentheses in an expression");
 
@@ -738,41 +745,40 @@ exprt smt2_parsert::expression()
   switch(next_token())
   {
   case smt2_tokenizert::SYMBOL:
+  {
+    const auto &identifier = smt2_tokenizer.get_buffer();
+
+    // in the expression table?
+    const auto e_it = expressions.find(identifier);
+    if(e_it != expressions.end())
+      return e_it->second();
+
+    // rummage through id_map
+    const irep_idt final_id = rename_id(identifier);
+    auto id_it = id_map.find(final_id);
+    if(id_it != id_map.end())
     {
-      const auto &identifier = smt2_tokenizer.get_buffer();
+      symbol_exprt symbol_expr(final_id, id_it->second.type);
+      if(smt2_tokenizer.token_is_quoted_symbol())
+        symbol_expr.set(ID_C_quoted, true);
 
-      // in the expression table?
-      const auto e_it = expressions.find(identifier);
-      if(e_it != expressions.end())
-        return e_it->second();
-
-      // rummage through id_map
-      const irep_idt final_id = rename_id(identifier);
-      auto id_it = id_map.find(final_id);
-      if(id_it != id_map.end())
+      // nullary function?
+      if(symbol_expr.type().id() == ID_mathematical_function)
       {
-        symbol_exprt symbol_expr(final_id, id_it->second.type);
-        if(smt2_tokenizer.token_is_quoted_symbol())
-          symbol_expr.set(ID_C_quoted, true);
+        const auto &f_type = to_mathematical_function_type(symbol_expr.type());
 
-        // nullary function?
-        if(symbol_expr.type().id() == ID_mathematical_function)
-        {
-          const auto &f_type =
-            to_mathematical_function_type(symbol_expr.type());
-
-          if(f_type.domain().empty())
-            return function_application_exprt(std::move(symbol_expr), {});
-          else // leave as is
-            return std::move(symbol_expr);
-        }
-        else
+        if(f_type.domain().empty())
+          return function_application_exprt(std::move(symbol_expr), {});
+        else // leave as is
           return std::move(symbol_expr);
       }
-
-      // don't know, give up
-      throw error() << "unknown expression '" << identifier << '\'';
+      else
+        return std::move(symbol_expr);
     }
+
+    // don't know, give up
+    throw error() << "unknown expression '" << identifier << '\'';
+  }
 
   case smt2_tokenizert::NUMERAL:
   {
@@ -794,6 +800,11 @@ exprt smt2_parsert::expression()
       CHECK_RETURN(width != 0);
       unsignedbv_typet type(width);
       return from_integer(value, type);
+    }
+    else if (buffer.size()>1 && buffer[0]=='-')
+    {
+      constant_exprt numeral(std::string(buffer, 1, std::string::npos),integer_typet());
+      return unary_exprt(ID_unary_minus, numeral);
     }
     else
     {
@@ -946,7 +957,9 @@ void smt2_parsert::setup_expressions()
 
   expressions["distinct"] = [this] {
     // pair-wise different constraint, multi-ary
-    return multi_ary("distinct", operands());
+    exprt result=multi_ary("distinct", operands());
+    result.type()=bool_typet();
+    return result;
   };
 
   expressions["ite"] = [this] {
@@ -970,7 +983,6 @@ void smt2_parsert::setup_expressions()
 
   expressions["select"] = [this] {
     auto op = operands();
-
     // array index
     if(op.size() != 2)
       throw error("select takes two operands");
@@ -1165,6 +1177,8 @@ void smt2_parsert::setup_sorts()
     // to something else into our 'array_typet'
     if(domain.id() == ID_unsignedbv)
       return array_typet(range, infinity_exprt(domain));
+    else if(domain.id() == ID_integer)
+      return array_typet(range, infinity_exprt(domain));
     else
       throw error("unsupported array sort");
   };
@@ -1245,7 +1259,7 @@ typet smt2_parsert::function_signature_declaration()
 
   return mathematical_function_typet(domain, codomain);
 }
-
+#include <iostream>
 void smt2_parsert::command(const std::string &c)
 {
   auto c_it = commands.find(c);

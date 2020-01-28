@@ -116,7 +116,7 @@ protected:
   void skip_to_end_of_list();
 
 private:
-  tokent get_decimal_numeral();
+  tokent get_decimal_numeral(bool is_negative);
   tokent get_hex_numeral();
   tokent get_bin_numeral();
   tokent get_simple_symbol();

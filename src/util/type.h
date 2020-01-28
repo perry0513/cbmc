@@ -19,18 +19,22 @@ class namespacet;
 #include "source_location.h"
 #include "validate_types.h"
 #include "validation_mode.h"
-
+#include <iostream>
 /// The type of an expression, extends irept. Types may have subtypes. This is
 /// modeled with two subs named “subtype” (a single type) and “subtypes”
 /// (a vector of types). The class typet only adds specialized methods
 /// for accessing the subtype information to the interface of irept.
 /// For pre-defined types see `std_types.h` and `mathematical_types.h`.
-class typet:public irept
+class typet : public irept
 {
 public:
-  typet() { }
+  typet()
+  {
+  }
 
-  explicit typet(const irep_idt &_id):irept(_id) { }
+  explicit typet(const irep_idt &_id) : irept(_id)
+  {
+  }
 
 #if defined(__clang__) || !defined(__GNUC__) || __GNUC__ >= 6
   typet(irep_idt _id, typet _subtype)
@@ -53,20 +57,27 @@ public:
 
   typet &subtype()
   {
-    subt &sub=get_sub();
+    subt &sub = get_sub();
     if(sub.empty())
       sub.resize(1);
+
     return static_cast<typet &>(sub.front());
   }
 
   bool has_subtypes() const
-  { return !get_sub().empty(); }
+  {
+    return !get_sub().empty();
+  }
 
   bool has_subtype() const
-  { return !get_sub().empty(); }
+  {
+    return !get_sub().empty();
+  }
 
   void remove_subtype()
-  { get_sub().clear(); }
+  {
+    get_sub().clear();
+  }
 
   const source_locationt &source_location() const
   {
@@ -142,24 +153,26 @@ public:
 };
 
 /// Type with a single subtype.
-class type_with_subtypet:public typet
+class type_with_subtypet : public typet
 {
 public:
   DEPRECATED(SINCE(2018, 12, 2, "use type_with_subtypet(id, subtype) instead"))
-  explicit type_with_subtypet(const irep_idt &_id):typet(_id) { }
+  explicit type_with_subtypet(const irep_idt &_id) : typet(_id)
+  {
+  }
 
   type_with_subtypet(irep_idt _id, typet _subtype)
     : typet(std::move(_id), std::move(_subtype))
   {
   }
 
-  #if 0
+#if 0
   const typet &subtype() const
   { return (typet &)find(ID_subtype); }
 
   typet &subtype()
   { return (typet &)add(ID_subtype); }
-  #endif
+#endif
 };
 
 inline const type_with_subtypet &to_type_with_subtype(const typet &type)
@@ -175,18 +188,22 @@ inline type_with_subtypet &to_type_with_subtype(typet &type)
 }
 
 /// Type with multiple subtypes.
-class type_with_subtypest:public typet
+class type_with_subtypest : public typet
 {
 public:
   typedef std::vector<typet> subtypest;
 
   DEPRECATED(
     SINCE(2018, 12, 2, "use type_with_subtypest(id, subtypes) instead"))
-  type_with_subtypest() { }
+  type_with_subtypest()
+  {
+  }
 
   DEPRECATED(
     SINCE(2018, 12, 2, "use type_with_subtypest(id, subtypes) instead"))
-  explicit type_with_subtypest(const irep_idt &_id):typet(_id) { }
+  explicit type_with_subtypest(const irep_idt &_id) : typet(_id)
+  {
+  }
 
   type_with_subtypest(const irep_idt &_id, const subtypest &_subtypes)
     : typet(_id)
@@ -224,15 +241,19 @@ inline type_with_subtypest &to_type_with_subtypes(typet &type)
   return static_cast<type_with_subtypest &>(type);
 }
 
-#define forall_subtypes(it, type) \
-  if((type).has_subtypes()) /* NOLINT(readability/braces) */ \
-    for(type_with_subtypest::subtypest::const_iterator it=to_type_with_subtypes(type).subtypes().begin(), \
-        it##_end=to_type_with_subtypes(type).subtypes().end(); \
-        it!=it##_end; ++it)
+#define forall_subtypes(it, type)                                              \
+  if((type).has_subtypes()) /* NOLINT(readability/braces) */                   \
+    for(type_with_subtypest::subtypest::const_iterator                         \
+          it = to_type_with_subtypes(type).subtypes().begin(),                 \
+          it##_end = to_type_with_subtypes(type).subtypes().end();             \
+        it != it##_end;                                                        \
+        ++it)
 
-#define Forall_subtypes(it, type) \
-  if((type).has_subtypes()) /* NOLINT(readability/braces) */ \
-    for(type_with_subtypest::subtypest::iterator it=to_type_with_subtypes(type).subtypes().begin(); \
-        it!=to_type_with_subtypes(type).subtypes().end(); ++it)
+#define Forall_subtypes(it, type)                                              \
+  if((type).has_subtypes()) /* NOLINT(readability/braces) */                   \
+    for(type_with_subtypest::subtypest::iterator it =                          \
+          to_type_with_subtypes(type).subtypes().begin();                      \
+        it != to_type_with_subtypes(type).subtypes().end();                    \
+        ++it)
 
 #endif // CPROVER_UTIL_TYPE_H

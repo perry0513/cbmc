@@ -9,6 +9,7 @@ Author: Daniel Kroening, kroening@kroening.com
 #include "smt2_tokenizer.h"
 
 #include <istream>
+#include <iostream>
 
 bool smt2_tokenizert::is_simple_symbol_character(char ch)
 {
@@ -56,11 +57,13 @@ smt2_tokenizert::tokent smt2_tokenizert::get_simple_symbol()
   }
 }
 
-smt2_tokenizert::tokent smt2_tokenizert::get_decimal_numeral()
+smt2_tokenizert::tokent smt2_tokenizert::get_decimal_numeral(bool is_negative)
 {
   // we accept any sequence of digits and dots
 
   buffer.clear();
+  if(is_negative)
+    buffer+="-";
 
   char ch;
   while(in->get(ch))
@@ -268,7 +271,6 @@ void smt2_tokenizert::get_token_from_stream()
       }
       else
         throw error("expecting symbol after colon");
-
     case '#':
       if(in->get(ch))
       {
@@ -288,12 +290,25 @@ void smt2_tokenizert::get_token_from_stream()
       else
         throw error("unexpected EOF in numeral token");
       break;
+    case '-':
+    if(in->get(ch))
+    {
+      if(isdigit(ch))
+      {
+        in->unget();
+        token=get_decimal_numeral(true);
+        return;
+      }
+      else
+        throw error("unexpected token after -");
+    } 
+    break; 
 
     default: // likely a simple symbol or a numeral
       if(isdigit(ch))
       {
         in->unget();
-        token = get_decimal_numeral();
+        token = get_decimal_numeral(false);
         return;
       }
       else if(is_simple_symbol_character(ch))

@@ -6,7 +6,6 @@ Author: Daniel Kroening, kroening@kroening.com
 
 \*******************************************************************/
 
-
 #ifndef CPROVER_UTIL_STD_EXPR_H
 #define CPROVER_UTIL_STD_EXPR_H
 
@@ -123,7 +122,7 @@ public:
 
 /// Expression to hold a symbol (variable) with extra accessors to
 /// ID_c_static_lifetime and ID_C_thread_local
-class decorated_symbol_exprt:public symbol_exprt
+class decorated_symbol_exprt : public symbol_exprt
 {
 public:
   /// \param identifier: Name of symbol
@@ -181,9 +180,12 @@ inline void validate_expr(const symbol_exprt &value)
 ///
 /// \param expr: Source expression
 /// \return Object of type \ref symbol_exprt
+#include <iostream>
 inline const symbol_exprt &to_symbol_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_symbol);
+  if(expr.id() != ID_symbol)
+    std::cout << "NOT A SYMBOL \n" << expr.pretty() << std::endl;
+  PRECONDITION(expr.id() == ID_symbol);
   const symbol_exprt &ret = static_cast<const symbol_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -192,12 +194,11 @@ inline const symbol_exprt &to_symbol_expr(const exprt &expr)
 /// \copydoc to_symbol_expr(const exprt &)
 inline symbol_exprt &to_symbol_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_symbol);
+  PRECONDITION(expr.id() == ID_symbol);
   symbol_exprt &ret = static_cast<symbol_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
-
 
 /// \brief Expression to hold a nondeterministic choice
 class nondet_symbol_exprt : public nullary_exprt
@@ -254,7 +255,7 @@ inline void validate_expr(const nondet_symbol_exprt &value)
 /// \return Object of type \ref nondet_symbol_exprt
 inline const nondet_symbol_exprt &to_nondet_symbol_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_nondet_symbol);
+  PRECONDITION(expr.id() == ID_nondet_symbol);
   const nondet_symbol_exprt &ret =
     static_cast<const nondet_symbol_exprt &>(expr);
   validate_expr(ret);
@@ -264,12 +265,11 @@ inline const nondet_symbol_exprt &to_nondet_symbol_expr(const exprt &expr)
 /// \copydoc to_nondet_symbol_expr(const exprt &)
 inline nondet_symbol_exprt &to_nondet_symbol_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_symbol);
+  PRECONDITION(expr.id() == ID_symbol);
   nondet_symbol_exprt &ret = static_cast<nondet_symbol_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
-
 
 /// \brief Generic base class for unary expressions
 class unary_exprt : public expr_protectedt
@@ -342,9 +342,8 @@ inline unary_exprt &to_unary_expr(exprt &expr)
   return ret;
 }
 
-
 /// \brief Absolute value
-class abs_exprt:public unary_exprt
+class abs_exprt : public unary_exprt
 {
 public:
   explicit abs_exprt(exprt _op) : unary_exprt(ID_abs, std::move(_op))
@@ -371,7 +370,7 @@ inline void validate_expr(const abs_exprt &value)
 /// \return Object of type \ref abs_exprt
 inline const abs_exprt &to_abs_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_abs);
+  PRECONDITION(expr.id() == ID_abs);
   const abs_exprt &ret = static_cast<const abs_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -380,15 +379,14 @@ inline const abs_exprt &to_abs_expr(const exprt &expr)
 /// \copydoc to_abs_expr(const exprt &)
 inline abs_exprt &to_abs_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_abs);
+  PRECONDITION(expr.id() == ID_abs);
   abs_exprt &ret = static_cast<abs_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
 
-
 /// \brief The unary minus expression
-class unary_minus_exprt:public unary_exprt
+class unary_minus_exprt : public unary_exprt
 {
 public:
   unary_minus_exprt(exprt _op, typet _type)
@@ -421,7 +419,7 @@ inline void validate_expr(const unary_minus_exprt &value)
 /// \return Object of type \ref unary_minus_exprt
 inline const unary_minus_exprt &to_unary_minus_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_unary_minus);
+  PRECONDITION(expr.id() == ID_unary_minus);
   const unary_minus_exprt &ret = static_cast<const unary_minus_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -430,7 +428,7 @@ inline const unary_minus_exprt &to_unary_minus_expr(const exprt &expr)
 /// \copydoc to_unary_minus_expr(const exprt &)
 inline unary_minus_exprt &to_unary_minus_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_unary_minus);
+  PRECONDITION(expr.id() == ID_unary_minus);
   unary_minus_exprt &ret = static_cast<unary_minus_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -481,7 +479,7 @@ inline unary_plus_exprt &to_unary_plus_expr(exprt &expr)
 }
 
 /// \brief The byte swap expression
-class bswap_exprt: public unary_exprt
+class bswap_exprt : public unary_exprt
 {
 public:
   bswap_exprt(exprt _op, std::size_t bits_per_byte, typet _type)
@@ -576,17 +574,17 @@ public:
 
 /// \brief A base class for expressions that are predicates,
 ///   i.e., Boolean-typed, and that take exactly one argument.
-class unary_predicate_exprt:public unary_exprt
+class unary_predicate_exprt : public unary_exprt
 {
 public:
   DEPRECATED(SINCE(2018, 12, 2, "use unary_predicate_exprt(id, op) instead"))
-  unary_predicate_exprt():unary_exprt(irep_idt(), bool_typet())
+  unary_predicate_exprt() : unary_exprt(irep_idt(), bool_typet())
   {
   }
 
   DEPRECATED(SINCE(2018, 12, 2, "use unary_predicate_exprt(id, op) instead"))
-  explicit unary_predicate_exprt(const irep_idt &_id):
-    unary_exprt(_id, bool_typet())
+  explicit unary_predicate_exprt(const irep_idt &_id)
+    : unary_exprt(_id, bool_typet())
   {
   }
 
@@ -598,7 +596,7 @@ public:
 
 /// \brief Sign of an expression
 /// Predicate is true if \a _op is negative, false otherwise.
-class sign_exprt:public unary_predicate_exprt
+class sign_exprt : public unary_predicate_exprt
 {
 public:
   DEPRECATED(SINCE(2018, 12, 2, "use sign_exprt(op) instead"))
@@ -753,19 +751,19 @@ inline binary_exprt &to_binary_expr(exprt &expr)
 
 /// \brief A base class for expressions that are predicates,
 ///   i.e., Boolean-typed, and that take exactly two arguments.
-class binary_predicate_exprt:public binary_exprt
+class binary_predicate_exprt : public binary_exprt
 {
 public:
   DEPRECATED(
     SINCE(2018, 12, 2, "use binary_predicate_exprt(lhs, id, rhs) instead"))
-  binary_predicate_exprt():binary_exprt(irep_idt(), bool_typet())
+  binary_predicate_exprt() : binary_exprt(irep_idt(), bool_typet())
   {
   }
 
   DEPRECATED(
     SINCE(2018, 12, 2, "use binary_predicate_exprt(lhs, id, rhs) instead"))
-  explicit binary_predicate_exprt(const irep_idt &_id):
-    binary_exprt(_id, bool_typet())
+  explicit binary_predicate_exprt(const irep_idt &_id)
+    : binary_exprt(_id, bool_typet())
   {
   }
 
@@ -797,7 +795,7 @@ public:
 
 /// \brief A base class for relations, i.e., binary predicates whose
 /// two operands have the same type
-class binary_relation_exprt:public binary_predicate_exprt
+class binary_relation_exprt : public binary_predicate_exprt
 {
 public:
   DEPRECATED(
@@ -808,8 +806,8 @@ public:
 
   DEPRECATED(
     SINCE(2018, 12, 2, "use binary_relation_exprt(lhs, id, rhs) instead"))
-  explicit binary_relation_exprt(const irep_idt &id):
-    binary_predicate_exprt(id)
+  explicit binary_relation_exprt(const irep_idt &id)
+    : binary_predicate_exprt(id)
   {
   }
 
@@ -872,7 +870,6 @@ inline binary_relation_exprt &to_binary_relation_expr(exprt &expr)
   binary_relation_exprt::check(expr);
   return static_cast<binary_relation_exprt &>(expr);
 }
-
 
 /// \brief A base class for multi-ary expressions
 /// Associativity is not specified.
@@ -974,10 +971,9 @@ inline multi_ary_exprt &to_multi_ary_expr(exprt &expr)
   return static_cast<multi_ary_exprt &>(expr);
 }
 
-
 /// \brief The plus expression
 /// Associativity is not specified.
-class plus_exprt:public multi_ary_exprt
+class plus_exprt : public multi_ary_exprt
 {
 public:
   DEPRECATED(SINCE(2019, 1, 12, "use plus_exprt(lhs, rhs, type) instead"))
@@ -1024,7 +1020,7 @@ inline void validate_expr(const plus_exprt &value)
 /// \return Object of type \ref plus_exprt
 inline const plus_exprt &to_plus_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_plus);
+  PRECONDITION(expr.id() == ID_plus);
   const plus_exprt &ret = static_cast<const plus_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -1033,15 +1029,14 @@ inline const plus_exprt &to_plus_expr(const exprt &expr)
 /// \copydoc to_plus_expr(const exprt &)
 inline plus_exprt &to_plus_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_plus);
+  PRECONDITION(expr.id() == ID_plus);
   plus_exprt &ret = static_cast<plus_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
 
-
 /// \brief Binary minus
-class minus_exprt:public binary_exprt
+class minus_exprt : public binary_exprt
 {
 public:
   minus_exprt(exprt _lhs, exprt _rhs)
@@ -1069,7 +1064,7 @@ inline void validate_expr(const minus_exprt &value)
 /// \return Object of type \ref minus_exprt
 inline const minus_exprt &to_minus_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_minus);
+  PRECONDITION(expr.id() == ID_minus);
   const minus_exprt &ret = static_cast<const minus_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -1078,16 +1073,15 @@ inline const minus_exprt &to_minus_expr(const exprt &expr)
 /// \copydoc to_minus_expr(const exprt &)
 inline minus_exprt &to_minus_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_minus);
+  PRECONDITION(expr.id() == ID_minus);
   minus_exprt &ret = static_cast<minus_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
 
-
 /// \brief Binary multiplication
 /// Associativity is not specified.
-class mult_exprt:public multi_ary_exprt
+class mult_exprt : public multi_ary_exprt
 {
 public:
   mult_exprt(exprt _lhs, exprt _rhs)
@@ -1115,7 +1109,7 @@ inline void validate_expr(const mult_exprt &value)
 /// \return Object of type \ref mult_exprt
 inline const mult_exprt &to_mult_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_mult);
+  PRECONDITION(expr.id() == ID_mult);
   const mult_exprt &ret = static_cast<const mult_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -1124,15 +1118,14 @@ inline const mult_exprt &to_mult_expr(const exprt &expr)
 /// \copydoc to_mult_expr(const exprt &)
 inline mult_exprt &to_mult_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_mult);
+  PRECONDITION(expr.id() == ID_mult);
   mult_exprt &ret = static_cast<mult_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
 
-
 /// \brief Division
-class div_exprt:public binary_exprt
+class div_exprt : public binary_exprt
 {
 public:
   div_exprt(exprt _lhs, exprt _rhs)
@@ -1184,7 +1177,7 @@ inline void validate_expr(const div_exprt &value)
 /// \return Object of type \ref div_exprt
 inline const div_exprt &to_div_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_div);
+  PRECONDITION(expr.id() == ID_div);
   const div_exprt &ret = static_cast<const div_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -1193,15 +1186,14 @@ inline const div_exprt &to_div_expr(const exprt &expr)
 /// \copydoc to_div_expr(const exprt &)
 inline div_exprt &to_div_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_div);
+  PRECONDITION(expr.id() == ID_div);
   div_exprt &ret = static_cast<div_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
 
-
 /// \brief Modulo
-class mod_exprt:public binary_exprt
+class mod_exprt : public binary_exprt
 {
 public:
   mod_exprt(exprt _lhs, exprt _rhs)
@@ -1229,7 +1221,7 @@ inline void validate_expr(const mod_exprt &value)
 /// \return Object of type \ref mod_exprt
 inline const mod_exprt &to_mod_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_mod);
+  PRECONDITION(expr.id() == ID_mod);
   const mod_exprt &ret = static_cast<const mod_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -1238,15 +1230,14 @@ inline const mod_exprt &to_mod_expr(const exprt &expr)
 /// \copydoc to_mod_expr(const exprt &)
 inline mod_exprt &to_mod_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_mod);
+  PRECONDITION(expr.id() == ID_mod);
   mod_exprt &ret = static_cast<mod_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
 
-
 /// \brief Remainder of division
-class rem_exprt:public binary_exprt
+class rem_exprt : public binary_exprt
 {
 public:
   rem_exprt(exprt _lhs, exprt _rhs)
@@ -1274,7 +1265,7 @@ inline void validate_expr(const rem_exprt &value)
 /// \return Object of type \ref rem_exprt
 inline const rem_exprt &to_rem_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_rem);
+  PRECONDITION(expr.id() == ID_rem);
   const rem_exprt &ret = static_cast<const rem_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -1283,15 +1274,14 @@ inline const rem_exprt &to_rem_expr(const exprt &expr)
 /// \copydoc to_rem_expr(const exprt &)
 inline rem_exprt &to_rem_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_rem);
+  PRECONDITION(expr.id() == ID_rem);
   rem_exprt &ret = static_cast<rem_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
 
-
 /// \brief Equality
-class equal_exprt:public binary_relation_exprt
+class equal_exprt : public binary_relation_exprt
 {
 public:
   equal_exprt(exprt _lhs, exprt _rhs)
@@ -1334,7 +1324,7 @@ inline void validate_expr(const equal_exprt &value)
 /// \return Object of type \ref equal_exprt
 inline const equal_exprt &to_equal_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_equal);
+  PRECONDITION(expr.id() == ID_equal);
   equal_exprt::check(expr);
   return static_cast<const equal_exprt &>(expr);
 }
@@ -1342,14 +1332,13 @@ inline const equal_exprt &to_equal_expr(const exprt &expr)
 /// \copydoc to_equal_expr(const exprt &)
 inline equal_exprt &to_equal_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_equal);
+  PRECONDITION(expr.id() == ID_equal);
   equal_exprt::check(expr);
   return static_cast<equal_exprt &>(expr);
 }
 
-
 /// \brief Disequality
-class notequal_exprt:public binary_relation_exprt
+class notequal_exprt : public binary_relation_exprt
 {
 public:
   notequal_exprt(exprt _lhs, exprt _rhs)
@@ -1377,7 +1366,7 @@ inline void validate_expr(const notequal_exprt &value)
 /// \return Object of type \ref notequal_exprt
 inline const notequal_exprt &to_notequal_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_notequal);
+  PRECONDITION(expr.id() == ID_notequal);
   const notequal_exprt &ret = static_cast<const notequal_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -1386,15 +1375,14 @@ inline const notequal_exprt &to_notequal_expr(const exprt &expr)
 /// \copydoc to_notequal_expr(const exprt &)
 inline notequal_exprt &to_notequal_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_notequal);
+  PRECONDITION(expr.id() == ID_notequal);
   notequal_exprt &ret = static_cast<notequal_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
 
-
 /// \brief Array index operator
-class index_exprt:public binary_exprt
+class index_exprt : public binary_exprt
 {
 public:
   index_exprt(const exprt &_array, exprt _index)
@@ -1451,7 +1439,7 @@ inline void validate_expr(const index_exprt &value)
 /// \return Object of type \ref index_exprt
 inline const index_exprt &to_index_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_index);
+  PRECONDITION(expr.id() == ID_index);
   const index_exprt &ret = static_cast<const index_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -1460,15 +1448,14 @@ inline const index_exprt &to_index_expr(const exprt &expr)
 /// \copydoc to_index_expr(const exprt &)
 inline index_exprt &to_index_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_index);
+  PRECONDITION(expr.id() == ID_index);
   index_exprt &ret = static_cast<index_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
 
-
 /// \brief Array constructor from single element
-class array_of_exprt:public unary_exprt
+class array_of_exprt : public unary_exprt
 {
 public:
   explicit array_of_exprt(exprt _what, array_typet _type)
@@ -1516,7 +1503,7 @@ inline void validate_expr(const array_of_exprt &value)
 /// \return Object of type \ref array_of_exprt
 inline const array_of_exprt &to_array_of_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_array_of);
+  PRECONDITION(expr.id() == ID_array_of);
   const array_of_exprt &ret = static_cast<const array_of_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -1525,12 +1512,11 @@ inline const array_of_exprt &to_array_of_expr(const exprt &expr)
 /// \copydoc to_array_of_expr(const exprt &)
 inline array_of_exprt &to_array_of_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_array_of);
+  PRECONDITION(expr.id() == ID_array_of);
   array_of_exprt &ret = static_cast<array_of_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
-
 
 /// \brief Array constructor from list of elements
 class array_exprt : public multi_ary_exprt
@@ -1572,14 +1558,14 @@ inline bool can_cast_expr<array_exprt>(const exprt &base)
 /// \return Object of type \ref array_exprt
 inline const array_exprt &to_array_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_array);
+  PRECONDITION(expr.id() == ID_array);
   return static_cast<const array_exprt &>(expr);
 }
 
 /// \copydoc to_array_expr(const exprt &)
 inline array_exprt &to_array_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_array);
+  PRECONDITION(expr.id() == ID_array);
   return static_cast<array_exprt &>(expr);
 }
 
@@ -1673,20 +1659,19 @@ inline bool can_cast_expr<vector_exprt>(const exprt &base)
 /// \return Object of type \ref vector_exprt
 inline const vector_exprt &to_vector_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_vector);
+  PRECONDITION(expr.id() == ID_vector);
   return static_cast<const vector_exprt &>(expr);
 }
 
 /// \copydoc to_vector_expr(const exprt &)
 inline vector_exprt &to_vector_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_vector);
+  PRECONDITION(expr.id() == ID_vector);
   return static_cast<vector_exprt &>(expr);
 }
 
-
 /// \brief Union constructor from single element
-class union_exprt:public unary_exprt
+class union_exprt : public unary_exprt
 {
 public:
   union_exprt(const irep_idt &_component_name, exprt _value, typet _type)
@@ -1735,7 +1720,7 @@ inline void validate_expr(const union_exprt &value)
 /// \return Object of type \ref union_exprt
 inline const union_exprt &to_union_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_union);
+  PRECONDITION(expr.id() == ID_union);
   const union_exprt &ret = static_cast<const union_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -1744,12 +1729,11 @@ inline const union_exprt &to_union_expr(const exprt &expr)
 /// \copydoc to_union_expr(const exprt &)
 inline union_exprt &to_union_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_union);
+  PRECONDITION(expr.id() == ID_union);
   union_exprt &ret = static_cast<union_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
-
 
 /// \brief Struct constructor from list of elements
 class struct_exprt : public multi_ary_exprt
@@ -1783,20 +1767,19 @@ inline bool can_cast_expr<struct_exprt>(const exprt &base)
 /// \return Object of type \ref struct_exprt
 inline const struct_exprt &to_struct_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_struct);
+  PRECONDITION(expr.id() == ID_struct);
   return static_cast<const struct_exprt &>(expr);
 }
 
 /// \copydoc to_struct_expr(const exprt &)
 inline struct_exprt &to_struct_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_struct);
+  PRECONDITION(expr.id() == ID_struct);
   return static_cast<struct_exprt &>(expr);
 }
 
-
 /// \brief Complex constructor from a pair of numbers
-class complex_exprt:public binary_exprt
+class complex_exprt : public binary_exprt
 {
 public:
   complex_exprt(exprt _real, exprt _imag, complex_typet _type)
@@ -1848,7 +1831,7 @@ inline void validate_expr(const complex_exprt &value)
 /// \return Object of type \ref complex_exprt
 inline const complex_exprt &to_complex_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_complex);
+  PRECONDITION(expr.id() == ID_complex);
   const complex_exprt &ret = static_cast<const complex_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -1857,7 +1840,7 @@ inline const complex_exprt &to_complex_expr(const exprt &expr)
 /// \copydoc to_complex_expr(const exprt &)
 inline complex_exprt &to_complex_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_complex);
+  PRECONDITION(expr.id() == ID_complex);
   complex_exprt &ret = static_cast<complex_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -1956,7 +1939,7 @@ inline complex_imag_exprt &to_complex_imag_expr(exprt &expr)
 class namespacet;
 
 /// \brief Split an expression into a base object and a (byte) offset
-class object_descriptor_exprt:public binary_exprt
+class object_descriptor_exprt : public binary_exprt
 {
 public:
   object_descriptor_exprt()
@@ -2023,10 +2006,10 @@ inline void validate_expr(const object_descriptor_exprt &value)
 ///
 /// \param expr: Source expression
 /// \return Object of type \ref object_descriptor_exprt
-inline const object_descriptor_exprt &to_object_descriptor_expr(
-  const exprt &expr)
+inline const object_descriptor_exprt &
+to_object_descriptor_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_object_descriptor);
+  PRECONDITION(expr.id() == ID_object_descriptor);
   const object_descriptor_exprt &ret =
     static_cast<const object_descriptor_exprt &>(expr);
   validate_expr(ret);
@@ -2036,15 +2019,14 @@ inline const object_descriptor_exprt &to_object_descriptor_expr(
 /// \copydoc to_object_descriptor_expr(const exprt &)
 inline object_descriptor_exprt &to_object_descriptor_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_object_descriptor);
+  PRECONDITION(expr.id() == ID_object_descriptor);
   object_descriptor_exprt &ret = static_cast<object_descriptor_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
 
-
 /// Representation of heap-allocated objects
-class dynamic_object_exprt:public binary_exprt
+class dynamic_object_exprt : public binary_exprt
 {
 public:
   DEPRECATED(SINCE(2019, 2, 11, "use dynamic_object_exprt(type) instead"))
@@ -2094,10 +2076,9 @@ inline void validate_expr(const dynamic_object_exprt &value)
 ///
 /// \param expr: Source expression
 /// \return Object of type \ref dynamic_object_exprt
-inline const dynamic_object_exprt &to_dynamic_object_expr(
-  const exprt &expr)
+inline const dynamic_object_exprt &to_dynamic_object_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_dynamic_object);
+  PRECONDITION(expr.id() == ID_dynamic_object);
   const dynamic_object_exprt &ret =
     static_cast<const dynamic_object_exprt &>(expr);
   validate_expr(ret);
@@ -2107,7 +2088,7 @@ inline const dynamic_object_exprt &to_dynamic_object_expr(
 /// \copydoc to_dynamic_object_expr(const exprt &)
 inline dynamic_object_exprt &to_dynamic_object_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_dynamic_object);
+  PRECONDITION(expr.id() == ID_dynamic_object);
   dynamic_object_exprt &ret = static_cast<dynamic_object_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -2147,7 +2128,7 @@ inline is_dynamic_object_exprt &to_is_dynamic_object_expr(exprt &expr)
 }
 
 /// \brief Semantic type conversion
-class typecast_exprt:public unary_exprt
+class typecast_exprt : public unary_exprt
 {
 public:
   typecast_exprt(exprt op, typet _type)
@@ -2184,7 +2165,7 @@ inline void validate_expr(const typecast_exprt &value)
 /// \return Object of type \ref typecast_exprt
 inline const typecast_exprt &to_typecast_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_typecast);
+  PRECONDITION(expr.id() == ID_typecast);
   const typecast_exprt &ret = static_cast<const typecast_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -2193,15 +2174,14 @@ inline const typecast_exprt &to_typecast_expr(const exprt &expr)
 /// \copydoc to_typecast_expr(const exprt &)
 inline typecast_exprt &to_typecast_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_typecast);
+  PRECONDITION(expr.id() == ID_typecast);
   typecast_exprt &ret = static_cast<typecast_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
 
-
 /// \brief Semantic type conversion from/to floating-point formats
-class floatbv_typecast_exprt:public binary_exprt
+class floatbv_typecast_exprt : public binary_exprt
 {
 public:
   floatbv_typecast_exprt(exprt op, exprt rounding, typet _type)
@@ -2253,7 +2233,7 @@ inline void validate_expr(const floatbv_typecast_exprt &value)
 /// \return Object of type \ref floatbv_typecast_exprt
 inline const floatbv_typecast_exprt &to_floatbv_typecast_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_floatbv_typecast);
+  PRECONDITION(expr.id() == ID_floatbv_typecast);
   const floatbv_typecast_exprt &ret =
     static_cast<const floatbv_typecast_exprt &>(expr);
   validate_expr(ret);
@@ -2263,19 +2243,18 @@ inline const floatbv_typecast_exprt &to_floatbv_typecast_expr(const exprt &expr)
 /// \copydoc to_floatbv_typecast_expr(const exprt &)
 inline floatbv_typecast_exprt &to_floatbv_typecast_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_floatbv_typecast);
+  PRECONDITION(expr.id() == ID_floatbv_typecast);
   floatbv_typecast_exprt &ret = static_cast<floatbv_typecast_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
 
-
 /// \brief Boolean AND
-class and_exprt:public multi_ary_exprt
+class and_exprt : public multi_ary_exprt
 {
 public:
   DEPRECATED(SINCE(2019, 1, 12, "use and_exprt(op, op) instead"))
-  and_exprt():multi_ary_exprt(ID_and, bool_typet())
+  and_exprt() : multi_ary_exprt(ID_and, bool_typet())
   {
   }
 
@@ -2326,20 +2305,19 @@ inline bool can_cast_expr<and_exprt>(const exprt &base)
 /// \return Object of type \ref and_exprt
 inline const and_exprt &to_and_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_and);
+  PRECONDITION(expr.id() == ID_and);
   return static_cast<const and_exprt &>(expr);
 }
 
 /// \copydoc to_and_expr(const exprt &)
 inline and_exprt &to_and_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_and);
+  PRECONDITION(expr.id() == ID_and);
   return static_cast<and_exprt &>(expr);
 }
 
-
 /// \brief Boolean implication
-class implies_exprt:public binary_exprt
+class implies_exprt : public binary_exprt
 {
 public:
   implies_exprt(exprt op0, exprt op1)
@@ -2367,7 +2345,7 @@ inline void validate_expr(const implies_exprt &value)
 /// \return Object of type \ref implies_exprt
 inline const implies_exprt &to_implies_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_implies);
+  PRECONDITION(expr.id() == ID_implies);
   const implies_exprt &ret = static_cast<const implies_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -2376,19 +2354,18 @@ inline const implies_exprt &to_implies_expr(const exprt &expr)
 /// \copydoc to_implies_expr(const exprt &)
 inline implies_exprt &to_implies_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_implies);
+  PRECONDITION(expr.id() == ID_implies);
   implies_exprt &ret = static_cast<implies_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
 
-
 /// \brief Boolean OR
-class or_exprt:public multi_ary_exprt
+class or_exprt : public multi_ary_exprt
 {
 public:
   DEPRECATED(SINCE(2019, 1, 12, "use or_exprt(op, op) instead"))
-  or_exprt():multi_ary_exprt(ID_or, bool_typet())
+  or_exprt() : multi_ary_exprt(ID_or, bool_typet())
   {
   }
 
@@ -2439,24 +2416,23 @@ inline bool can_cast_expr<or_exprt>(const exprt &base)
 /// \return Object of type \ref or_exprt
 inline const or_exprt &to_or_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_or);
+  PRECONDITION(expr.id() == ID_or);
   return static_cast<const or_exprt &>(expr);
 }
 
 /// \copydoc to_or_expr(const exprt &)
 inline or_exprt &to_or_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_or);
+  PRECONDITION(expr.id() == ID_or);
   return static_cast<or_exprt &>(expr);
 }
 
-
 /// \brief Boolean XOR
-class xor_exprt:public multi_ary_exprt
+class xor_exprt : public multi_ary_exprt
 {
 public:
   DEPRECATED(SINCE(2019, 1, 12, "use xor_exprt(op, op) instead"))
-  xor_exprt():multi_ary_exprt(ID_bitxor, bool_typet())
+  xor_exprt() : multi_ary_exprt(ID_bitxor, bool_typet())
   {
   }
 
@@ -2480,20 +2456,19 @@ inline bool can_cast_expr<xor_exprt>(const exprt &base)
 /// \return Object of type \ref xor_exprt
 inline const xor_exprt &to_xor_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_xor);
+  PRECONDITION(expr.id() == ID_xor);
   return static_cast<const xor_exprt &>(expr);
 }
 
 /// \copydoc to_bitxor_expr(const exprt &)
 inline xor_exprt &to_xor_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_xor);
+  PRECONDITION(expr.id() == ID_xor);
   return static_cast<xor_exprt &>(expr);
 }
 
-
 /// \brief Bit-wise negation of bit-vectors
-class bitnot_exprt:public unary_exprt
+class bitnot_exprt : public unary_exprt
 {
 public:
   explicit bitnot_exprt(exprt op) : unary_exprt(ID_bitnot, std::move(op))
@@ -2520,7 +2495,7 @@ inline void validate_expr(const bitnot_exprt &value)
 /// \return Object of type \ref bitnot_exprt
 inline const bitnot_exprt &to_bitnot_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_bitnot);
+  PRECONDITION(expr.id() == ID_bitnot);
   const bitnot_exprt &ret = static_cast<const bitnot_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -2529,15 +2504,14 @@ inline const bitnot_exprt &to_bitnot_expr(const exprt &expr)
 /// \copydoc to_bitnot_expr(const exprt &)
 inline bitnot_exprt &to_bitnot_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_bitnot);
+  PRECONDITION(expr.id() == ID_bitnot);
   bitnot_exprt &ret = static_cast<bitnot_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
 
-
 /// \brief Bit-wise OR
-class bitor_exprt:public multi_ary_exprt
+class bitor_exprt : public multi_ary_exprt
 {
 public:
   bitor_exprt(const exprt &_op0, exprt _op1)
@@ -2560,20 +2534,19 @@ inline bool can_cast_expr<bitor_exprt>(const exprt &base)
 /// \return Object of type \ref bitor_exprt
 inline const bitor_exprt &to_bitor_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_bitor);
+  PRECONDITION(expr.id() == ID_bitor);
   return static_cast<const bitor_exprt &>(expr);
 }
 
 /// \copydoc to_bitor_expr(const exprt &)
 inline bitor_exprt &to_bitor_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_bitor);
+  PRECONDITION(expr.id() == ID_bitor);
   return static_cast<bitor_exprt &>(expr);
 }
 
-
 /// \brief Bit-wise XOR
-class bitxor_exprt:public multi_ary_exprt
+class bitxor_exprt : public multi_ary_exprt
 {
 public:
   bitxor_exprt(exprt _op0, exprt _op1)
@@ -2596,20 +2569,19 @@ inline bool can_cast_expr<bitxor_exprt>(const exprt &base)
 /// \return Object of type \ref bitxor_exprt
 inline const bitxor_exprt &to_bitxor_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_bitxor);
+  PRECONDITION(expr.id() == ID_bitxor);
   return static_cast<const bitxor_exprt &>(expr);
 }
 
 /// \copydoc to_bitxor_expr(const exprt &)
 inline bitxor_exprt &to_bitxor_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_bitxor);
+  PRECONDITION(expr.id() == ID_bitxor);
   return static_cast<bitxor_exprt &>(expr);
 }
 
-
 /// \brief Bit-wise AND
-class bitand_exprt:public multi_ary_exprt
+class bitand_exprt : public multi_ary_exprt
 {
 public:
   bitand_exprt(const exprt &_op0, exprt _op1)
@@ -2632,20 +2604,19 @@ inline bool can_cast_expr<bitand_exprt>(const exprt &base)
 /// \return Object of type \ref bitand_exprt
 inline const bitand_exprt &to_bitand_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_bitand);
+  PRECONDITION(expr.id() == ID_bitand);
   return static_cast<const bitand_exprt &>(expr);
 }
 
 /// \copydoc to_bitand_expr(const exprt &)
 inline bitand_exprt &to_bitand_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_bitand);
+  PRECONDITION(expr.id() == ID_bitand);
   return static_cast<bitand_exprt &>(expr);
 }
 
-
 /// \brief A base class for shift operators
-class shift_exprt:public binary_exprt
+class shift_exprt : public binary_exprt
 {
 public:
   shift_exprt(exprt _src, const irep_idt &_id, exprt _distance)
@@ -2708,9 +2679,8 @@ inline shift_exprt &to_shift_expr(exprt &expr)
   return ret;
 }
 
-
 /// \brief Left shift
-class shl_exprt:public shift_exprt
+class shl_exprt : public shift_exprt
 {
 public:
   shl_exprt(exprt _src, exprt _distance)
@@ -2748,7 +2718,7 @@ inline shl_exprt &to_shl_expr(exprt &expr)
 }
 
 /// \brief Arithmetic right shift
-class ashr_exprt:public shift_exprt
+class ashr_exprt : public shift_exprt
 {
 public:
   ashr_exprt(exprt _src, exprt _distance)
@@ -2763,7 +2733,7 @@ public:
 };
 
 /// \brief Logical right shift
-class lshr_exprt:public shift_exprt
+class lshr_exprt : public shift_exprt
 {
 public:
   lshr_exprt(exprt _src, exprt _distance)
@@ -2778,7 +2748,7 @@ public:
 };
 
 /// \brief Extracts a single bit of a bit-vector operand
-class extractbit_exprt:public binary_predicate_exprt
+class extractbit_exprt : public binary_predicate_exprt
 {
 public:
   /// Extract the \p _index-th least significant bit from \p _src.
@@ -2829,7 +2799,7 @@ inline void validate_expr(const extractbit_exprt &value)
 /// \return Object of type \ref extractbit_exprt
 inline const extractbit_exprt &to_extractbit_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_extractbit);
+  PRECONDITION(expr.id() == ID_extractbit);
   const extractbit_exprt &ret = static_cast<const extractbit_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -2838,12 +2808,11 @@ inline const extractbit_exprt &to_extractbit_expr(const exprt &expr)
 /// \copydoc to_extractbit_expr(const exprt &)
 inline extractbit_exprt &to_extractbit_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_extractbit);
+  PRECONDITION(expr.id() == ID_extractbit);
   extractbit_exprt &ret = static_cast<extractbit_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
-
 
 /// \brief Extracts a sub-range of a bit-vector operand
 class extractbits_exprt : public expr_protectedt
@@ -2918,7 +2887,7 @@ inline void validate_expr(const extractbits_exprt &value)
 /// \return Object of type \ref extractbits_exprt
 inline const extractbits_exprt &to_extractbits_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_extractbits);
+  PRECONDITION(expr.id() == ID_extractbits);
   const extractbits_exprt &ret = static_cast<const extractbits_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -2927,15 +2896,14 @@ inline const extractbits_exprt &to_extractbits_expr(const exprt &expr)
 /// \copydoc to_extractbits_expr(const exprt &)
 inline extractbits_exprt &to_extractbits_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_extractbits);
+  PRECONDITION(expr.id() == ID_extractbits);
   extractbits_exprt &ret = static_cast<extractbits_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
 
-
 /// \brief Operator to return the address of an object
-class address_of_exprt:public unary_exprt
+class address_of_exprt : public unary_exprt
 {
 public:
   explicit address_of_exprt(const exprt &op);
@@ -2975,7 +2943,7 @@ inline void validate_expr(const address_of_exprt &value)
 /// \return Object of type \ref address_of_exprt
 inline const address_of_exprt &to_address_of_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_address_of);
+  PRECONDITION(expr.id() == ID_address_of);
   const address_of_exprt &ret = static_cast<const address_of_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -2984,15 +2952,14 @@ inline const address_of_exprt &to_address_of_expr(const exprt &expr)
 /// \copydoc to_address_of_expr(const exprt &)
 inline address_of_exprt &to_address_of_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_address_of);
+  PRECONDITION(expr.id() == ID_address_of);
   address_of_exprt &ret = static_cast<address_of_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
 
-
 /// \brief Boolean negation
-class not_exprt:public unary_exprt
+class not_exprt : public unary_exprt
 {
 public:
   explicit not_exprt(exprt _op) : unary_exprt(ID_not, std::move(_op))
@@ -3001,7 +2968,7 @@ public:
   }
 
   DEPRECATED(SINCE(2019, 1, 12, "use not_exprt(op) instead"))
-  not_exprt():unary_exprt(ID_not, bool_typet())
+  not_exprt() : unary_exprt(ID_not, bool_typet())
   {
   }
 };
@@ -3025,7 +2992,7 @@ inline void validate_expr(const not_exprt &value)
 /// \return Object of type \ref not_exprt
 inline const not_exprt &to_not_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_not);
+  PRECONDITION(expr.id() == ID_not);
   const not_exprt &ret = static_cast<const not_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -3034,21 +3001,20 @@ inline const not_exprt &to_not_expr(const exprt &expr)
 /// \copydoc to_not_expr(const exprt &)
 inline not_exprt &to_not_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_not);
+  PRECONDITION(expr.id() == ID_not);
   not_exprt &ret = static_cast<not_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
 
-
 /// \brief Operator to dereference a pointer
-class dereference_exprt:public unary_exprt
+class dereference_exprt : public unary_exprt
 {
 public:
-  explicit dereference_exprt(const exprt &op):
-    unary_exprt(ID_dereference, op, op.type().subtype())
+  explicit dereference_exprt(const exprt &op)
+    : unary_exprt(ID_dereference, op, op.type().subtype())
   {
-    PRECONDITION(op.type().id()==ID_pointer);
+    PRECONDITION(op.type().id() == ID_pointer);
   }
 
   dereference_exprt(exprt op, typet type)
@@ -3101,7 +3067,7 @@ inline void validate_expr(const dereference_exprt &value)
 /// \return Object of type \ref dereference_exprt
 inline const dereference_exprt &to_dereference_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_dereference);
+  PRECONDITION(expr.id() == ID_dereference);
   const dereference_exprt &ret = static_cast<const dereference_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -3110,12 +3076,11 @@ inline const dereference_exprt &to_dereference_expr(const exprt &expr)
 /// \copydoc to_dereference_expr(const exprt &)
 inline dereference_exprt &to_dereference_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_dereference);
+  PRECONDITION(expr.id() == ID_dereference);
   dereference_exprt &ret = static_cast<dereference_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
-
 
 /// \brief The trinary if-then-else operator
 class if_exprt : public ternary_exprt
@@ -3186,7 +3151,7 @@ inline void validate_expr(const if_exprt &value)
 /// \return Object of type \ref if_exprt
 inline const if_exprt &to_if_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_if);
+  PRECONDITION(expr.id() == ID_if);
   const if_exprt &ret = static_cast<const if_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -3195,7 +3160,7 @@ inline const if_exprt &to_if_expr(const exprt &expr)
 /// \copydoc to_if_expr(const exprt &)
 inline if_exprt &to_if_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_if);
+  PRECONDITION(expr.id() == ID_if);
   if_exprt &ret = static_cast<if_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -3269,7 +3234,7 @@ inline void validate_expr(const with_exprt &value)
 /// \return Object of type \ref with_exprt
 inline const with_exprt &to_with_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_with);
+  PRECONDITION(expr.id() == ID_with);
   const with_exprt &ret = static_cast<const with_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -3278,7 +3243,7 @@ inline const with_exprt &to_with_expr(const exprt &expr)
 /// \copydoc to_with_expr(const exprt &)
 inline with_exprt &to_with_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_with);
+  PRECONDITION(expr.id() == ID_with);
   with_exprt &ret = static_cast<with_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -3322,7 +3287,7 @@ inline void validate_expr(const index_designatort &value)
 /// \return Object of type \ref index_designatort
 inline const index_designatort &to_index_designator(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_index_designator);
+  PRECONDITION(expr.id() == ID_index_designator);
   const index_designatort &ret = static_cast<const index_designatort &>(expr);
   validate_expr(ret);
   return ret;
@@ -3331,7 +3296,7 @@ inline const index_designatort &to_index_designator(const exprt &expr)
 /// \copydoc to_index_designator(const exprt &)
 inline index_designatort &to_index_designator(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_index_designator);
+  PRECONDITION(expr.id() == ID_index_designator);
   index_designatort &ret = static_cast<index_designatort &>(expr);
   validate_expr(ret);
   return ret;
@@ -3371,7 +3336,7 @@ inline void validate_expr(const member_designatort &value)
 /// \return Object of type \ref member_designatort
 inline const member_designatort &to_member_designator(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_member_designator);
+  PRECONDITION(expr.id() == ID_member_designator);
   const member_designatort &ret = static_cast<const member_designatort &>(expr);
   validate_expr(ret);
   return ret;
@@ -3380,12 +3345,11 @@ inline const member_designatort &to_member_designator(const exprt &expr)
 /// \copydoc to_member_designator(const exprt &)
 inline member_designatort &to_member_designator(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_member_designator);
+  PRECONDITION(expr.id() == ID_member_designator);
   member_designatort &ret = static_cast<member_designatort &>(expr);
   validate_expr(ret);
   return ret;
 }
-
 
 /// \brief Operator to update elements in structs and arrays
 class update_exprt : public ternary_exprt
@@ -3456,7 +3420,7 @@ inline void validate_expr(const update_exprt &value)
 /// \return Object of type \ref update_exprt
 inline const update_exprt &to_update_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_update);
+  PRECONDITION(expr.id() == ID_update);
   const update_exprt &ret = static_cast<const update_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -3465,12 +3429,11 @@ inline const update_exprt &to_update_expr(const exprt &expr)
 /// \copydoc to_update_expr(const exprt &)
 inline update_exprt &to_update_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_update);
+  PRECONDITION(expr.id() == ID_update);
   update_exprt &ret = static_cast<update_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
-
 
 #if 0
 /// \brief Update of one element of an array
@@ -3557,9 +3520,8 @@ inline array_update_exprt &to_array_update_expr(exprt &expr)
 
 #endif
 
-
 /// \brief Extract member of struct or union
-class member_exprt:public unary_exprt
+class member_exprt : public unary_exprt
 {
 public:
   member_exprt(exprt op, const irep_idt &component_name, typet _type)
@@ -3646,7 +3608,7 @@ inline void validate_expr(const member_exprt &value)
 /// \return Object of type \ref member_exprt
 inline const member_exprt &to_member_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_member);
+  PRECONDITION(expr.id() == ID_member);
   const member_exprt &ret = static_cast<const member_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -3655,15 +3617,14 @@ inline const member_exprt &to_member_expr(const exprt &expr)
 /// \copydoc to_member_expr(const exprt &)
 inline member_exprt &to_member_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_member);
+  PRECONDITION(expr.id() == ID_member);
   member_exprt &ret = static_cast<member_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
 
-
 /// \brief Evaluates to true if the operand is NaN
-class isnan_exprt:public unary_predicate_exprt
+class isnan_exprt : public unary_predicate_exprt
 {
 public:
   explicit isnan_exprt(exprt op)
@@ -3672,7 +3633,7 @@ public:
   }
 
   DEPRECATED(SINCE(2018, 12, 2, "use isnan_exprt(op) instead"))
-  isnan_exprt():unary_predicate_exprt(ID_isnan)
+  isnan_exprt() : unary_predicate_exprt(ID_isnan)
   {
   }
 };
@@ -3696,7 +3657,7 @@ inline void validate_expr(const isnan_exprt &value)
 /// \return Object of type \ref isnan_exprt
 inline const isnan_exprt &to_isnan_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_isnan);
+  PRECONDITION(expr.id() == ID_isnan);
   const isnan_exprt &ret = static_cast<const isnan_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -3705,15 +3666,14 @@ inline const isnan_exprt &to_isnan_expr(const exprt &expr)
 /// \copydoc to_isnan_expr(const exprt &)
 inline isnan_exprt &to_isnan_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_isnan);
+  PRECONDITION(expr.id() == ID_isnan);
   isnan_exprt &ret = static_cast<isnan_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
 
-
 /// \brief Evaluates to true if the operand is infinite
-class isinf_exprt:public unary_predicate_exprt
+class isinf_exprt : public unary_predicate_exprt
 {
 public:
   explicit isinf_exprt(exprt op)
@@ -3722,7 +3682,7 @@ public:
   }
 
   DEPRECATED(SINCE(2018, 12, 2, "use isinf_exprt(op) instead"))
-  isinf_exprt():unary_predicate_exprt(ID_isinf)
+  isinf_exprt() : unary_predicate_exprt(ID_isinf)
   {
   }
 };
@@ -3746,7 +3706,7 @@ inline void validate_expr(const isinf_exprt &value)
 /// \return Object of type \ref isinf_exprt
 inline const isinf_exprt &to_isinf_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_isinf);
+  PRECONDITION(expr.id() == ID_isinf);
   const isinf_exprt &ret = static_cast<const isinf_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -3755,15 +3715,14 @@ inline const isinf_exprt &to_isinf_expr(const exprt &expr)
 /// \copydoc to_isinf_expr(const exprt &)
 inline isinf_exprt &to_isinf_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_isinf);
+  PRECONDITION(expr.id() == ID_isinf);
   isinf_exprt &ret = static_cast<isinf_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
 
-
 /// \brief Evaluates to true if the operand is finite
-class isfinite_exprt:public unary_predicate_exprt
+class isfinite_exprt : public unary_predicate_exprt
 {
 public:
   explicit isfinite_exprt(exprt op)
@@ -3772,7 +3731,7 @@ public:
   }
 
   DEPRECATED(SINCE(2018, 12, 2, "use isfinite_exprt(op) instead"))
-  isfinite_exprt():unary_predicate_exprt(ID_isfinite)
+  isfinite_exprt() : unary_predicate_exprt(ID_isfinite)
   {
   }
 };
@@ -3796,7 +3755,7 @@ inline void validate_expr(const isfinite_exprt &value)
 /// \return Object of type \ref isfinite_exprt
 inline const isfinite_exprt &to_isfinite_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_isfinite);
+  PRECONDITION(expr.id() == ID_isfinite);
   const isfinite_exprt &ret = static_cast<const isfinite_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -3805,15 +3764,14 @@ inline const isfinite_exprt &to_isfinite_expr(const exprt &expr)
 /// \copydoc to_isfinite_expr(const exprt &)
 inline isfinite_exprt &to_isfinite_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_isfinite);
+  PRECONDITION(expr.id() == ID_isfinite);
   isfinite_exprt &ret = static_cast<isfinite_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
 
-
 /// \brief Evaluates to true if the operand is a normal number
-class isnormal_exprt:public unary_predicate_exprt
+class isnormal_exprt : public unary_predicate_exprt
 {
 public:
   explicit isnormal_exprt(exprt op)
@@ -3822,7 +3780,7 @@ public:
   }
 
   DEPRECATED(SINCE(2018, 12, 2, "use isnormal_exprt(op) instead"))
-  isnormal_exprt():unary_predicate_exprt(ID_isnormal)
+  isnormal_exprt() : unary_predicate_exprt(ID_isnormal)
   {
   }
 };
@@ -3846,7 +3804,7 @@ inline void validate_expr(const isnormal_exprt &value)
 /// \return Object of type \ref isnormal_exprt
 inline const isnormal_exprt &to_isnormal_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_isnormal);
+  PRECONDITION(expr.id() == ID_isnormal);
   const isnormal_exprt &ret = static_cast<const isnormal_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -3855,19 +3813,18 @@ inline const isnormal_exprt &to_isnormal_expr(const exprt &expr)
 /// \copydoc to_isnormal_expr(const exprt &)
 inline isnormal_exprt &to_isnormal_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_isnormal);
+  PRECONDITION(expr.id() == ID_isnormal);
   isnormal_exprt &ret = static_cast<isnormal_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
 
-
 /// \brief IEEE-floating-point equality
-class ieee_float_equal_exprt:public binary_relation_exprt
+class ieee_float_equal_exprt : public binary_relation_exprt
 {
 public:
   DEPRECATED(SINCE(2018, 12, 2, "use ieee_float_equal_exprt(lhs, rhs) instead"))
-  ieee_float_equal_exprt():binary_relation_exprt(ID_ieee_float_equal)
+  ieee_float_equal_exprt() : binary_relation_exprt(ID_ieee_float_equal)
   {
   }
 
@@ -3899,7 +3856,7 @@ inline void validate_expr(const ieee_float_equal_exprt &value)
 /// \return Object of type \ref ieee_float_equal_exprt
 inline const ieee_float_equal_exprt &to_ieee_float_equal_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_ieee_float_equal);
+  PRECONDITION(expr.id() == ID_ieee_float_equal);
   const ieee_float_equal_exprt &ret =
     static_cast<const ieee_float_equal_exprt &>(expr);
   validate_expr(ret);
@@ -3909,21 +3866,19 @@ inline const ieee_float_equal_exprt &to_ieee_float_equal_expr(const exprt &expr)
 /// \copydoc to_ieee_float_equal_expr(const exprt &)
 inline ieee_float_equal_exprt &to_ieee_float_equal_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_ieee_float_equal);
+  PRECONDITION(expr.id() == ID_ieee_float_equal);
   ieee_float_equal_exprt &ret = static_cast<ieee_float_equal_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
 
-
 /// \brief IEEE floating-point disequality
-class ieee_float_notequal_exprt:public binary_relation_exprt
+class ieee_float_notequal_exprt : public binary_relation_exprt
 {
 public:
   DEPRECATED(
     SINCE(2018, 12, 2, "use ieee_float_notequal_exprt(lhs, rhs) instead"))
-  ieee_float_notequal_exprt():
-    binary_relation_exprt(ID_ieee_float_notequal)
+  ieee_float_notequal_exprt() : binary_relation_exprt(ID_ieee_float_notequal)
   {
   }
 
@@ -3953,10 +3908,10 @@ inline void validate_expr(const ieee_float_notequal_exprt &value)
 ///
 /// \param expr: Source expression
 /// \return Object of type \ref ieee_float_notequal_exprt
-inline const ieee_float_notequal_exprt &to_ieee_float_notequal_expr(
-  const exprt &expr)
+inline const ieee_float_notequal_exprt &
+to_ieee_float_notequal_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_ieee_float_notequal);
+  PRECONDITION(expr.id() == ID_ieee_float_notequal);
   const ieee_float_notequal_exprt &ret =
     static_cast<const ieee_float_notequal_exprt &>(expr);
   validate_expr(ret);
@@ -3966,7 +3921,7 @@ inline const ieee_float_notequal_exprt &to_ieee_float_notequal_expr(
 /// \copydoc to_ieee_float_notequal_expr(const exprt &)
 inline ieee_float_notequal_exprt &to_ieee_float_notequal_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_ieee_float_notequal);
+  PRECONDITION(expr.id() == ID_ieee_float_notequal);
   ieee_float_notequal_exprt &ret =
     static_cast<ieee_float_notequal_exprt &>(expr);
   validate_expr(ret);
@@ -4054,7 +4009,6 @@ inline ieee_float_op_exprt &to_ieee_float_op_expr(exprt &expr)
   return ret;
 }
 
-
 /// \brief An expression denoting a type
 class type_exprt : public nullary_exprt
 {
@@ -4128,20 +4082,19 @@ inline bool can_cast_expr<constant_exprt>(const exprt &base)
 /// \return Object of type \ref constant_exprt
 inline const constant_exprt &to_constant_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_constant);
+  PRECONDITION(expr.id() == ID_constant);
   return static_cast<const constant_exprt &>(expr);
 }
 
 /// \copydoc to_constant_expr(const exprt &)
 inline constant_exprt &to_constant_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_constant);
+  PRECONDITION(expr.id() == ID_constant);
   return static_cast<constant_exprt &>(expr);
 }
 
-
 /// \brief The Boolean constant true
-class true_exprt:public constant_exprt
+class true_exprt : public constant_exprt
 {
 public:
   true_exprt() : constant_exprt(ID_true, bool_typet())
@@ -4150,7 +4103,7 @@ public:
 };
 
 /// \brief The Boolean constant false
-class false_exprt:public constant_exprt
+class false_exprt : public constant_exprt
 {
 public:
   false_exprt() : constant_exprt(ID_false, bool_typet())
@@ -4175,7 +4128,7 @@ inline bool can_cast_expr<nil_exprt>(const exprt &base)
 }
 
 /// \brief The null pointer constant
-class null_pointer_exprt:public constant_exprt
+class null_pointer_exprt : public constant_exprt
 {
 public:
   explicit null_pointer_exprt(pointer_typet type)
@@ -4284,17 +4237,16 @@ inline bool can_cast_expr<concatenation_exprt>(const exprt &base)
 /// \return Object of type \ref concatenation_exprt
 inline const concatenation_exprt &to_concatenation_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_concatenation);
+  PRECONDITION(expr.id() == ID_concatenation);
   return static_cast<const concatenation_exprt &>(expr);
 }
 
 /// \copydoc to_concatenation_expr(const exprt &)
 inline concatenation_exprt &to_concatenation_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_concatenation);
+  PRECONDITION(expr.id() == ID_concatenation);
   return static_cast<concatenation_exprt &>(expr);
 }
-
 
 /// \brief An expression denoting infinity
 class infinity_exprt : public nullary_exprt
@@ -4478,7 +4430,7 @@ inline void validate_expr(const let_exprt &let_expr)
 /// \return Object of type \ref let_exprt
 inline const let_exprt &to_let_expr(const exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_let);
+  PRECONDITION(expr.id() == ID_let);
   const let_exprt &ret = static_cast<const let_exprt &>(expr);
   validate_expr(ret);
   return ret;
@@ -4487,14 +4439,14 @@ inline const let_exprt &to_let_expr(const exprt &expr)
 /// \copydoc to_let_expr(const exprt &)
 inline let_exprt &to_let_expr(exprt &expr)
 {
-  PRECONDITION(expr.id()==ID_let);
+  PRECONDITION(expr.id() == ID_let);
   let_exprt &ret = static_cast<let_exprt &>(expr);
   validate_expr(ret);
   return ret;
 }
 
 /// \brief The popcount (counting the number of bits set to 1) expression
-class popcount_exprt: public unary_exprt
+class popcount_exprt : public unary_exprt
 {
 public:
   popcount_exprt(exprt _op, typet _type)
