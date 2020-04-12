@@ -33,6 +33,7 @@ symex_bmct::symex_bmct(
       path_storage,
       guard_manager),
     record_coverage(!options.get_option("symex-coverage-report").empty()),
+    havoc_bodyless_functions(options.get_bool_option("havoc-undefined-functions")),
     symex_coverage(ns)
 {
 }
@@ -212,5 +213,12 @@ void symex_bmct::no_body(const irep_idt &identifier)
   {
     log.warning() << "**** WARNING: no body for function " << identifier
                   << log.eom;
+
+    if(havoc_bodyless_functions)
+    {
+      log.warning()
+          << "; assigning non-deterministic values to any pointer arguments";
+    }
+    log.warning() << log.eom;
   }
 }
