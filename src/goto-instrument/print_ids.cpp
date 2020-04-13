@@ -12,7 +12,7 @@ Author: Daniel Kroening, kroening@kroening.com
 #include <util/c_types.h>
 #include <util/namespace.h>
 #include <util/union_find.h>
-#include <util/type_eq.h>
+#include <util/base_type.h>
 #include <util/fresh_symbol.h>
 #include <util/expanding_vector.h>
 
@@ -462,7 +462,7 @@ void fix_argument_types(
   {
     if(i<call_arguments.size())
     {
-      if(!type_eq(call_arguments[i].type(),
+      if(!base_type_eq(call_arguments[i].type(),
                   function_parameters[i].type(), ns))
       {
         call_arguments[i].make_typecast(function_parameters[i].type());
@@ -486,7 +486,7 @@ void fix_return_type(
     to_code_type(ns.follow(function_call.function().type()));
 
   // type already ok?
-  if(type_eq(
+  if(base_type_eq(
        function_call.lhs().type(),
        code_type.return_type(), ns))
     return;

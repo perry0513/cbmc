@@ -15,6 +15,7 @@ Author: Daniel Kroening, kroening@kroening.com
 #include <util/byte_operators.h>
 #include <util/c_types.h>
 #include <util/pointer_offset_size.h>
+#include <iostream>
 
 void goto_symext::havoc_rec(
   statet &state,
@@ -70,6 +71,7 @@ void goto_symext::havoc_rec(
   else
   {
     // consider printing a warning
+    std::cout<<"unable to havoc this type of thing \n";
   }
 }
 

@@ -100,7 +100,6 @@ Author: Daniel Kroening, kroening@kroening.com
 #include "nondet_static.h"
 #include "nondet_volatile.h"
 #include "points_to.h"
-#include "print_ids.h"
 #include "race_check.h"
 #include "reachability_slicer.h"
 #include "remove_function.h"
@@ -278,47 +277,6 @@ int goto_instrument_parse_optionst::doit()
         return CPROVER_EXIT_INTERNAL_ERROR;
       }
       // otherwise, fall-through to write new binary
-
-
-    if(cmdline.isset("print-ids"))
-    {
-      print_ids(goto_model);
-      #if 0
-      show_goto_functions(
-        goto_model,
-        get_message_handler(),
-        ui_message_handler.get_ui(),
-        false);
-      #endif
-      if(cmdline.args.size()==2)
-      {
-        status() << "Writing GOTO program to `" << cmdline.args[1] << "'" << eom;
-
-        if(write_goto_binary(
-          cmdline.args[1], goto_model, get_message_handler()))
-          return CPROVER_EXIT_CONVERSION_FAILED;
-        else
-          return CPROVER_EXIT_SUCCESS;
-      }
-      else
-        return CPROVER_EXIT_SUCCESS;
-    }
-
-    if(cmdline.isset("value-set-fi-fp-removal"))
-    {
-      value_set_fi_fp_removal(goto_model);
-      if(cmdline.args.size()==2)
-      {
-        status() << "Writing GOTO program to `" << cmdline.args[1] << "'" << eom;
-
-        if(write_goto_binary(
-          cmdline.args[1], goto_model, get_message_handler()))
-          return CPROVER_EXIT_CONVERSION_FAILED;
-        else
-          return CPROVER_EXIT_SUCCESS;
-      }
-      else
-        return CPROVER_EXIT_SUCCESS;
     }
 
     if(cmdline.isset("show-value-sets"))
@@ -961,12 +919,12 @@ int goto_instrument_parse_optionst::doit()
         "goto-instrument needs one input and one output file, aside from other "
         "flags");
     }
-
     help();
     return CPROVER_EXIT_USAGE_ERROR;
   }
 // NOLINTNEXTLINE(readability/fn_size)
 }
+
 
 void goto_instrument_parse_optionst::do_indirect_call_and_rtti_removal(
   bool force)
@@ -1138,6 +1096,8 @@ void goto_instrument_parse_optionst::instrument_goto_program()
       ui_message_handler);
   }
 
+
+
   // we add the library in some cases, as some analyses benefit
 
   if(cmdline.isset("add-library") ||
@@ -1251,6 +1211,11 @@ void goto_instrument_parse_optionst::instrument_goto_program()
         exit(CPROVER_EXIT_USAGE_ERROR);
   }
 
+  if(cmdline.isset("value-set-fi-fp-removal"))
+  {
+      value_set_fi_fp_removal(goto_model);
+  }  
+
   // replace function pointers, if explicitly requested
   if(cmdline.isset("remove-function-pointers"))
   {
@@ -1262,15 +1227,9 @@ void goto_instrument_parse_optionst::instrument_goto_program()
   }
   else if(cmdline.isset("extreme-function-pointer-removal"))
   {
-    print_ids(goto_model);
+    value_set_fi_fp_removal(goto_model);
     do_indirect_call_and_rtti_removal();
   }
-  else if(cmdline.isset("moderate-function-pointer-removal"))
-  {
-    print_ids(goto_model, true);
-    do_indirect_call_and_rtti_removal();
-  }
-
 
   if(cmdline.isset("replace-calls"))
   {

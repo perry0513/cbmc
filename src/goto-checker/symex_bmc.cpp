@@ -216,8 +216,7 @@ void symex_bmct::no_body(const irep_idt &identifier)
 
     if(havoc_bodyless_functions)
     {
-      log.warning()
-          << "; assigning non-deterministic values to any pointer arguments";
+      log.warning() << "Assigning non-deterministic values to any pointer arguments";
     }
     log.warning() << log.eom;
   }
