@@ -41,7 +41,7 @@ fi
 
 SLICE_options="--aggressive-slice --aggressive-slice-call-depth ${depth} "
 
-CBMC_options=" --stop-on-fail --object-bits 16 --trace --trace-show-function-calls --trace-show-code --trace-hex --no-sat-preprocessor --unwind ${unwinding} --havoc-undefined-functions "
+CBMC_options=" --stop-on-fail --object-bits 16 --trace --trace-show-function-calls --trace-show-code --trace-hex --no-sat-preprocessor --unwind ${unwinding} "
 
 if [ ${preserve_direct_paths} -ne 0 ]; then
  SLICE_options="$SLICE_options --aggressive-slice-preserve-all-direct-paths "
@@ -135,6 +135,11 @@ echo "Done slicing $(date +%s)" |& tee -a "$BASE.sliced.trace"
 
 goto-instrument --count-eloc "$BASE.sliced.binary" |tee -a "$BASE.sliced.trace"
 goto-instrument --count-eloc "$BASE.binary" |tee -a "$BASE.sliced.trace"
+
+echo "Havoc undefined function bodies"
+goto-instrument --generate-function-body '.*' --generate-function-body-options 'havoc,params:.*' $BASE.sliced.binary $BASE.havoc.binary
+goto-instrument --count-eloc "$BASE.havoc.binary" |tee -a "$BASE.sliced.trace"
+cp $BASE.havoc.binary $BASE.sliced.binary
 
 aws s3 cp "$BASE.sliced.trace" "$BUCKETNAME/$NAME$BASE.depth${depth}-unwind${unwinding}-dp${preserve_direct_paths}-fs${full_slice}-fp$FP_removal.trace"
 
