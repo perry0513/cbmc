@@ -633,7 +633,7 @@ void remove_function_pointer(
   target->type=OTHER;
 }
 
-void value_set_fi_fp_removal(goto_modelt &goto_model)
+void value_set_fi_fp_removal(goto_modelt &goto_model, bool conservative)
 {
   std::cout << "Doing FI value set analysis\n";
 
@@ -684,7 +684,8 @@ void value_set_fi_fp_removal(goto_modelt &goto_model)
           for(const auto &f : functions)
             std::cout << "  function: " << f.get_identifier() << '\n';
 
-          remove_function_pointer(
+          if(functions.size()>0 || !conservative)
+            remove_function_pointer(
             f.second.body, target, functions, goto_model);
         }
       }

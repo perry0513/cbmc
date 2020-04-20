@@ -1213,7 +1213,7 @@ void goto_instrument_parse_optionst::instrument_goto_program()
 
   if(cmdline.isset("value-set-fi-fp-removal"))
   {
-      value_set_fi_fp_removal(goto_model);
+      value_set_fi_fp_removal(goto_model, false);
   }  
 
   // replace function pointers, if explicitly requested
@@ -1225,9 +1225,14 @@ void goto_instrument_parse_optionst::instrument_goto_program()
   {
     do_remove_const_function_pointers_only();
   }
+  else if(cmdline.isset("moderate-function-pointer-removal"))
+  {
+    value_set_fi_fp_removal(goto_model, true);
+    do_indirect_call_and_rtti_removal();
+  }
   else if(cmdline.isset("extreme-function-pointer-removal"))
   {
-    value_set_fi_fp_removal(goto_model);
+    value_set_fi_fp_removal(goto_model, false);
     do_indirect_call_and_rtti_removal();
   }
 

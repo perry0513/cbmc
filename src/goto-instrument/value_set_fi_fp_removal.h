@@ -14,6 +14,6 @@ Author: Daniel Kroening, kroening@kroening.com
 
 class goto_modelt;
 
-void value_set_fi_fp_removal(goto_modelt &);
+void value_set_fi_fp_removal(goto_modelt &, bool conservative);
 
 #endif // CPROVER_GOTO_INSTRUMENT_VALUE_SET_FI_FP_REMOVAL_H
