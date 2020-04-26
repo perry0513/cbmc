@@ -12,15 +12,15 @@ git clone https://github.com/diffblue/cbmc.git
 cd cbmc/src
 make minisat2-download
 make LINKFLAGS=-static -j36
-export PATH=$(pwd)/cbmc/
-export PATH=$(pwd)/goto-instrument/
-export PATH=$(pwd)/goto-cc/
-export PATH=$(pwd)/goto-diff/
+export PATH=$PATH:$(pwd)/cbmc/
+export PATH=$PATH:$(pwd)/goto-instrument/
+export PATH=$PATH:$(pwd)/goto-cc/
+export PATH=$PATH:$(pwd)/goto-diff/
 cd $home
 
 # Download one-line-scan
 git clone https://github.com/awslabs/one-line-scan.git
-export PATH=PATH:$(pwd)/one-line-scan/configuration
+export PATH=$PATH:$(pwd)/one-line-scan/configuration
 
 
 # Download Xen:
