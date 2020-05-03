@@ -10,7 +10,7 @@ Author: Daniel Kroening, kroening@kroening.com
 /// Value Set (Flow Insensitive, Sharing)
 
 #include "value_set_fi.h"
-
+#include <iostream>
 #include <cassert>
 #include <iterator>
 #include <ostream>
@@ -1196,7 +1196,10 @@ void value_set_fit::assign_rec(
   else if(lhs.id()==ID_index)
   {
     const typet &type = to_index_expr(lhs).array().type();
-
+ 
+    if(type.id() != ID_array)
+        return;
+   
     DATA_INVARIANT(type.id()==ID_array ||
                    type.id()=="#REF#",
                    "operand 0 of index expression must be an array");
