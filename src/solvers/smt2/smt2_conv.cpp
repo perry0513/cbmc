@@ -4285,8 +4285,11 @@ void smt2_convt::find_symbols(const exprt &expr)
           << "\n";
       out << "(declare-fun " << id << " () ";
       convert_type(expr.type());
-      out << ")"
-          << "\n";
+      out << ")" out << "(( as const ";
+      convert_type(expr.type());
+      out << ")";
+      convert_expr(to_array_of_expr(expr).what());
+      out << ")) \n";
 
 // use a quantifier instead of the lambda
 #if 0 // not really working in any solver yet!
