@@ -4285,7 +4285,7 @@ void smt2_convt::find_symbols(const exprt &expr)
           << "\n";
       out << "(declare-fun " << id << " () ";
       convert_type(expr.type());
-      out << ")" out << "(( as const ";
+      out << ")\n(( as const ";
       convert_type(expr.type());
       out << ")";
       convert_expr(to_array_of_expr(expr).what());
