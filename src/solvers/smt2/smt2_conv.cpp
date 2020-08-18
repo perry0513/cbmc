@@ -4283,9 +4283,9 @@ void smt2_convt::find_symbols(const exprt &expr)
         "array_of." + std::to_string(defined_expressions.size());
       out << "; the following is a substitute for lambda i. x"
           << "\n";
-      out << "(declare-fun " << id << " () ";
+      out << "(define-fun " << id << " () ";
       convert_type(expr.type());
-      out << ")\n(( as const ";
+      out << "\n(( as const ";
       convert_type(expr.type());
       out << ")";
       convert_expr(to_array_of_expr(expr).what());
