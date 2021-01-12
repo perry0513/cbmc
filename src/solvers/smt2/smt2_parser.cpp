@@ -932,8 +932,9 @@ void smt2_parsert::setup_expressions()
   };
 
   expressions["distinct"] = [this] {
-    // pair-wise different constraint, multi-ary
-    return multi_ary("distinct", operands());
+    // not equal
+    exprt equal = binary_predicate(ID_equal, operands());
+    return not_exprt(equal);
   };
 
   expressions["ite"] = [this] {
