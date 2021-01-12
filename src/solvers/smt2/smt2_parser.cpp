@@ -1233,6 +1233,7 @@ typet smt2_parsert::function_signature_declaration()
 
   if(smt2_tokenizer.peek() == smt2_tokenizert::CLOSE)
   {
+    // no inputs
     next_token(); // eat the ')'
     return sort();
   }
@@ -1241,16 +1242,7 @@ typet smt2_parsert::function_signature_declaration()
 
   while(smt2_tokenizer.peek() != smt2_tokenizert::CLOSE)
   {
-    if(next_token() != smt2_tokenizert::OPEN)
-      throw error("expected '(' at beginning of parameter");
-
-    if(next_token() != smt2_tokenizert::SYMBOL)
-      throw error("expected symbol in parameter");
-
     domain.push_back(sort());
-
-    if(next_token() != smt2_tokenizert::CLOSE)
-      throw error("expected ')' at end of parameter");
   }
 
   next_token(); // eat the ')'
@@ -1296,7 +1288,6 @@ void smt2_parsert::setup_commands()
 
     irep_idt id = smt2_tokenizer.get_buffer();
     auto type = function_signature_declaration();
-
     add_unique_id(id, exprt(ID_nil, type));
   };
 
