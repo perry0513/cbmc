@@ -21,6 +21,7 @@ Author: Daniel Kroening, kroening@kroening.com
 #include <util/ieee_float.h>
 #include <util/invariant.h>
 #include <util/mathematical_expr.h>
+#include <util/mathematical_types.h>
 #include <util/pointer_offset_size.h>
 #include <util/range.h>
 #include <util/std_expr.h>
@@ -1947,6 +1948,14 @@ void smt2_convt::convert_expr(const exprt &expr)
   {
     exprt lowered = lower_popcount(to_popcount_expr(expr), ns);
     convert_expr(lowered);
+  }
+  else if (expr.id()==ID_function_application)
+  {
+    auto func_app = to_function_application_expr(expr);
+    out << '('<< to_symbol_expr(func_app.function()).get_identifier();
+    for(const auto &arg: func_app.arguments())
+      convert_expr(arg);
+    out <<')';  
   }
   else
     INVARIANT_WITH_DIAGNOSTICS(
@@ -4633,6 +4642,15 @@ void smt2_convt::convert_type(const typet &type)
   else if(type.id()==ID_c_bit_field)
   {
     convert_type(c_bit_field_replacement_type(to_c_bit_field_type(type), ns));
+  }
+  else if(type.id()==ID_mathematical_function)
+  {
+    out << "(-> ";
+    auto &func=to_mathematical_function_type(type);
+    for(const auto &op: func.domain())
+      convert_type(op);
+    convert_type(func.codomain()) ;
+    out << ")"; 
   }
   else
   {
