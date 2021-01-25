@@ -1393,10 +1393,10 @@ void smt2_convt::convert_expr(const exprt &expr)
         UNEXPECTEDCASE(
           "distance type for " + shift_expr.id_string() + "must be constant");
 
-      out << ' ';
+      out << ") ";
       convert_expr(shift_expr.op());
 
-      out << "))"; // rotate_*
+      out << ")"; // rotate_*
     }
     else
       UNEXPECTEDCASE(
@@ -4379,7 +4379,10 @@ void smt2_convt::find_symbols(const exprt &expr)
         out << "(";
         auto &func_type = to_mathematical_function_type(expr.type());
         for(const auto &d: func_type.domain())
+        {
           convert_type(d);
+          out <<" ";
+        }
         out <<")";  
         convert_type(func_type.codomain());
         out << ")\n"; 
