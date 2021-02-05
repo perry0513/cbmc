@@ -893,7 +893,7 @@ void smt2_parsert::setup_expressions()
   expressions["-"] = [this] {
     auto ops=operands();
     if(ops.size()==1)
-      return unary(ID_minus, ops);
+      return unary(ID_unary_minus, ops);
     else
       return binary(ID_minus, ops); };
   expressions["bvmul"] = [this] { return binary(ID_mult, operands()); };
