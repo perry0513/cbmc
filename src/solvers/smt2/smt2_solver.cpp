@@ -33,7 +33,7 @@ public:
 
 protected:
   decision_proceduret &solver;
-
+  void solve();
   void setup_commands();
   void define_constants();
   void expand_function_applications(exprt &);
@@ -123,20 +123,9 @@ void smt2_solvert::expand_function_applications(exprt &expr)
   }
 }
 
-void smt2_solvert::setup_commands()
+void smt2_solvert::solve()
 {
-  {
-    commands["assert"] = [this]() {
-      exprt e = expression();
-      if(e.is_not_nil())
-      {
-        expand_function_applications(e);
-        solver.set_to_true(e);
-      }
-    };
-
-    commands["check-sat"] = [this]() {
-      // add constant definitions as constraints
+  // add constant definitions as constraints
       define_constants();
 
       switch(solver())
@@ -155,10 +144,44 @@ void smt2_solvert::setup_commands()
         std::cout << "error\n";
         status = NOT_SOLVED;
       }
+}
+
+void smt2_solvert::setup_commands()
+{
+  {
+    commands["assert"] = [this]() {
+      exprt e = expression();
+      if(e.is_not_nil())
+      {
+        expand_function_applications(e);
+        solver.set_to_true(e);
+      }
+    };
+
+    commands["check-sat"] = [this]() {
+     solve();
     };
 
     commands["check-sat-assuming"] = [this]() {
-      throw error("not yet implemented");
+      
+      if(next_token() != smt2_tokenizert::OPEN)
+        throw error("check-sat expects list of expressions");
+      
+      while(smt2_tokenizer.peek() != smt2_tokenizert::CLOSE &&
+            smt2_tokenizer.peek() != smt2_tokenizert::END_OF_FILE)
+      {
+        exprt e = expression();
+        if(e.is_not_nil())
+        {
+          expand_function_applications(e);
+          solver.set_to_true(e);
+        }
+      }
+
+      if(next_token() != smt2_tokenizert::CLOSE)
+        throw error("get-value expects ')' at end of list");
+
+      solve();
     };
 
     commands["display"] = [this]() {
