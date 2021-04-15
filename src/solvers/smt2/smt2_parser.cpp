@@ -167,6 +167,15 @@ void smt2_parsert::add_unique_id(const irep_idt &id, const exprt &expr)
   }
 }
 
+void smt2_parsert::add_unique_type_id(const irep_idt &id, const typet &type)
+{
+  if(!type_map.emplace(id, type).second)
+  {
+    // id already used
+    throw error() << "type identifier '" << id << "' defined twice";
+  }
+}
+
 irep_idt smt2_parsert::rename_id(const irep_idt &id) const
 {
   auto it=renaming_map.find(id);
@@ -1135,7 +1144,14 @@ typet smt2_parsert::sort()
   const auto s_it = sorts.find(token);
 
   if(s_it == sorts.end())
-    throw error() << "unexpected sort: '" << token << '\'';
+  {
+    // is this a user defined sort?
+    auto user_sort = type_map.find(token);
+    if(user_sort == type_map.end())
+      throw error() << "unexpected sort: '" << token << '\'';
+    
+    return user_sort->second;
+  }
 
   return s_it->second();
 }
@@ -1306,6 +1322,38 @@ void smt2_parsert::setup_commands()
     irep_idt id = smt2_tokenizer.get_buffer();
     auto type = function_signature_declaration();
     add_unique_id(id, exprt(ID_nil, type));
+  };
+
+  commands["declare-sort"] = [this]() {
+    const auto s = smt2_tokenizer.get_buffer();
+
+    if(next_token() != smt2_tokenizert::SYMBOL)
+      throw error() << "expected a symbol after " << s;
+
+    irep_idt id = smt2_tokenizer.get_buffer();
+    
+    if(smt2_tokenizer.peek() != smt2_tokenizert::NUMERAL)
+    {
+      auto type = uninterpreted_typet(0u);
+      add_unique_type_id(id, type);
+    }
+    else
+    {
+      next_token();
+      auto width = std::stoll(smt2_tokenizer.get_buffer());
+      add_unique_type_id(id, uninterpreted_typet(width));
+    }
+  };
+
+  commands["define-sort"] = [this]() {
+    const auto s = smt2_tokenizer.get_buffer();
+
+    if(next_token() != smt2_tokenizert::SYMBOL)
+      throw error() << "expected a symbol after " << s;
+
+    irep_idt id = smt2_tokenizer.get_buffer();
+    const auto type = sort();
+     add_unique_type_id(id, type);
   };
 
   commands["define-const"] = [this]() {
