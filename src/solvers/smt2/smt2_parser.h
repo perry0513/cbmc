@@ -51,6 +51,8 @@ public:
   using id_mapt=std::map<irep_idt, idt>;
   id_mapt id_map;
 
+  std::map<irep_idt,typet> type_map;  
+
   struct named_termt
   {
     /// Default-constructing a symbol_exprt is deprecated, thus make sure we
@@ -95,6 +97,8 @@ protected:
   renaming_counterst renaming_counters;
   irep_idt add_fresh_id(const irep_idt &, idt::kindt, const exprt &);
   void add_unique_id(const irep_idt &, const exprt &);
+  void add_unique_type_id(const irep_idt &, const typet &);
+
   irep_idt rename_id(const irep_idt &) const;
 
   struct signature_with_parameter_idst
