@@ -896,8 +896,8 @@ void smt2_parsert::setup_expressions()
       return unary(ID_unary_minus, ops);
     else
       return binary(ID_minus, ops); };
-  expressions["bvmul"] = [this] { return binary(ID_mult, operands()); };
-  expressions["*"] = [this] { return binary(ID_mult, operands()); };
+  expressions["bvmul"] = [this] { return multi_ary(ID_mult, operands()); };
+  expressions["*"] = [this] { return multi_ary(ID_mult, operands()); };
 
   expressions["bvsdiv"] = [this] {
     return cast_bv_to_unsigned(binary(ID_div, cast_bv_to_signed(operands())));
