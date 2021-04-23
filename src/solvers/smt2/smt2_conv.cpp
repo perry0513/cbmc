@@ -2960,6 +2960,14 @@ void smt2_convt::convert_mod(const mod_exprt &expr)
     convert_expr(expr.op1());
     out << ")";
   }
+  else if(expr.type().id()==ID_integer)
+  {
+    out << "(mod ";
+    convert_expr(expr.op0());
+    out << " ";
+    convert_expr(expr.op1());
+    out << ")";
+  }
   else
     UNEXPECTEDCASE("unsupported type for mod: "+expr.type().id_string());
 }
