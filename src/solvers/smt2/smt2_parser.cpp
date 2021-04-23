@@ -178,6 +178,7 @@ void smt2_parsert::add_unique_type_id(const irep_idt &id, const typet &type)
   }
 }
 
+
 irep_idt smt2_parsert::rename_id(const irep_idt &id) const
 {
   auto it=renaming_map.find(id);
