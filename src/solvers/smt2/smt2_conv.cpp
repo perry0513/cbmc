@@ -51,7 +51,7 @@ smt2_convt::smt2_convt(
   const std::string &_logic,
   solvert _solver,
   std::ostream &_out)
-  : use_FPA_theory(false),
+  : use_FPA_theory(true),
     use_datatypes(false),
     use_array_of_bool(false),
     emit_set_logic(true),
