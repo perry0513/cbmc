@@ -428,6 +428,11 @@ constant_exprt smt2_convt::parse_literal(
   {
     return from_integer(value, type);
   }
+  else if (type.id()==ID_real)
+  {
+    return constant_exprt(src.id_string(), type);
+  }
+
   else
     INVARIANT(
       false,
@@ -2183,6 +2188,12 @@ void smt2_convt::convert_typecast(const typecast_exprt &expr)
           "typecast unexpected "+src_type.id_string()+" -> "+
           dest_type.id_string());
       }
+      else if(dest_type.id()==ID_real)
+      {
+        out << "(fp.to_real "; 
+        convert_expr(src);
+        out <<")";
+      }
     }
     else if(src_type.id()==ID_bool) // from boolean to int
     {
@@ -2506,6 +2517,16 @@ void smt2_convt::convert_typecast(const typecast_exprt &expr)
       }
       else
         convert_expr(src);
+    }
+    else if(src_type.id() == ID_real)
+    {
+      ieee_float_spect float_spec;
+      float_spec.from_type(to_floatbv_type(dest_type));
+      out << "((_ to_fp " << integer2string(float_spec.e) << " "
+          << integer2string(float_spec.f + 1) << ")";
+      out << " roundNearestTiesToEven ";
+      convert_expr(src);
+      out << ")";
     }
     else
       UNEXPECTEDCASE("Unknown typecast "+src_type.id_string()+" -> float");
@@ -2938,6 +2959,10 @@ void smt2_convt::convert_constant(const constant_exprt &expr)
     }
   }
   else if(expr_type.id()==ID_integer)
+  {
+    out << expr.get_value();
+  }
+  else if(expr_type.id()==ID_real)
   {
     out << expr.get_value();
   }

@@ -508,8 +508,8 @@ exprt smt2_parsert::function_application_fp(const exprt::operandst &op)
 
   // stitch the bits together. NB width_f *includes* this hidden bit
   return typecast_exprt(
-    concatenation_exprt(exprt::operandst(op), bv_typet(width_f + width_e)),
-    ieee_float_spect(width_f-1, width_e).to_type());
+    concatenation_exprt(exprt::operandst(op), bv_typet(width_f + width_e + 1)),
+    ieee_float_spect(width_f, width_e).to_type());
 }
 
 exprt smt2_parsert::function_application()
@@ -705,59 +705,71 @@ exprt smt2_parsert::function_application()
           else
             return nil_exprt();
         }
-        else if(id=="to_fp")
-      {
-        if(next_token() != smt2_tokenizert::NUMERAL)
-          throw error("expected number after to_fp");
-
-        auto width_e = std::stoll(smt2_tokenizer.get_buffer());
-
-        if(next_token() != smt2_tokenizert::NUMERAL)
-          throw error("expected second number after to_fp");
-
-        auto width_f = std::stoll(smt2_tokenizer.get_buffer());
-
-        if(next_token() != smt2_tokenizert::CLOSE)
-          throw error("expected ')' after to_fp");
-
-        auto rounding_mode = expression();
-
-        if(next_token() != smt2_tokenizert::NUMERAL)
-          throw error("expected number after to_fp");
-
-        auto real_number = smt2_tokenizer.get_buffer();
-
-        if(next_token() != smt2_tokenizert::CLOSE)
-          throw error("expected ')' at the end of to_fp");
-
-        mp_integer significand, exponent;
-
-        auto dot_pos = real_number.find('.');
-        if(dot_pos == std::string::npos)
+        else if(id == "to_fp")
         {
-          exponent = 0;
-          significand = string2integer(real_number);
-        }
-        else
-        {
-          // remove the '.', if any
-          std::string significand_str;
-          significand_str.reserve(real_number.size());
-          for(auto ch : real_number)
-            if(ch != '.')
-              significand_str += ch;
+          smt2_tokenizert::tokent token = next_token();
+          if(token != smt2_tokenizert::NUMERAL)
+            throw error() << "expected numeral after to_fp, got " << token
+                          << "\n";
 
-          exponent = mp_integer(dot_pos) - mp_integer(real_number.size()) + 1;
-          significand = string2integer(significand_str);
-        }
+          auto width_e = std::stoll(smt2_tokenizer.get_buffer());
 
-        // width_f *includes* the hidden bit
-        ieee_float_spect spec(width_f - 1, width_e);
-        ieee_floatt a(spec);
-        a.rounding_mode = static_cast<ieee_floatt::rounding_modet>(
-          numeric_cast_v<int>(to_constant_expr(rounding_mode)));
-        a.from_base10(significand, exponent);
-        return a.to_expr();
+          if(next_token() != smt2_tokenizert::NUMERAL)
+            throw error("expected second number after to_fp");
+
+          auto width_f = std::stoll(smt2_tokenizer.get_buffer());
+
+          if(next_token() != smt2_tokenizert::CLOSE)
+            throw error("expected ')' after to_fp");
+
+          auto rounding_mode = expression();
+          // width_f *includes* the hidden bit
+          ieee_float_spect spec(width_f - 1, width_e);
+          ieee_floatt a(spec);
+          a.rounding_mode = static_cast<ieee_floatt::rounding_modet>(
+              numeric_cast_v<int>(to_constant_expr(rounding_mode)));
+
+          if(smt2_tokenizer.peek() == smt2_tokenizert::NUMERAL)
+          {
+            next_token();
+            auto real_number = smt2_tokenizer.get_buffer();
+
+            if(next_token() != smt2_tokenizert::CLOSE)
+              throw error("expected ')' at the end of to_fp");
+
+            mp_integer significand, exponent;
+
+            auto dot_pos = real_number.find('.');
+            if(dot_pos == std::string::npos)
+            {
+              exponent = 0;
+              significand = string2integer(real_number);
+            }
+            else
+            {
+              // remove the '.', if any
+              std::string significand_str;
+              significand_str.reserve(real_number.size());
+              for(auto ch : real_number)
+                if(ch != '.')
+                  significand_str += ch;
+
+              exponent =
+                mp_integer(dot_pos) - mp_integer(real_number.size()) + 1;
+              significand = string2integer(significand_str);
+            }
+            a.from_base10(significand, exponent);
+            return a.to_expr();
+          }
+          else
+          {
+            // is cast
+            auto cast_body = expression();
+            if(next_token() != smt2_tokenizert::CLOSE)
+              throw error("expected ')' at the end of to_fp");
+            std::cout<<"Creating cast expression from " << cast_body.pretty()<<" \nto "<<spec.to_type().pretty()<<std::endl;
+            return typecast_exprt(cast_body, spec.to_type());
+          }
         }
         else
         {
@@ -864,7 +876,16 @@ exprt smt2_parsert::expression()
     }
     else
     {
-      return constant_exprt(buffer, integer_typet());
+      auto real_number = buffer;
+      auto dot_pos = real_number.find('.');
+      if(dot_pos == std::string::npos)
+      {
+        return constant_exprt(buffer, integer_typet());
+      }
+      else
+      {
+        return constant_exprt(buffer, real_typet());
+      }
     }
   }
 
@@ -1086,6 +1107,15 @@ void smt2_parsert::setup_expressions()
       throw error("fp.isNaN takes FloatingPoint operand");
 
     return unary_predicate_exprt(ID_isnan, op[0]);
+  };
+
+  expressions["fp.to_real"] = [this] {
+    auto op = operands();
+
+    if(op.size() != 1)
+      throw error("fp.to_real takes one operand");
+
+    return typecast_exprt(op[0], real_typet());
   };
 
   expressions["fp.isInf"] = [this] {
