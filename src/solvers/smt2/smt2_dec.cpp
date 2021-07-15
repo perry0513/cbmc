@@ -24,6 +24,7 @@ std::string smt2_dect::decision_procedure_text() const
      solver==solvert::CPROVER_SMT2?"CPROVER SMT2":
      solver==solvert::CVC3?"CVC3":
      solver==solvert::CVC4?"CVC4":
+     solver==solvert::CVC5?"CVC5":
      solver==solvert::MATHSAT?"MathSAT":
      solver==solvert::YICES?"Yices":
      solver==solvert::Z3?"Z3":
@@ -77,6 +78,12 @@ decision_proceduret::resultt smt2_dect::dec_solve()
     // The flags --bitblast=eager --bv-div-zero-const help but only
     // work for pure bit-vector formulas.
     argv = {"cvc4", "-L", "smt2", temp_file_problem()};
+    break;
+
+  case solvert::CVC5:
+    // The flags --bitblast=eager --bv-div-zero-const help but only
+    // work for pure bit-vector formulas.
+    argv = {"cvc5", "-L", "smt2", temp_file_problem()};
     break;
 
   case solvert::MATHSAT:

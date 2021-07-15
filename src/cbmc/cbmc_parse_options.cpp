@@ -408,6 +408,12 @@ void cbmc_parse_optionst::get_command_line_options(optionst &options)
     options.set_option("cvc4", true), solver_set=true;
     options.set_option("smt2", true);
   }
+  
+  if(cmdline.isset("cvc5"))
+  {
+    options.set_option("cvc5", true), solver_set=true;
+    options.set_option("smt2", true);
+  }
 
   if(cmdline.isset("incremental-smt2-solver"))
   {

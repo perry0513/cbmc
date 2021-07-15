@@ -42,6 +42,7 @@ public:
     CPROVER_SMT2,
     CVC3,
     CVC4,
+    CVC5,
     MATHSAT,
     YICES,
     Z3

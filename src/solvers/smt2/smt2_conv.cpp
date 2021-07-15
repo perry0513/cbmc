@@ -100,6 +100,11 @@ smt2_convt::smt2_convt(
     use_as_const = true;
     break;
 
+  case solvert::CVC5:
+    use_array_of_bool = true;
+    use_as_const = true;
+    break;
+
   case solvert::MATHSAT:
     break;
 
@@ -160,6 +165,7 @@ void smt2_convt::write_header()
     out << "; Generated for the CPROVER SMT2 solver\n"; break;
   case solvert::CVC3: out << "; Generated for CVC 3\n"; break;
   case solvert::CVC4: out << "; Generated for CVC 4\n"; break;
+  case solvert::CVC5: out << "; Generated for CVC 5\n"; break;
   case solvert::MATHSAT: out << "; Generated for MathSAT\n"; break;
   case solvert::YICES: out << "; Generated for Yices\n"; break;
   case solvert::Z3: out << "; Generated for Z3\n"; break;

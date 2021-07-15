@@ -169,6 +169,8 @@ smt2_dect::solvert solver_factoryt::get_smt2_solver_type() const
     s = smt2_dect::solvert::CVC3;
   else if(options.get_bool_option("cvc4"))
     s = smt2_dect::solvert::CVC4;
+  else if(options.get_bool_option("cvc5"))
+    s = smt2_dect::solvert::CVC5;
   else if(options.get_bool_option("yices"))
     s = smt2_dect::solvert::YICES;
   else if(options.get_bool_option("z3"))
