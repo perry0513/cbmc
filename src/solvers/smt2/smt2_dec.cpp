@@ -14,7 +14,7 @@ Author: Daniel Kroening, kroening@kroening.com
 #include <util/tempfile.h>
 
 #include "smt2irep.h"
-
+#include <iostream>
 std::string smt2_dect::decision_procedure_text() const
 {
   // clang-format off
@@ -45,6 +45,7 @@ decision_proceduret::resultt smt2_dect::dec_solve()
     stringstream.str(std::string{});
     write_footer();
     problem_out << cached_output.str() << stringstream.str();
+    std::cout<< "PROBLEM: " << cached_output.str() << stringstream.str();
     stringstream.str(std::string{});
   };
   write_problem_to_file(std::ofstream(
