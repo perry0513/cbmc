@@ -96,6 +96,16 @@ public:
   {
     return subtypes()[1];
   }
+
+  void set_oracle_name(const irep_idt &binary_name)
+  {
+    set(ID_oracle_binary, binary_name);
+  }
+
+  irep_idt get_oracle_name() const
+  {
+    return get(ID_oracle_binary);
+  }
 };
 
 /// Check whether a reference to a typet is a \ref mathematical_function_typet.

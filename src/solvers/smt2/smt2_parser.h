@@ -157,6 +157,8 @@ protected:
   exprt function_application_fp(const exprt::operandst &);
   exprt::operandst operands();
   typet function_signature_declaration();
+  typet oracle_function_signature_declaration();
+
   signature_with_parameter_idst function_signature_definition();
   exprt multi_ary(irep_idt, const exprt::operandst &);
   exprt binary_predicate(irep_idt, const exprt::operandst &);

@@ -1488,6 +1488,36 @@ typet smt2_parsert::function_signature_declaration()
   return mathematical_function_typet(domain, codomain);
 }
 
+typet smt2_parsert::oracle_function_signature_declaration()
+{
+  if(next_token() != smt2_tokenizert::OPEN)
+    throw error("expected '(' at beginning of signature");
+
+  if(smt2_tokenizer.peek() == smt2_tokenizert::CLOSE)
+  {
+    next_token(); // eat the ')'
+    return sort();
+  }
+
+  mathematical_function_typet::domaint domain;
+
+  while(smt2_tokenizer.peek() != smt2_tokenizert::CLOSE)
+    domain.push_back(sort());
+
+  next_token(); // eat the ')'
+
+  typet codomain = sort();
+
+  if(next_token() != smt2_tokenizert::SYMBOL)
+    throw error("expected an oracle name with declare-oracle-fun");
+
+  irep_idt oracle = smt2_tokenizer.get_buffer();
+
+  mathematical_function_typet result = mathematical_function_typet(domain, codomain);
+  result.set_oracle_name(oracle);
+  return std::move(result);
+}
+
 void smt2_parsert::command(const std::string &c)
 {
   auto c_it = commands.find(c);
@@ -1524,6 +1554,16 @@ void smt2_parsert::setup_commands()
 
     irep_idt id = smt2_tokenizer.get_buffer();
     auto type = function_signature_declaration();
+
+    add_unique_id(id, exprt(ID_nil, type));
+  };
+
+  commands["declare-oracle-fun"] = [this]() {
+    if(next_token() != smt2_tokenizert::SYMBOL)
+      throw error("expected a symbol after declare-fun");
+
+    irep_idt id = smt2_tokenizer.get_buffer();
+    auto type = oracle_function_signature_declaration();
 
     add_unique_id(id, exprt(ID_nil, type));
   };

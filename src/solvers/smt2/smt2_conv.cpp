@@ -4545,12 +4545,15 @@ void smt2_convt::find_symbols(const exprt &expr)
       std::string smt2_identifier = convert_identifier(identifier);
 
       out << "; find_symbols\n";
-      out << "(declare-fun |" << smt2_identifier << "| ";
-
       if(expr.type().id() == ID_mathematical_function)
       {
-        out << "(";
         auto &func_type = to_mathematical_function_type(expr.type());
+        if(func_type.get_oracle_name()!=ID_nil)
+          out << "(declare-oracle-fun |" << smt2_identifier << "| ";
+        else
+          out << "(declare-fun |" << smt2_identifier << "| ";
+
+        out << "(";
         for(const auto &d: func_type.domain())
         {
           convert_type(d);
@@ -4558,10 +4561,15 @@ void smt2_convt::find_symbols(const exprt &expr)
         }
         out <<")";  
         convert_type(func_type.codomain());
+
+        if(func_type.get_oracle_name()!=ID_nil)
+          out << " " << id2string(func_type.get_oracle_name());
+
         out << ")\n"; 
       }
       else
       {
+        out << "(declare-fun |" << smt2_identifier << "| ";
         smt2_identifiers.insert(smt2_identifier);
         out << "() ";
         convert_type(expr.type());
