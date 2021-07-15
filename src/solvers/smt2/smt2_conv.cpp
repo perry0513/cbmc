@@ -2038,6 +2038,17 @@ void smt2_convt::convert_expr(const exprt &expr)
     convert_expr(let_expr.where());
     out << ')'; // let
   }
+  else if (expr.id()==ID_function_application)
+  {
+    auto func_app = to_function_application_expr(expr);
+    out << '('<< to_symbol_expr(func_app.function()).get_identifier() << " ";
+    for(const auto &arg: func_app.arguments())
+    {
+      convert_expr(arg);
+      out <<" ";
+    }  
+    out <<')';  
+  }
   else if(expr.id()==ID_constraint_select_one)
   {
     UNEXPECTEDCASE(
@@ -4523,17 +4534,34 @@ void smt2_convt::find_symbols(const exprt &expr)
 
     if(id.type.is_nil())
     {
-      id.type=expr.type();
+      id.type = expr.type();
 
-      std::string smt2_identifier=convert_identifier(identifier);
-      smt2_identifiers.insert(smt2_identifier);
+      std::string smt2_identifier = convert_identifier(identifier);
 
       out << "; find_symbols\n";
-      out << "(declare-fun |"
-          << smt2_identifier
-          << "| () ";
-      convert_type(expr.type());
-      out << ")" << "\n";
+      out << "(declare-fun |" << smt2_identifier << "| ";
+
+      if(expr.type().id() == ID_mathematical_function)
+      {
+        out << "(";
+        auto &func_type = to_mathematical_function_type(expr.type());
+        for(const auto &d: func_type.domain())
+        {
+          convert_type(d);
+          out <<" ";
+        }
+        out <<")";  
+        convert_type(func_type.codomain());
+        out << ")\n"; 
+      }
+      else
+      {
+        smt2_identifiers.insert(smt2_identifier);
+        out << "() ";
+        convert_type(expr.type());
+        out << ")"
+            << "\n";
+      }
     }
   }
   else if(expr.id() == ID_array_of)
