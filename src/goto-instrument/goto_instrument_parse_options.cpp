@@ -93,6 +93,7 @@ Author: Daniel Kroening, kroening@kroening.com
 #include "havoc_loops.h"
 #include "horn_encoding.h"
 #include "insert_final_assert_false.h"
+#include "instrument_oracles.h"
 #include "interrupt.h"
 #include "k_induction.h"
 #include "mmio.h"
@@ -886,6 +887,18 @@ int goto_instrument_parse_optionst::doit()
       log.status() << "Removing unused functions" << messaget::eom;
       remove_unused_functions(goto_model.goto_functions, ui_message_handler);
     }
+
+    if(cmdline.isset("oracles"))
+    {
+      // mark functions as oracle functions
+      log.status() << "Marking oracle functions" << messaget::eom;
+      instrument_oracle_functions(
+        goto_model,
+        cmdline.get_values("oracles"),
+        ui_message_handler);
+
+    }
+
 
     if(cmdline.isset("undefined-function-is-assume-false"))
     {
@@ -1857,6 +1870,7 @@ void goto_instrument_parse_optionst::help()
     " --inline                     perform full inlining\n"
     " --partial-inline             perform partial inlining\n"
     " --function-inline <function> transitively inline all calls <function> makes\n" // NOLINT(*)
+    " --oracles <function>         mark functions as oracle functions \n" // NOLINT(*)
     " --no-caching                 disable caching of intermediate results during transitive function inlining\n" // NOLINT(*)
     " --log <file>                 log in json format which code segments were inlined, use with --function-inline\n" // NOLINT(*)
     " --remove-function-pointers   replace function pointers by case statement over function calls\n" // NOLINT(*)

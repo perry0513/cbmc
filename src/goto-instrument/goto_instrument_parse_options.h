@@ -122,6 +122,7 @@ Author: Daniel Kroening, kroening@kroening.com
   OPT_RESTRICT_FUNCTION_POINTER \
   OPT_NONDET_VOLATILE \
   "(ensure-one-backedge-per-target)" \
+  "(oracles):" \
   // empty last line
 
 // clang-format on

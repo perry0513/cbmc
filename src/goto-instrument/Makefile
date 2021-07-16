@@ -43,6 +43,7 @@ SRC = accelerate/accelerate.cpp \
       havoc_loops.cpp \
       horn_encoding.cpp \
       insert_final_assert_false.cpp \
+      instrument_oracles.cpp \
       interrupt.cpp \
       k_induction.cpp \
       loop_utils.cpp \
