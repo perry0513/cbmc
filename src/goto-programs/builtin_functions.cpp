@@ -943,6 +943,38 @@ void goto_convertt::do_function_call_symbol(
     assignment.add_source_location()=function.source_location();
     copy(assignment, ASSIGN, dest);
   }
+  else if(has_prefix(id2string(identifier), CPROVER_PREFIX "oracle_"))
+  {
+    // make it a side effect if there is an LHS
+    if(lhs.is_nil())
+      return;
+
+    if(function.type().get_bool(ID_C_incomplete))
+    {
+      error().source_location = function.find_source_location();
+      error() << "'" << identifier << "' is not declared, "
+              << "missing type information required to construct call to "
+              << "uninterpreted function" << eom;
+      throw 0;
+    }
+
+    const code_typet &function_call_type = to_code_type(function.type());
+    mathematical_function_typet::domaint domain;
+    for(const auto &parameter : function_call_type.parameters())
+      domain.push_back(parameter.type());
+    mathematical_function_typet function_type{domain,
+                                              function_call_type.return_type()};
+
+    std::size_t prefix_length = std::string(CPROVER_PREFIX "oracle_").size();
+    irep_idt oracle_name = id2string(identifier).substr(prefix_length);
+    function_type.set_oracle_name(oracle_name);
+    const function_application_exprt rhs(
+      symbol_exprt{function.get_identifier(), function_type}, arguments);
+
+    code_assignt assignment(lhs, rhs);
+    assignment.add_source_location()=function.source_location();
+    copy(assignment, ASSIGN, dest);
+  }
   else if(identifier==CPROVER_PREFIX "array_equal")
   {
     do_array_op(ID_array_equal, lhs, function, arguments, dest);

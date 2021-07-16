@@ -4548,7 +4548,7 @@ void smt2_convt::find_symbols(const exprt &expr)
       if(expr.type().id() == ID_mathematical_function)
       {
         auto &func_type = to_mathematical_function_type(expr.type());
-        if(func_type.get_oracle_name()!=ID_nil)
+        if(func_type.get_oracle_name()!="")
           out << "(declare-oracle-fun |" << smt2_identifier << "| ";
         else
           out << "(declare-fun |" << smt2_identifier << "| ";
