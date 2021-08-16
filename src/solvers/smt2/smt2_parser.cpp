@@ -1626,14 +1626,15 @@ void smt2_parsert::setup_commands()
     if(next_token() != smt2_tokenizert::SYMBOL)
       throw error("expected a symbol after declare-oracle-fun");
     irep_idt id = smt2_tokenizer.get_buffer();
-    if(next_token() != smt2_tokenizert::SYMBOL)
-      throw error("expected a binary name after symbol in declare-oracle-fun");
-    std::string binary = smt2_tokenizer.get_buffer();
 
     auto type = function_signature_declaration();
     if(type.id()!=ID_mathematical_function)
       throw error("expected functional type for oracle");
     add_unique_id(id, exprt(ID_nil, type));
+    
+    if(next_token() != smt2_tokenizert::SYMBOL)
+      throw error("expected a binary name after symbol in declare-oracle-fun");
+    std::string binary = smt2_tokenizer.get_buffer();
 
     if(!oracle_symbols
         .emplace(
