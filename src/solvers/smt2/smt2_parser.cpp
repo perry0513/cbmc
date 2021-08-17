@@ -446,7 +446,7 @@ exprt smt2_parsert::function_application_ieee_float_op(
     throw error() << id << " takes three operands";
 
   if(op[1].type().id() != ID_floatbv || op[2].type().id() != ID_floatbv )
-    throw error() << id << " takes FloatingPoint operands but got " << smt2_format(op[1].type()) <<" and "<<  smt2_format(op[2].type());
+    throw error() << id << " takes FloatingPoint operands but got " << smt2_format(op[1].type()) <<" and "<<  smt2_format(op[2].type())<<"op1 "<< op[1].pretty()<<"\nop2: "<< op[2].pretty();
 
   if(op[1].type() != op[2].type())
   {
@@ -488,10 +488,20 @@ exprt smt2_parsert::function_application_fp(const exprt::operandst &op)
   const auto width_e = to_unsignedbv_type(op[1].type()).get_width();
   const auto width_f = to_unsignedbv_type(op[2].type()).get_width();
 
-  // stitch the bits together. NB width_f *includes* this hidden bit
+  // stitch the bits together
+  const auto concat_type = unsignedbv_typet(width_f + width_e + 1);
+
+  // We need a bitvector type without numerical interpretation
+  // to do this conversion.
+  const auto bv_type = bv_typet(concat_type.get_width());
+
+  // The target type
+  const auto fp_type = ieee_float_spect(width_f, width_e).to_type();
+
   return typecast_exprt(
-    concatenation_exprt(exprt::operandst(op), bv_typet(width_f + width_e + 1)),
-    ieee_float_spect(width_f, width_e).to_type());
+    typecast_exprt(
+      concatenation_exprt(exprt::operandst(op), concat_type), bv_type),
+    fp_type);
 }
 
 exprt smt2_parsert::function_application()
@@ -787,8 +797,10 @@ exprt smt2_parsert::function_application()
               return a.to_expr();
             }
             else
-              throw error()
-                << "to_fp for non-constant real expressions is not implemented";
+            {
+              return floatbv_typecast_exprt(
+                source_op, rounding_mode, spec.to_type());
+            }
           }
           else if(source_op.type().id() == ID_unsignedbv)
           {
