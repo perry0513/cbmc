@@ -1473,6 +1473,69 @@ void smt2_parsert::setup_sorts()
   };
 }
 
+std::pair<smt2_parsert::signature_with_parameter_idst, exprt>
+smt2_parsert::lambda_definition()
+{
+  if(next_token() != smt2_tokenizert::OPEN)
+    throw error("expected '(' at beginning of signature");
+
+  if(smt2_tokenizer.peek() == smt2_tokenizert::CLOSE)
+  {
+    // no parameters
+    next_token(); // eat the ')'
+    auto body = expression();
+    typet codomain = body.type();
+
+    return std::pair<smt2_parsert::signature_with_parameter_idst, exprt>{
+    signature_with_parameter_idst(codomain), body};
+  }
+
+  mathematical_function_typet::domaint domain;
+  std::vector<irep_idt> parameters;
+
+  while(smt2_tokenizer.peek() != smt2_tokenizert::CLOSE)
+  {
+    if(next_token() != smt2_tokenizert::OPEN)
+      throw error("expected '(' at beginning of parameter");
+
+    if(next_token() != smt2_tokenizert::SYMBOL)
+      throw error("expected symbol in parameter");
+
+    irep_idt id = smt2_tokenizer.get_buffer();
+    domain.push_back(sort());
+    parameters.push_back(id);
+
+    if(next_token() != smt2_tokenizert::CLOSE)
+      throw error("expected ')' at end of parameter");
+  }
+
+  next_token(); // eat the ')'
+
+  // add parameters to scope
+    std::vector<std::pair<irep_idt, idt>> hidden_ids;
+
+    for(unsigned int i=0; i< parameters.size(); i++)
+    {
+      auto insert_result =
+        id_map.insert({parameters[i], idt{idt::PARAMETER, domain[i]}});
+      if(!insert_result.second) // already there
+      {
+        auto &id_entry = *insert_result.first;
+        hidden_ids.emplace_back(id_entry.first, std::move(id_entry.second));
+        id_entry.second = idt{idt::PARAMETER, domain[i]};
+      }
+    }
+
+  auto body = expression();
+  typet codomain = body.type();
+
+  return std::pair<smt2_parsert::signature_with_parameter_idst, exprt>{
+    signature_with_parameter_idst(
+    mathematical_function_typet(domain, codomain), parameters), body
+  };
+}
+
+
 
 smt2_parsert::signature_with_parameter_idst
 smt2_parsert::function_signature_definition()
@@ -1658,6 +1721,7 @@ void smt2_parsert::setup_commands()
       throw error() << "Oracle '" << id << "' defined twice";
     }
   };
+
 
   commands["define-fun"] = [this]() {
     if(next_token() != smt2_tokenizert::SYMBOL)
