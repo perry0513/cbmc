@@ -73,6 +73,14 @@ void smt2_parsert::command_sequence()
     if(next_token() != smt2_tokenizert::OPEN)
       throw error("command must start with '('");
 
+    // eat nested parenthesis
+    std::size_t parenthesis=1;
+    while(smt2_tokenizer.peek()== smt2_tokenizert::OPEN)
+    {
+      next_token(); // eat the '('
+      parenthesis++;
+    }
+
     if(next_token() != smt2_tokenizert::SYMBOL)
     {
       ignore_command();
@@ -88,8 +96,17 @@ void smt2_parsert::command_sequence()
         " but got EOF");
 
     case smt2_tokenizert::CLOSE:
+    {
+      parenthesis--;
+      while(parenthesis>0)
+      {
+        if(next_token()!=smt2_tokenizert::CLOSE)
+          throw error("missing a closing parenthesis at end of command");
+        parenthesis--;
+      }
       // what we expect
       break;
+    }
 
     case smt2_tokenizert::OPEN:
     case smt2_tokenizert::SYMBOL:
