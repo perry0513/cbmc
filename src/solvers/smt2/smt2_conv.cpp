@@ -428,16 +428,29 @@ constant_exprt smt2_convt::parse_literal(
   {
     return from_integer(value, type);
   }
-  else if (type.id()==ID_real)
-  {
-    return constant_exprt(src.id_string(), type);
-  }
-
   else
     INVARIANT(
       false,
       "smt2_convt::parse_literal should not be of unsupported type " +
         type.id_string());
+}
+
+exprt smt2_convt::parse_real(
+    const irept &src,
+    const typet &type)
+{
+  INVARIANT(type.id()==ID_real, "expected real in smt2_convt::parse_real");
+  if(src.get_sub().size()==2 && src.get_sub()[0].id()=="-") // (- val)
+  {
+    return unary_minus_exprt(parse_real(src.get_sub()[1], type), type);
+  }
+  else if(src.get_sub().size()==3 && src.get_sub()[0].id()=="/") // (/ val1 val2)
+  {
+    return div_exprt(parse_real(src.get_sub()[1], type),
+                     parse_real(src.get_sub()[2], type));
+  }
+  else
+    return constant_exprt(src.id_string(), type);
 }
 
 exprt smt2_convt::parse_array(
@@ -549,12 +562,15 @@ exprt smt2_convt::parse_rec(const irept &src, const typet &type)
 {
   if(
     type.id() == ID_signedbv || type.id() == ID_unsignedbv ||
-    type.id() == ID_integer || type.id() == ID_rational ||
-    type.id() == ID_real || type.id() == ID_c_enum ||
+    type.id() == ID_integer || type.id() == ID_rational || type.id() == ID_c_enum ||
     type.id() == ID_c_enum_tag || type.id() == ID_fixedbv ||
     type.id() == ID_floatbv)
   {
     return parse_literal(src, type);
+  }
+  else if(type.id()==ID_real)
+  {
+    return parse_real(src, type);
   }
   else if(type.id()==ID_bool)
   {
@@ -3115,6 +3131,7 @@ void smt2_convt::convert_relation(const binary_relation_exprt &expr)
       convert_floatbv(expr);
   }
   else if(op_type.id()==ID_rational ||
+          op_type.id()==ID_real ||
           op_type.id()==ID_integer)
   {
     out << "(";
@@ -3498,6 +3515,14 @@ void smt2_convt::convert_div(const div_exprt &expr)
     out << ")";
 
     out << "))";
+  }
+  else if(expr.type().id()==ID_real)
+  {
+    out <<"(/ ";
+    convert_expr(expr.op0());
+    out <<" ";
+    convert_expr(expr.op1());
+    out <<")";
   }
   else if(expr.type().id()==ID_floatbv)
   {
