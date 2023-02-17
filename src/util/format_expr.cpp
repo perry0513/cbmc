@@ -178,6 +178,9 @@ static std::ostream &format_rec(std::ostream &os, const constant_exprt &src)
     return os << *numeric_cast<mp_integer>(src);
   else if(type == ID_integer)
     return os << src.get_value();
+  else if(type == ID_real) {
+    return os << src.get_value();
+  }
   else if(type == ID_string)
     return os << '"' << escape(id2string(src.get_value())) << '"';
   else if(type == ID_floatbv)
