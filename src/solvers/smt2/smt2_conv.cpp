@@ -169,11 +169,14 @@ void smt2_convt::write_footer(std::ostream &os)
   if(!assumptions.empty())
   {
     os << "; assumptions\n";
-
     for(const auto &assumption : assumptions)
     {
       os << "(assert ";
-      convert_literal(to_literal_expr(assumption).get_literal());
+      /* convert_literal(to_literal_expr(assumption).get_literal()); */
+      auto l = to_literal_expr(assumption).get_literal();
+      if(l.sign()) os << "(not ";
+      os << "|B" << l.var_no() << "|";
+      if(l.sign()) os << ")";
       os << ")"
          << "\n";
     }
