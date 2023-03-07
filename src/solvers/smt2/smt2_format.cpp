@@ -135,6 +135,16 @@ std::ostream &smt2_format_rec(std::ostream &out, const exprt &expr)
           << smt2_format(array_list_expr.operands()[i + 1]) << ')';
     }
   }
+  else if(expr.id() == ID_unary_minus)
+  {
+    DATA_INVARIANT(expr.operands().size() == 1, "unary_minus takes only one operand");
+    out << "(- " << smt2_format(expr.operands()[0]) << ")";
+  }
+  else if(expr.id() == ID_div)
+  {
+    DATA_INVARIANT(expr.operands().size() == 2, "div takes exactly two operands");
+    out << "(/ " << smt2_format(expr.operands()[0]) << ' ' << smt2_format(expr.operands()[1]) << ")";
+  }
   else
     out << "? " << expr.id();
 
